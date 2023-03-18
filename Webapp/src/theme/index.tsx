@@ -11,6 +11,7 @@ import {
 
 // Project Import
 // hooks
+import { useSettings } from '../hooks';
 // theme
 import breakpoints from './breakpoints';
 import palette from './palette';
@@ -24,7 +25,7 @@ ThemeProvider.propTypes = {
     children: PropTypes.node,
 };
 
-export default function ThemeProvider({ children }) {
+export default function ThemeProvider({ children }: any) {
     const { themeMode, themeDirection } = useSettings();
 
     const isLight = themeMode === 'light';
@@ -42,7 +43,7 @@ export default function ThemeProvider({ children }) {
         [isLight, themeDirection]
     );
 
-    const theme: Theme = createTheme(themeOptions);
+    const theme: Theme = createTheme(themeOptions as any);
 
     theme.components = componentsOverride(theme);
 
