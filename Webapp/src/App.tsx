@@ -1,14 +1,16 @@
-// routes
 // Project Import
-import Router from './routes';
+import AppRoute from './routes';
 import ThemeProvider from './theme';
+import ThemeSettings from './providers/theme-setting';
 
 // ==============================|| APP: APPLY THEME PROVIDER  ||============================== //
 
 function App() {
     return (
         <ThemeProvider>
-            <Router />
+            <ThemeSettings>
+                <AppRoute />
+            </ThemeSettings>
         </ThemeProvider>
     );
 }
