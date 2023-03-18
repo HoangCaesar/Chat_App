@@ -5,15 +5,18 @@ import { HelmetProvider } from 'react-helmet-async';
 
 // Project Import
 import App from './App';
+import SettingsProvider from './providers/SettingProvider';
 
 // ==============================|| MAIN: SETTING-ROUTER-HELMET PROVIDER  ||============================== //
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
         <HelmetProvider>
-            <Router>
-                <App />
-            </Router>
+            <SettingsProvider>
+                <Router>
+                    <App />
+                </Router>
+            </SettingsProvider>
         </HelmetProvider>
     </React.StrictMode>
 );

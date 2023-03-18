@@ -1,6 +1,16 @@
-function App() {
+// routes
+// Project Import
+import Router from './routes';
+import ThemeProvider from './theme';
 
-    return <div className="App">App</div>;
+// ==============================|| APP: APPLY THEME PROVIDER  ||============================== //
+
+function App() {
+    return (
+        <ThemeProvider>
+            <Router />
+        </ThemeProvider>
+    );
 }
 
 export default App;
