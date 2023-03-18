@@ -12,6 +12,18 @@
     This part is mainly for visualizing data from server.
 #### Technologies: 
     "react": is a JavaScript library for creating user interfaces.
+    "react-router-dom": to manage router in a whole of app.
+    "react-helmet-async": to encapsulate data on a per-request basis, this package does just that.
+    "react-i18next": is a powerful internationalization framework for React which based on i18next.
+    "@mui/material": is a library of React UI components that implements Google's Material Design.
+    "stylis-plugin-rtl": Right-to-left languages such as Arabic, Persian, or Hebrew are supported.
+    "phosphor-react": is a flexible icon family for interfaces, diagrams, presentations
+    "simplebar-react": to keep the native overflow: auto scroll and only replace the scrollbar visual appearance.
+    "framer-motion": to create animation for buttons.
+    "prop-types": type checking for React props.
+    "emoji-mart": emoji families.
+    "@iconify/react": icons for the whole app.
 
-
+    --- dev-dependencies ---
+    "jest": testing our app.
 
