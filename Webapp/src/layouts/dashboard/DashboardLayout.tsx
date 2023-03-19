@@ -1,3 +1,4 @@
+import { Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 // Project Import
@@ -8,8 +9,10 @@ import SideBar from './SideBar';
 const DashboardLayout = () => {
     return (
         <>
-            <SideBar />
-            <Outlet />
+            <Stack direction="row">
+                <SideBar />
+                <Outlet />
+            </Stack>
         </>
     );
 };
