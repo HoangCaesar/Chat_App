@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 // @mui
 import { Box } from '@mui/material';
 
-// ==============================|| HOOKS: ICONIFY ||============================== //
+// ==============================|| COMPONENT: ICONIFY ||============================== //
 
 const Iconify = ({ icon, sx, ...other }: any) => {
     return <Box component={Icon} icon={icon} sx={{ ...sx }} {...other} />;

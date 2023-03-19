@@ -7,7 +7,7 @@ import { DEFAULT_PATH } from '../config/config';
 import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 // render
-const Dashboard = Loadable(lazy(() => import('../pages/app/App')));
+const Dashboard = Loadable(lazy(() => import('../pages/app/MainApp')));
 const Page404 = Loadable(lazy(() => import('../pages/404/Page404')));
 
 // ==============================|| DASHBOARD ROUTE  ||============================== //

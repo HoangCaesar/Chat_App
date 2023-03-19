@@ -9,6 +9,9 @@ import {
   Users,
 } from "phosphor-react";
 
+// Project import
+import { Chat } from '../model'
+
 const Profile_Menu = [
   {
     title: "Profile",
@@ -46,7 +49,7 @@ const Nav_Setting = [
   },
 ];
 
-const ChatList = [
+const ChatList: Chat[] = [
   {
     id: 0,
     img: faker.image.avatar(),

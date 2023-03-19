@@ -35,7 +35,7 @@ const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
     },
 }));
 
-// ==============================|| HOOKS: SCROLL BAR ||============================== //
+// ==============================|| COMPONENT: SCROLL BAR ||============================== //
 
 const Scrollbar = ({ children, sx, ...other }: any) => {
     const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent;
@@ -68,4 +68,3 @@ Scrollbar.propTypes = {
 
 export { SimpleBarStyle };
 export default Scrollbar;
-
