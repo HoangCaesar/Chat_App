@@ -5,6 +5,7 @@ import { Loadable } from '../components';
 import AuthLayout from '../layouts/auth/AuthLayout';
 
 // render
+const Auth = Loadable(lazy(() => import('../pages/auth/Auth')));
 
 // ==============================|| AUTH ROUTE  ||============================== //
 
@@ -13,8 +14,8 @@ const AuthRoutes = {
     element: <AuthLayout />,
     children: [
         {
-            path: 'login',
-            element: <div>LoginPage</div>,
+            path: '/signin',
+            element: <Auth />,
         },
         {
             path: 'register',

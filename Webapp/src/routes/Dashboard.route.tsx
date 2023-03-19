@@ -7,6 +7,8 @@ import { DEFAULT_PATH } from '../config/config';
 import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 // render
+const Dashboard = Loadable(lazy(() => import('../pages/dashboard/Dashboard')));
+const Page404 = Loadable(lazy(() => import('../pages/404/Page404')));
 
 // ==============================|| DASHBOARD ROUTE  ||============================== //
 
@@ -20,11 +22,11 @@ const DashboardRoutes = {
         },
         {
             path: '/app',
-            element: <div>Gen App</div>,
+            element: <Dashboard />,
         },
         {
             path: '/404',
-            element: <div>Page 404</div>,
+            element: <Page404 />,
         },
         {
             path: '*',
