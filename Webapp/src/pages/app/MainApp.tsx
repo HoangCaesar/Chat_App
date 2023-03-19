@@ -3,14 +3,18 @@ import React from 'react';
 
 // Project Import
 import Chats from './Chats';
+import Messenger from './main-messenger';
 
 // ==============================|| PAGE: MAIN APP  ||============================== //
 
 const MainApp = () => {
     return (
         <>
-            <Stack direction="row" sx={{ width: "100%" }} >
+            <Stack direction="row" sx={{ width: '100%' }}>
+                {/* Chat Bar */}
                 <Chats />
+                {/* Body */}
+                <Messenger  />
             </Stack>
         </>
     );
