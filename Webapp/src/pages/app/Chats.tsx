@@ -50,7 +50,7 @@ const Chats = () => {
                     <Divider />
                 </Stack>
                 {/* Chat */}
-                <Stack direction="column" sx={{ flexGrow: 1, overflow: 'scroll', height: '100%' }}>
+                <Stack direction="column" sx={{ flexGrow: 1, overflowY: 'scroll', height: '100%' }}>
                     <SimpleBarStyle clickOnTrack={false}>
                         {/* Pinned Messages */}
                         <Stack spacing={2}>
@@ -58,7 +58,7 @@ const Chats = () => {
                                 Pinned
                             </Typography>
                             {ChatList.filter((item: Chat) => item.pinned).map((item, idx) => {
-                                return <ChatItem {...item} />;
+                                return <ChatItem key={item.id} {...item} />;
                             })}
                             {/* All Messages */}
                             <Stack spacing={2.4}>
@@ -67,7 +67,7 @@ const Chats = () => {
                                 </Typography>
                             </Stack>
                             {ChatList.filter((item: Chat) => !item.pinned).map((item, idx) => {
-                                return <ChatItem {...item} />;
+                                return <ChatItem key={item.id} {...item} />;
                             })}
                         </Stack>
                     </SimpleBarStyle>
