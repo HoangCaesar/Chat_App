@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "dev": "vite --port==5000",
+    "dev": "vite --port=5000",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
