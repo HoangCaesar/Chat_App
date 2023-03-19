@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Loadable } from '../components';
 
 // Project import
+import AuthLayout from '../layouts/auth/AuthLayout';
 
 // render
 
@@ -9,7 +10,7 @@ import { Loadable } from '../components';
 
 const AuthRoutes = {
     path: '/auth',
-    element: <div>Auth Layout</div>,
+    element: <AuthLayout />,
     children: [
         {
             path: 'login',

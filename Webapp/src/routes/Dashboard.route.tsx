@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 // Project import
 import { DEFAULT_PATH } from '../config/config';
+import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 // render
 
@@ -11,7 +12,7 @@ import { DEFAULT_PATH } from '../config/config';
 
 const DashboardRoutes = {
     path: '/',
-    element: <div>Dashboard Layout</div>,
+    element: <DashboardLayout />,
     children: [
         {
             element: <Navigate to={DEFAULT_PATH} replace />,
