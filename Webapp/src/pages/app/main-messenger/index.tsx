@@ -9,12 +9,11 @@ import Header from './Header';
 
 const Messenger = () => {
     return (
-        <Stack height={'100%'} maxHeight={'100vh'} sx={{ width: '100%' }} width="auto">
+        <Stack height={'100%'} maxHeight={'100vh'} sx={{ flexGrow: 1 }} width="auto">
             {/* Header */}
             <Header />
 
             {/* Body */}
-
             <Body />
 
             {/* Footer */}
