@@ -6,6 +6,7 @@ import AuthLayout from '../layouts/auth/AuthLayout';
 
 // render
 const SignIn = Loadable(lazy(() => import('../pages/auth/SignIn')));
+const Register = Loadable(lazy(() => import('../pages/auth/Register')));
 
 // ==============================|| AUTH ROUTE  ||============================== //
 
@@ -19,7 +20,7 @@ const AuthRoutes = {
         },
         {
             path: 'register',
-            element: <div>Register Page</div>,
+            element: <Register />,
         },
         {
             path: 'reset-password',
