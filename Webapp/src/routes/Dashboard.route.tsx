@@ -9,6 +9,7 @@ import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 // render
 const Dashboard = Loadable(lazy(() => import('../pages/app/MainApp')));
 const Page404 = Loadable(lazy(() => import('../pages/404/Page404')));
+const Settings = Loadable(lazy(() => import('../pages/settings/Settings')));
 
 // ==============================|| DASHBOARD ROUTE  ||============================== //
 
@@ -25,9 +26,14 @@ const DashboardRoutes = {
             element: <Dashboard />,
         },
         {
+            path: '/settings',
+            element: <Settings />,
+        },
+        {
             path: '/404',
             element: <Page404 />,
         },
+
         {
             path: '*',
             element: <Navigate to="/404" replace />,
