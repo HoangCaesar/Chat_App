@@ -5,7 +5,7 @@ import { Loadable } from '../components';
 import AuthLayout from '../layouts/auth/AuthLayout';
 
 // render
-const Auth = Loadable(lazy(() => import('../pages/auth/Auth')));
+const SignIn = Loadable(lazy(() => import('../pages/auth/SignIn')));
 
 // ==============================|| AUTH ROUTE  ||============================== //
 
@@ -15,7 +15,7 @@ const AuthRoutes = {
     children: [
         {
             path: 'signin',
-            element: <Auth />,
+            element: <SignIn />,
         },
         {
             path: 'register',
