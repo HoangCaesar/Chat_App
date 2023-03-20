@@ -181,7 +181,6 @@ const Settings = () => {
         <ThemeDialog open={openTheme} handleClose={handleCloseTheme} />
       )}
       {openShortcuts && <ShortcutDialog open={openShortcuts} handleClose={handleCloseShortcuts} /> }
-      
     </>
   );
 };

@@ -135,32 +135,6 @@ const SideBar = () => {
                         })}
 
                         <Divider sx={{ width: '100%' }} />
-                        {/* Gear */}
-                        {activeItem === 3 ? (
-                            <Box
-                                sx={{
-                                    backgroundColor: theme.palette.primary.main,
-                                    borderRadius: 1.5,
-                                }}
-                            >
-                                <IconButton sx={{ width: 'max-content', color: '#fff' }}>
-                                    <Gear />
-                                </IconButton>
-                            </Box>
-                        ) : (
-                            <IconButton
-                                sx={{
-                                    width: 'max-content',
-                                    color:
-                                        theme.palette.mode === 'light'
-                                            ? '#000'
-                                            : theme.palette.text.primary,
-                                }}
-                                onClick={() => setActiveItem(3)}
-                            >
-                                <Gear />
-                            </IconButton>
-                        )}
                     </Stack>
                 </Stack>
 

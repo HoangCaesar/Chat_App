@@ -1,16 +1,13 @@
 import { faker } from "@faker-js/faker";
 import {
-  ChatCircleDots,
+  Cloud,
   Gear,
-  GearSix,
-  Phone,
-  SignOut,
-  User,
-  Users,
+  GearSix, SignOut,
+  User
 } from "phosphor-react";
 
 // Project import
-import { Chat } from '../model'
+import { Chat } from '../model';
 
 const Profile_Menu = [
   {
@@ -30,15 +27,15 @@ const Profile_Menu = [
 const Nav_Buttons = [
   {
     index: 0,
-    icon: <ChatCircleDots />,
+    icon: <Cloud color="red" />,
   },
   {
     index: 1,
-    icon: <Users />,
+    icon: <Cloud color="green" />,
   },
   {
     index: 2,
-    icon: <Phone />,
+    icon: <Cloud color="yellow" />
   },
 ];
 
@@ -231,3 +228,4 @@ export {
   Chat_History,
   Message_options,
 };
+
