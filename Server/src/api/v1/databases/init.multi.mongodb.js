@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 // ======================================== MULTI MONGODB - connect mongodb databases =======================================
-const {} =
+const { MONGODB_URI } =
     // eslint-disable-next-line no-undef
     process.env;
 
@@ -38,4 +38,6 @@ function newConnection(uri) {
     return db;
 }
 
-module.exports = {};
+const appDatabase = newConnection(MONGODB_URI);
+
+module.exports = { appDatabase };

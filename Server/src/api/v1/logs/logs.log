@@ -1,0 +1,4 @@
+20-03-2023	01:07:16-----GET / ::: This route does not exist.
+20-03-2023	01:07:16-----GET /favicon.ico ::: This route does not exist.
+20-03-2023	05:07:16-----GET /api/v1 ::: No default engine was specified and no extension was provided.
+20-03-2023	44:07:16-----GET /api/v1 ::: res.sed is not a function
