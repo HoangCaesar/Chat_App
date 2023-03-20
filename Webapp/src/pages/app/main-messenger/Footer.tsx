@@ -143,7 +143,7 @@ function containsUrl(text: string) {
 const Footer = () => {
     const theme = useTheme();
 
-    const [openPicker, setOpenPicker] = React.useState(false);
+    const [openPicker, setOpenPicker] = useState(false);
 
     const [value, setValue] = useState('');
     const inputRef = useRef(null);

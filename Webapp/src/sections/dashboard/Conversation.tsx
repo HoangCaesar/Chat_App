@@ -1,13 +1,13 @@
-import React from 'react';
+import{ useState } from 'react';
 import { Stack, Box, Typography, Menu, MenuItem, IconButton, Divider } from '@mui/material';
 import { useTheme, alpha } from '@mui/material/styles';
 import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
-import { Message_options } from '../../data/chat_data';
+import { Message_options } from '../../data/chat_data'; 
 import { Link } from 'react-router-dom';
 import truncateString from '../../utils/truncate';
 
 const MessageOption = () => {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
