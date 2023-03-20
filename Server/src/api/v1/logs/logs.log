@@ -2,3 +2,11 @@
 20-03-2023	01:07:16-----GET /favicon.ico ::: This route does not exist.
 20-03-2023	05:07:16-----GET /api/v1 ::: No default engine was specified and no extension was provided.
 20-03-2023	44:07:16-----GET /api/v1 ::: res.sed is not a function
+20-03-2023	00:41:16-----POST /api/v1/auth/signin ::: This route does not exist.
+20-03-2023	25:41:16-----POST /api/v1/auth/signin ::: This route does not exist.
+20-03-2023	33:41:16-----POST /api/v1/auth/signin ::: This route does not exist.
+20-03-2023	52:41:16-----POST /api/v1/auth/user ::: This route does not exist.
+20-03-2023	03:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
+20-03-2023	34:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
+20-03-2023	50:42:16-----POST /api/v1/user/signin ::: This route does not exist.
+20-03-2023	54:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
