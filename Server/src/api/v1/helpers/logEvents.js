@@ -2,7 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const { format } = require('date-fns');
 
-// ========================================== LOG EVENTS ===============================================
+// ========================================== HELPER: LOG EVENTS ===============================================
 // eslint-disable-next-line no-undef
 const fileName = path.join(__dirname, '../logs', 'logs.log');
 

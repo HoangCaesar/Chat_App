@@ -1,7 +1,7 @@
 // Project import
 const logEvents = require('./logEvents');
 
-// ========================================== ERROR HANDLER ===============================================
+// ========================================== HELPER: ERROR HANDLER ===============================================
 const errorHandler = (err, req, res) => {
     logEvents(`${req.method} ${req.url} ::: ${err.message}`);
     res.status(err.status || 500);
