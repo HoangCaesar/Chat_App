@@ -1,6 +1,7 @@
 import { Container, Stack } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
+// Project Import
 import { Logo } from '../../components';
 
 // ==============================|| LAYOUT: AUTH ||============================== //
