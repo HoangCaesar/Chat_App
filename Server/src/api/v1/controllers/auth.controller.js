@@ -1,5 +1,6 @@
 // Project import
-const {} = require('../services');
+const { AuthService } = require('../services');
+const objectFilter = require('../helpers/objectFilter');
 
 // ======================================== AUTH CONTROLLER =======================================
 
@@ -16,11 +17,17 @@ const signIn = async (req, res, next) => {
 
 // POST: api/v1/user/register
 const register = async (req, res, next) => {
-    const { firstName, lastName, email, password } = req.body;
     try {
-        res.json({
-            status: 'success',
-        });
+        const response = await AuthService.verifyRegistration(req.body);
+        if (!response) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Email already in use, Please login.',
+            });
+        }
+
+        req.userId = response._id;
+        next();
     } catch (error) {
         next(error);
     }
