@@ -10,3 +10,4 @@
 20-03-2023	34:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
 20-03-2023	50:42:16-----POST /api/v1/user/signin ::: This route does not exist.
 20-03-2023	54:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
+20-03-2023	33:47:16-----POST /api/v1/auth/signin ::: data is not defined
