@@ -9,5 +9,6 @@ export { default as AuthLoginForm } from './auth/AuthLoginForm';
 export { default as AuthRegisterForm } from './auth/AuthRegisterForm'
 export { default as AuthResetPasswordForm } from './auth/AuthResetPasswordForm';
 export { default as NewPasswordForm } from './auth/NewPasswordForm';
+export { default as VerifyForm } from './auth/VerifyForm';
 
 

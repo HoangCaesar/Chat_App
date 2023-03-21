@@ -9,6 +9,7 @@ const SignIn = Loadable(lazy(() => import('../pages/auth/SignIn')));
 const Register = Loadable(lazy(() => import('../pages/auth/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/auth/ResetPassword')));
 const NewPassword = Loadable(lazy(() => import('../pages/auth/NewPassword')));
+const Verify = Loadable(lazy(() => import('../pages/auth/Verify')));
 
 // ==============================|| AUTH ROUTE  ||============================== //
 
@@ -34,7 +35,7 @@ const AuthRoutes = {
         },
         {
             path: 'verify',
-            element: <div>Verify Page</div>,
+            element: <Verify />,
         },
     ],
 };

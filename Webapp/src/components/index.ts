@@ -15,3 +15,4 @@ export { default as ChatItem } from './chat/ChatItem';
 // Hook-form
 export { default as FormProvider } from './hook-form/FormProvider';
 export { default as RHFTextField } from './hook-form/RHFTextField';
+export { default as RHFCodes } from './hook-form/RHFCodes';
