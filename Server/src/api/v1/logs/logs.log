@@ -11,3 +11,11 @@
 20-03-2023	50:42:16-----POST /api/v1/user/signin ::: This route does not exist.
 20-03-2023	54:42:16-----POST /api/v1/user/get-users ::: This route does not exist.
 20-03-2023	33:47:16-----POST /api/v1/auth/signin ::: data is not defined
+21-03-2023	27:52:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	35:52:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	32:53:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	24:54:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	41:54:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	33:55:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	48:55:09-----POST /api/v1/auth/register ::: This route does not exist.
+21-03-2023	28:56:09-----POST /api/v1/auth/register ::: This route does not exist.

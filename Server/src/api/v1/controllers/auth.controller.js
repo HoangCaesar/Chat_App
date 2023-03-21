@@ -1,6 +1,5 @@
 // Project import
 const { AuthService } = require('../services');
-const objectFilter = require('../helpers/objectFilter');
 
 // ======================================== AUTH CONTROLLER =======================================
 

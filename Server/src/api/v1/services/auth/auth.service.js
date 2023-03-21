@@ -1,6 +1,6 @@
 // Project import
 const { User } = require('../../models/user.model');
-const objectFilter = require('../helpers/objectFilter');
+const objectFilter = require('../../helpers/objectFilter');
 
 // ======================================== SERVICE: VERIFY REGISTERATION =======================================
 

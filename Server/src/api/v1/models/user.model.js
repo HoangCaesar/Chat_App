@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
 
 // Project import
 const { appDatabase } = require('../databases/init.multi.mongodb');

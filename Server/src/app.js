@@ -24,7 +24,7 @@ app.use(cookieParser());
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1/', appRoute);
+app.use('/api/v1', appRoute);
 
 app.use((req, res, next) => {
     next(createError.NotFound('This route does not exist.'));
