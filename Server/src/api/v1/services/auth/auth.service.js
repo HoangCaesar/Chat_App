@@ -132,6 +132,9 @@ const forgotPassword = async (body) => {
 
         return { resetToken, user };
     } catch (error) {
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save({ validateBeforeSave: false });
         throw new Error('Error forgot Password');
     }
 };
