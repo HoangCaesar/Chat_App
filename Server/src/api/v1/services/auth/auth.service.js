@@ -7,8 +7,30 @@ const signToken = require('../../helpers/signToken');
 
 // ======================================== SERVICE: VERIFY REGISTERATION =======================================
 
+const verifyUser = async (email, password) => {
+    try {
+        const user = await User.findOne({ email: email }).select('+password');
+
+        if (!user || !user.password) {
+            // Incorrect password
+            return 'PASSWORD';
+        }
+
+        if (!user || !(await user.correctPassword(password, user.password))) {
+            // Email or password is incorrect
+            return 'EMAIL-PASSWORD';
+        }
+
+        const token = signToken(user._id);
+
+        return { token, uid: user._id };
+    } catch (error) {
+        throw new Error('Error verify User');
+    }
+};
+
 const verifyRegistration = async (data) => {
-    const { firstName, lastName, email, password } = data;
+    const { _firstName, _lastName, email, _password } = data;
     try {
         const filteredBody = objectFilter(data, 'firstName', 'lastName', 'email', 'password');
 
@@ -78,7 +100,7 @@ const verifyOTP = async (email, otp) => {
             return 'EMAIL';
         }
 
-        if (!user.correctOTP(otp, user.otp)) {
+        if (!(await user.correctOTP(otp, user.otp))) {
             // OTP is incorrect
             return 'OTP';
         }
@@ -91,7 +113,7 @@ const verifyOTP = async (email, otp) => {
 
         const token = signToken(user._id);
 
-        return { token, user };
+        return { token, uid: user._id };
     } catch (error) {
         throw new Error('Error verify OTP');
     }
@@ -101,4 +123,5 @@ module.exports = {
     verifyRegistration,
     generateOTP,
     verifyOTP,
+    verifyUser,
 };

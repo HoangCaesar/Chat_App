@@ -16,10 +16,29 @@ const signIn = async (req, res, next) => {
             return;
         }
 
-        
-        res.json({
-            status: 'success',
-        });
+        const response = await AuthService.verifyUser(email, password);
+
+        switch (response) {
+            case 'PASSWORD':
+                res.status(400).json({
+                    status: 'error',
+                    message: 'Incorrect password',
+                });
+                break;
+            case 'EMAIL-PASSWORD':
+                res.status(400).json({
+                    status: 'error',
+                    message: 'Email or password is incorrect',
+                });
+                break;
+            default:
+                res.status(200).json({
+                    status: 'success',
+                    message: 'Logged in successfully!',
+                    token: response.token,
+                    user_id: response.uid,
+                });
+        }
     } catch (error) {
         next(error);
     }
@@ -95,7 +114,7 @@ const verifyOTP = async (req, res, next) => {
                     status: 'success',
                     message: 'OTP verified Successfully!',
                     token: response.token,
-                    user_id: response.user._id,
+                    user_id: response.uid,
                 });
         }
     } catch (error) {
