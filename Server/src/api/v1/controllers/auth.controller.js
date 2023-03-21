@@ -2,7 +2,7 @@ require('dotenv').config();
 // Project import
 const { AuthService, MailService } = require('../services');
 const otpMail = require('../templates/sendOtp');
-const resetPassword = require('../templates/resetPassword');
+const resetMail = require('../templates/resetPassword');
 
 // ======================================== AUTH CONTROLLER =======================================
 
@@ -142,7 +142,7 @@ const forgotPassword = async (req, res, next) => {
         await MailService.sendMail({
             to: response.user.email,
             subject: 'Reset Password',
-            html: resetPassword(response.user.firstName, resetURL),
+            html: resetMail(response.user.firstName, resetURL),
             attachments: [],
         });
 
@@ -155,10 +155,34 @@ const forgotPassword = async (req, res, next) => {
     }
 };
 
+// POST: api/v1/user/reset-password
+const resetPassword = async (req, res, next) => {
+    const { token } = req.body;
+    try {
+        const response = await AuthService.resetPassword(req.body);
+
+        if (!response) {
+            res.status(400).json({
+                status: 'error',
+                message: 'Token is Invalid or Expired',
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Password Reseted Successfully',
+            token: response.token,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signIn,
     register,
     sendOTP,
     verifyOTP,
     forgotPassword,
+    resetPassword,
 };

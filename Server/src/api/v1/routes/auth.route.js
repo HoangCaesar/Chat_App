@@ -11,5 +11,6 @@ router.post("/verify-otp", AuthController.verifyOTP);
 
 // Password Process
 router.post("/forgot-password", AuthController.forgotPassword);
+router.post("/reset-password", AuthController.resetPassword);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const otpGenerator = require('otp-generator');
+const crypto = require('crypto');
 
 // Project import
 const { User } = require('../../models/user.model');
@@ -139,10 +140,37 @@ const forgotPassword = async (body) => {
     }
 };
 
+const resetPassword = async (body) => {
+    const hashedToken = crypto.createHash('sha256').update(body.token).digest('hex');
+    try {
+        const user = await User.findOne({
+            passwordResetToken: hashedToken,
+            passwordResetExpires: { $gt: Date.now() },
+        });
+
+        if (!user) {
+            // Token is Invalid or Expired
+            return false;
+        }
+
+        user.password = body.passwordConfirm;
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save();
+
+        const token = signToken(user._id);
+
+        return { token };
+    } catch (error) {
+        throw new Error('Error reset Password');
+    }
+};
+
 module.exports = {
     verifyRegistration,
     generateOTP,
     verifyOTP,
     verifyUser,
     forgotPassword,
+    resetPassword,
 };
