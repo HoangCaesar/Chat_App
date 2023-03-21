@@ -119,9 +119,27 @@ const verifyOTP = async (email, otp) => {
     }
 };
 
+const forgotPassword = async (body) => {
+    // 1) Get user based on POSTed email
+    const user = await User.findOne({ email: body.email });
+    try {
+        if (!user) {
+            return false;
+        }
+        // 2) Generate the random reset token
+        const resetToken = user.createPasswordResetToken();
+        await user.save({ validateBeforeSave: false });
+
+        return { resetToken, user };
+    } catch (error) {
+        throw new Error('Error forgot Password');
+    }
+};
+
 module.exports = {
     verifyRegistration,
     generateOTP,
     verifyOTP,
     verifyUser,
+    forgotPassword,
 };

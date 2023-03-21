@@ -110,6 +110,27 @@ UserSchema.methods.correctPassword = async function (candidatePassword, userPass
     return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+// RESET TOKEN
+UserSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+    this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+    return resetToken;
+};
+
+UserSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
+    if (this.passwordChangedAt) {
+        const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return JWTTimeStamp < changedTimeStamp;
+    }
+
+    // FALSE MEANS NOT CHANGED
+    return false;
+};
+
 const User = appDatabase.model('user', UserSchema);
 
 module.exports = {
