@@ -78,6 +78,9 @@ const UserSchema = new Schema(
             type: String,
             enum: ['Online', 'Offline'],
         },
+        location: {
+            type: String,
+        },
     },
     modelOptions
 );

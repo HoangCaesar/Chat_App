@@ -8,7 +8,7 @@ const signToken = require('../../helpers/signToken');
 
 // ======================================== SERVICE: VERIFY REGISTERATION =======================================
 
-const verifyUser = async (email, password) => {
+const verifyUser = async (email, password, location) => {
     try {
         const user = await User.findOne({ email: email }).select('+password');
 
@@ -21,6 +21,8 @@ const verifyUser = async (email, password) => {
             // Email or password is incorrect
             return 'EMAIL-PASSWORD';
         }
+
+        // Do something with location msg
 
         const token = signToken(user._id);
 

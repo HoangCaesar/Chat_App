@@ -8,7 +8,7 @@ const resetMail = require('../templates/resetPassword');
 
 // POST: api/v1/user/signin
 const signIn = async (req, res, next) => {
-    const { email, password } = req.body;
+    const { email, password, location } = req.body;
     try {
         if (!email || !password) {
             res.status(400).json({
@@ -18,7 +18,7 @@ const signIn = async (req, res, next) => {
             return;
         }
 
-        const response = await AuthService.verifyUser(email, password);
+        const response = await AuthService.verifyUser(email, password, location);
 
         switch (response) {
             case 'PASSWORD':
