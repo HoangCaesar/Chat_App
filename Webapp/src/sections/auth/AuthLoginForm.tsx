@@ -18,7 +18,7 @@ const AuthLoginForm = () => {
     const isLoading = useAppSelector(authSelectIsLoading);
 
     const [showPassword, setShowPassword] = useState(false);
-    const [userLocation, setUserLocation] = useState<Location>();
+    const [userLocation, setUserLocation] = useState<string>('');
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -65,9 +65,12 @@ const AuthLoginForm = () => {
 
     const onSubmit = async (data: UserLogin) => {
         try {
-            console.log(userLocation);
+            data = {
+                ...data,
+                location: userLocation,
+            };
             // submit data to backend
-            // dispatch(authActions.LoginUser(data));
+            dispatch(authActions.LoginUser(data));
         } catch (error: any) {
             console.error(error);
             reset();
