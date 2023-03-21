@@ -9,8 +9,13 @@ import { Alert, Stack } from '@mui/material';
 
 // Project Import
 import { FormProvider, RHFTextField } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
 
 const AuthRegisterForm = () => {
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(authSelectIsLoading);
+
     const [showPassword, setShowPassword] = useState(false);
 
     const LoginSchema = Yup.object().shape({
@@ -44,7 +49,7 @@ const AuthRegisterForm = () => {
     const onSubmit = async (data: any) => {
         try {
             // submit data to backend
-            console.log(data);
+            dispatch(authActions.RegisterUser(data));
         } catch (error: any) {
             console.error(error);
             reset();
@@ -62,11 +67,7 @@ const AuthRegisterForm = () => {
                     <Alert severity="error">{errors.afterSubmit.message}</Alert>
                 )}
 
-                <Stack
-                    direction={{ xs: 'column', sm: 'row' }}
-                    alignItems="center"
-                    spacing={2}
-                >
+                <Stack direction={{ xs: 'column', sm: 'row' }} alignItems="center" spacing={2}>
                     <RHFTextField name="firstName" label="First name" />
                     <RHFTextField name="lastName" label="Last name" />
                 </Stack>
@@ -86,6 +87,7 @@ const AuthRegisterForm = () => {
                 size="large"
                 type="submit"
                 variant="contained"
+                loading={isLoading}
                 sx={{
                     bgcolor: 'text.primary',
                     color: (theme) =>

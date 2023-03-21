@@ -16,12 +16,23 @@ import {
     VerifyOTPResponse,
 } from '../../../model';
 import authApi from '../../../api/auth.api';
+import { rootNavigate } from '../../../hooks';
 
 // ==============================|| AUTH SAGA  ||============================== //
 
 function* register(action: PayloadAction<UserRegister>) {
     try {
-    } catch (error) {}
+        yield put(authActions.updateIsLoading({ isLoading: true, error: false }));
+        const response: ResgiterResponse = yield call(authApi.register, action.payload);
+        if (response.status === 'success') {
+            yield put(authActions.updateRegisterEmail({ email: action.payload.email }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
+            rootNavigate('/auth/verify');
+        }
+    } catch (error) {
+        console.log(error);
+        yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+    }
 }
 
 function* handleLogin(payload: UserLogin) {
@@ -39,7 +50,10 @@ function* handleLogin(payload: UserLogin) {
         localStorage.setItem('uid', response.user_id);
 
         yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
-    } catch (error) {}
+    } catch (error) {
+        console.log(error);
+        yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+    }
 }
 
 function* watchLoginFlow() {
@@ -54,6 +68,7 @@ function* watchLoginFlow() {
 
 function* authSaga() {
     yield fork(watchLoginFlow);
+    yield takeLatest(authActions.RegisterUser, register);
 }
 
 export default authSaga;

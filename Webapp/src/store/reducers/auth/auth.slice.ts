@@ -42,6 +42,9 @@ const authSlice = createSlice({
         LoginUser(state, action: PayloadAction<UserLogin>) {
             // Do nothing
         },
+        RegisterUser(state, action: PayloadAction<UserRegister>) {
+            // Do nothing
+        },
 
         // others
         updateIsLoading(state, action: PayloadAction<any>) {
