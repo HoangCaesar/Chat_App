@@ -82,12 +82,30 @@ const UserSchema = new Schema(
     modelOptions
 );
 
-// verify OTP
-UserSchema.methods.correctOTP = function (candidateOTP, userOTP) {
-    return candidateOTP === userOTP;
+// OTP
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('otp') || !this.otp) return next();
+
+    this.otp = await bcrypt.hash(this.otp.toString(), 12);
+
+    console.log(this.otp.toString(), 'FROM PRE SAVE HOOK');
+
+    next();
+});
+
+UserSchema.methods.correctOTP = async function (candidateOTP, userOTP) {
+    return await bcrypt.compare(candidateOTP, userOTP);
 };
 
-// verify PASSWORD
+// PASSWORD
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password') || !this.password) return next();
+
+    this.password = await bcrypt.hash(this.password, 12);
+
+    next();
+});
+
 UserSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
     return await bcrypt.compare(candidatePassword, userPassword);
 };

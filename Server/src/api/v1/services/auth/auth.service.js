@@ -8,7 +8,7 @@ const signToken = require('../../helpers/signToken');
 // ======================================== SERVICE: VERIFY REGISTERATION =======================================
 
 const verifyRegistration = async (data) => {
-    const { _firstName, _lastName, email, _password } = data;
+    const { firstName, lastName, email, password } = data;
     try {
         const filteredBody = objectFilter(data, 'firstName', 'lastName', 'email', 'password');
 
