@@ -1,13 +1,14 @@
-const otpGenerator = require("otp-generator");
+const otpGenerator = require('otp-generator');
 
 // Project import
 const { User } = require('../../models/user.model');
 const objectFilter = require('../../helpers/objectFilter');
+const signToken = require('../../helpers/signToken');
 
 // ======================================== SERVICE: VERIFY REGISTERATION =======================================
 
 const verifyRegistration = async (data) => {
-    const { firstName, lastName, email, password } = data;
+    const { _firstName, _lastName, email, _password } = data;
     try {
         const filteredBody = objectFilter(data, 'firstName', 'lastName', 'email', 'password');
 
@@ -60,7 +61,44 @@ const generateOTP = async (userId) => {
     }
 };
 
+const verifyOTP = async (email, otp) => {
+    try {
+        const user = await User.findOne({
+            email,
+            otp_expiry_time: { $gt: Date.now() },
+        });
+
+        if (!user) {
+            // Email is verified or otp is expired
+            return 'EMAIL-OTP';
+        }
+
+        if (user.verified) {
+            // Email is verified
+            return 'EMAIL';
+        }
+
+        if (otp !== user.otp) {
+            // OTP is incorrect
+            return 'OTP';
+        }
+
+        // OTP is correct
+
+        user.verified = true;
+        user.otp = undefined;
+        await user.save({ new: true, validateModifiedOnly: true });
+
+        const token = signToken(user._id);
+
+        return { token, user };
+    } catch (error) {
+        throw new Error('Error verify OTP');
+    }
+};
+
 module.exports = {
     verifyRegistration,
-    generateOTP
+    generateOTP,
+    verifyOTP,
 };

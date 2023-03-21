@@ -55,8 +55,48 @@ const sendOTP = async (req, res, next) => {
     }
 };
 
+// POST: api/v1/user/verify-OTP
+const verifyOTP = async (req, res, next) => {
+    const { email, otp } = req.body;
+    try {
+        const response = await AuthService.verifyOTP(email, otp);
+
+        switch (response) {
+            case 'EMAIL-OTP':
+                res.status(400).json({
+                    status: 'error',
+                    message: 'Email is invalid or OTP expired',
+                });
+                break;
+            case 'EMAIL':
+                res.status(400).json({
+                    status: 'error',
+                    message: 'Email is already verified',
+                });
+                break;
+            case 'OTP':
+                res.status(400).json({
+                    status: 'error',
+                    message: 'OTP is incorrect',
+                });
+                break;
+            default:
+                res.status(200).json({
+                    status: 'success',
+                    message: 'OTP verified Successfully!',
+                    token: response.token,
+                    user_id: response.user._id,
+                });
+        }
+        
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signIn,
     register,
     sendOTP,
+    verifyOTP,
 };

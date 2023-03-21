@@ -20,3 +20,5 @@
 21-03-2023	48:55:09-----POST /api/v1/auth/register ::: This route does not exist.
 21-03-2023	28:56:09-----POST /api/v1/auth/register ::: This route does not exist.
 21-03-2023	46:50:10-----POST /api/v1/auth/register ::: otpMail is not a function
+21-03-2023	29:31:11-----POST /api/v1/auth/verify-otp ::: Error verify OTP
+21-03-2023	38:32:11-----POST /api/v1/auth/verify-otp ::: Error verify OTP
