@@ -2,9 +2,10 @@
 import { combineReducers } from 'redux';
 
 // project import
+import auth from './auth/auth.slice'
 
-// ==============================|| COMBINE REDUCERS ||============================== //
+// ==============================|| ROOT REDUCERS ||============================== //
 
-const reducers = combineReducers({  });
+const reducers = combineReducers({ auth });
 
 export default reducers;

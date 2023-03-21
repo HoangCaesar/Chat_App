@@ -3,13 +3,14 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import rootSaga from './root.saga';
 
 // project import
+import rootReducer from './reducers'
 
 // ==============================|| APP STORE - COMBINE ALL REDUCERS  ||============================== //
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-    reducer: {},
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 

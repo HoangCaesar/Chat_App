@@ -27,6 +27,7 @@ export interface ResetPassword {
 
 // Response Models
 export interface LoginResponse {
+    isLoggedIn?: boolean;
     status: string;
     message: string;
     token: string;
