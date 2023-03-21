@@ -26,14 +26,29 @@ function* register(action: PayloadAction<UserRegister>) {
 
 function* handleLogin(payload: UserLogin) {
     try {
-       
-    } catch (error) {
-    }
+        yield put(authActions.updateIsLoading({ isLoading: true, error: false }));
+        const response: LoginResponse = yield call(authApi.login, payload);
+        yield put(
+            authActions.logIn({
+                isLoggedIn: true,
+                token: response.token,
+                user_id: response.user_id,
+            })
+        );
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('uid', response.user_id);
+
+        yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
+    } catch (error) {}
 }
 
 function* watchLoginFlow() {
     while (true) {
-        
+        const isLoggedIn = Boolean(localStorage.getItem('token'));
+        if (!isLoggedIn) {
+            const action: PayloadAction<UserLogin> = yield take(authActions.LoginUser.type);
+            yield fork(handleLogin, action.payload);
+        }
     }
 }
 

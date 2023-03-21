@@ -39,11 +39,16 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        LoginUser(state, action: PayloadAction<UserLogin>) {
+            // Do nothing
+        },
+
+        // others
         updateIsLoading(state, action: PayloadAction<any>) {
             state.error = action.payload.error;
             state.isLoading = action.payload.isLoading;
         },
-        logIn(state, action: PayloadAction<LoginResponse>) {
+        logIn(state, action: PayloadAction<any>) {
             state.isLoggedIn = action.payload.isLoggedIn;
             state.token = action.payload.token;
             state.user_id = action.payload.user_id;

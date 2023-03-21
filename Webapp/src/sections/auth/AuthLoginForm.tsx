@@ -1,16 +1,21 @@
-import { useState } from 'react';
-import * as Yup from 'yup';
-import { Link as RouterLink } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link, Stack, Alert, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { Eye, EyeSlash } from 'phosphor-react';
+import { Alert, Link, Stack } from '@mui/material';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link as RouterLink } from 'react-router-dom';
+import * as Yup from 'yup';
 
 // Project Import
 import { FormProvider, RHFTextField } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
+import { UserLogin } from '../../model'
 
 const AuthLoginForm = () => {
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(authSelectIsLoading);
+
     const [showPassword, setShowPassword] = useState(false);
 
     const LoginSchema = Yup.object().shape({
@@ -37,10 +42,10 @@ const AuthLoginForm = () => {
         formState: { errors },
     }: any = methods;
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: UserLogin) => {
         try {
-            console.log(data);
             // submit data to backend
+            dispatch(authActions.LoginUser(data));
         } catch (error: any) {
             console.error(error);
             reset();
@@ -85,6 +90,7 @@ const AuthLoginForm = () => {
                 size="large"
                 type="submit"
                 variant="contained"
+                loading={isLoading}
                 sx={{
                     bgcolor: 'text.primary',
                     color: (theme) =>
