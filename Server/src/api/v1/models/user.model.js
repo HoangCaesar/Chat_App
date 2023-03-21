@@ -35,19 +35,15 @@ const UserSchema = new Schema(
             },
         },
         password: {
-            // unselect
             type: String,
         },
         passwordChangedAt: {
-            // unselect
             type: Date,
         },
         passwordResetToken: {
-            // unselect
             type: String,
         },
         passwordResetExpires: {
-            // unselect
             type: Date,
         },
         createdAt: {
@@ -55,7 +51,6 @@ const UserSchema = new Schema(
             default: Date.now(),
         },
         updatedAt: {
-            // unselect
             type: Date,
         },
         verified: {

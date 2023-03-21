@@ -32,7 +32,20 @@ const register = async (req, res, next) => {
     }
 };
 
+// POST: api/v1/user/send-OTP
+const sendOTP = async (req, res, next) => {
+    const { userId } = req;
+    try {
+        const { user, new_otp } = await AuthService.generateOTP(userId);
+
+        
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     signIn,
     register,
+    sendOTP,
 };

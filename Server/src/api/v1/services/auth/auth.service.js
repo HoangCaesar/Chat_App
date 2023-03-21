@@ -1,3 +1,5 @@
+const otpGenerator = require("otp-generator");
+
 // Project import
 const { User } = require('../../models/user.model');
 const objectFilter = require('../../helpers/objectFilter');
@@ -34,6 +36,31 @@ const verifyRegistration = async (data) => {
     }
 };
 
+const generateOTP = async (userId) => {
+    try {
+        const new_otp = otpGenerator.generate(6, {
+            upperCaseAlphabets: false,
+            specialChars: false,
+            lowerCaseAlphabets: false,
+        });
+
+        const otp_expiry_time = Date.now() + 10 * 60 * 1000; // 10 Mins after otp is sent
+
+        const user = await User.findByIdAndUpdate(userId, {
+            otp_expiry_time,
+        });
+
+        user.otp = new_otp.toString();
+
+        await user.save({ new: true, validateModifiedOnly: true });
+
+        return { user, new_otp };
+    } catch (error) {
+        throw new Error('Error send OTP');
+    }
+};
+
 module.exports = {
     verifyRegistration,
+    generateOTP
 };

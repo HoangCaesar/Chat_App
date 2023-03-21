@@ -1,3 +1,3 @@
 module.exports = {
-    AuthService: require('./auth/auth.service')
+    AuthService: require('./auth/auth.service'),
 };
