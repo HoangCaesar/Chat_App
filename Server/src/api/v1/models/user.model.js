@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 // Project import
 const { appDatabase } = require('../databases/init.multi.mongodb');
@@ -79,6 +81,16 @@ const UserSchema = new Schema(
     },
     modelOptions
 );
+
+// verify OTP
+UserSchema.methods.correctOTP = function (candidateOTP, userOTP) {
+    return candidateOTP === userOTP;
+};
+
+// verify PASSWORD
+UserSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
+    return await bcrypt.compare(candidatePassword, userPassword);
+};
 
 const User = appDatabase.model('user', UserSchema);
 

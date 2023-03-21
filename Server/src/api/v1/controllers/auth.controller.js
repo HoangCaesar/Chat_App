@@ -6,7 +6,17 @@ const otpMail = require('../templates/sendOtp');
 
 // POST: api/v1/user/signin
 const signIn = async (req, res, next) => {
+    const { email, password } = req.body;
     try {
+        if (!email || !password) {
+            res.status(400).json({
+                status: 'error',
+                message: 'Both email and password are required',
+            });
+            return;
+        }
+
+        
         res.json({
             status: 'success',
         });
@@ -88,7 +98,6 @@ const verifyOTP = async (req, res, next) => {
                     user_id: response.user._id,
                 });
         }
-        
     } catch (error) {
         next(error);
     }

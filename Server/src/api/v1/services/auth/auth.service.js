@@ -78,7 +78,7 @@ const verifyOTP = async (email, otp) => {
             return 'EMAIL';
         }
 
-        if (otp !== user.otp) {
+        if (!user.correctOTP(otp, user.otp)) {
             // OTP is incorrect
             return 'OTP';
         }
