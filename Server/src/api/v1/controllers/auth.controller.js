@@ -1,5 +1,6 @@
 // Project import
-const { AuthService } = require('../services');
+const { AuthService, MailService } = require('../services');
+const otpMail = require('../templates/sendOtp');
 
 // ======================================== AUTH CONTROLLER =======================================
 
@@ -38,7 +39,17 @@ const sendOTP = async (req, res, next) => {
     try {
         const { user, new_otp } = await AuthService.generateOTP(userId);
 
-        
+        await MailService.sendMail({
+            to: user.email,
+            subject: 'OTP Verification',
+            html: otpMail(user.firstName, new_otp),
+            attachments: [],
+        });
+
+        res.status(200).json({
+            status: 'success',
+            message: 'OTP Sent Successfully!',
+        });
     } catch (error) {
         next(error);
     }
