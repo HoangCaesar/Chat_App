@@ -1,7 +1,7 @@
+import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { Alert, Link, Stack } from '@mui/material';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link as RouterLink } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -10,13 +10,34 @@ import * as Yup from 'yup';
 import { FormProvider, RHFTextField } from '../../components';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
-import { UserLogin } from '../../model'
+import { UserLogin, Location } from '../../model';
+import getLocationName from '../../utils/getLocation';
 
 const AuthLoginForm = () => {
     const dispatch = useAppDispatch();
     const isLoading = useAppSelector(authSelectIsLoading);
 
     const [showPassword, setShowPassword] = useState(false);
+    const [userLocation, setUserLocation] = useState<Location>();
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const location = await getLocationName({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
+                    setUserLocation(location);
+                },
+                (error) => {
+                    console.log(error.message);
+                }
+            );
+        } else {
+            console.log('Geolocation is not supported by this browser.');
+        }
+    }, []);
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
@@ -44,8 +65,9 @@ const AuthLoginForm = () => {
 
     const onSubmit = async (data: UserLogin) => {
         try {
+            console.log(userLocation);
             // submit data to backend
-            dispatch(authActions.LoginUser(data));
+            // dispatch(authActions.LoginUser(data));
         } catch (error: any) {
             console.error(error);
             reset();
