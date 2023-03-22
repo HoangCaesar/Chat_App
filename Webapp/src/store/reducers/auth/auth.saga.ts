@@ -131,6 +131,7 @@ function* handleLogin(payload: UserLogin) {
         yield put(authActions.updateIsLoading({ isLoading: true, error: false }));
         const response: LoginResponse = yield call(authApi.login, payload);
         if (response.status === 'success') {
+            console.log(response);
             yield put(
                 authActions.logIn({
                     isLoggedIn: true,

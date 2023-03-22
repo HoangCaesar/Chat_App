@@ -2,7 +2,7 @@
 export interface UserLogin {
     email: String;
     password: String;
-    location: string;
+    location?: string;
 }
 
 export interface UserRegister {
@@ -33,6 +33,7 @@ export interface LoginResponse {
     message: string;
     token: string;
     user_id: string;
+    location?: string;
 }
 
 export interface ResgiterResponse {

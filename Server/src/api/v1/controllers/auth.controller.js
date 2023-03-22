@@ -8,7 +8,7 @@ const resetMail = require('../templates/resetPassword');
 
 // POST: api/v1/user/signin
 const signIn = async (req, res, next) => {
-    const { email, password, location } = req.body;
+    let { email, password, location } = req.body;
     try {
         if (!email || !password) {
             res.status(400).json({
@@ -39,6 +39,7 @@ const signIn = async (req, res, next) => {
                     message: 'Logged in successfully!',
                     token: response.token,
                     user_id: response.uid,
+                    location: response.location
                 });
         }
     } catch (error) {

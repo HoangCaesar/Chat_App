@@ -8,9 +8,9 @@ import * as Yup from 'yup';
 
 // Project Import
 import { FormProvider, RHFTextField } from '../../components';
-import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';  
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { UserLogin } from '../../model';
-import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice'; 
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
 import getLocationName from '../../utils/getLocation';
 
 const AuthLoginForm = () => {
