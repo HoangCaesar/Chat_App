@@ -6,10 +6,15 @@ import { LoadingButton } from '@mui/lab';
 
 // Project Import
 import { FormProvider, RHFTextField } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
 
 // ----------------------------------------------------------------------
 
 const AuthResetPasswordForm = () => {
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(authSelectIsLoading);
+
     const ResetPasswordSchema = Yup.object().shape({
         email: Yup.string()
             .required('Email is required')
@@ -26,7 +31,7 @@ const AuthResetPasswordForm = () => {
     const onSubmit = async (data: any) => {
         try {
             //   Send API Request
-            console.log(data);
+            dispatch(authActions.ForgotPassword(data))
         } catch (error) {
             console.error(error);
         }
@@ -41,6 +46,7 @@ const AuthResetPasswordForm = () => {
                 size="large"
                 type="submit"
                 variant="contained"
+                loading={isLoading}
                 sx={{
                     mt: 3,
                     bgcolor: 'text.primary',

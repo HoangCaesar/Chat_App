@@ -5,14 +5,48 @@ import { call, delay, fork, put, take, takeLatest } from 'redux-saga/effects';
 import authApi from '../../../api/auth.api';
 import { rootNavigate } from '../../../hooks';
 import {
-    LoginResponse, ResgiterResponse, UserLogin,
-    UserRegister, VerifyOTP,
-    VerifyOTPResponse
+    LoginResponse,
+    ResgiterResponse,
+    UserLogin,
+    UserRegister,
+    VerifyOTP,
+    VerifyOTPResponse,
+    ForgotPassword,
+    ForgotPasswordResponse,
 } from '../../../model';
 import { appActions } from '../app/app.slice';
 import { authActions } from './auth.slice';
 
 // ==============================|| AUTH SAGA  ||============================== //
+
+function* forgotPassword(action: PayloadAction<ForgotPassword>) {
+    try {
+        yield put(authActions.updateIsLoading({ isLoading: true, error: false }));
+        const response: ForgotPasswordResponse = yield call(authApi.forgotPassword, action.payload);
+        if (response.status === 'success') {
+            yield put(appActions.openSnackBar({ severity: 'success', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
+        } else {
+            yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+        }
+    } catch (error: any) {
+        console.log(error);
+        yield put(appActions.openSnackBar({ severity: 'success', message: error.message }));
+        yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+    }
+}
+
+function* signout() {
+    try {
+        localStorage.removeItem('token');
+        localStorage.removeItem('uid');
+        yield put(authActions.signOut());
+    } catch (error: any) {
+        console.log(error);
+        yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+    }
+}
 
 function* verifyOtp(action: PayloadAction<VerifyOTP>) {
     try {
@@ -29,6 +63,7 @@ function* verifyOtp(action: PayloadAction<VerifyOTP>) {
                     user_id: response.user_id,
                 })
             );
+            yield put(appActions.openSnackBar({ severity: 'success', message: response.message }));
             yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
             rootNavigate('/app');
             yield delay(1000);
@@ -38,6 +73,7 @@ function* verifyOtp(action: PayloadAction<VerifyOTP>) {
         }
     } catch (error: any) {
         console.log(error);
+        yield put(appActions.openSnackBar({ severity: 'error', message: error.message }));
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
     }
 }
@@ -49,6 +85,7 @@ function* register(action: PayloadAction<UserRegister>) {
         if (response.status === 'success') {
             yield put(authActions.updateRegisterEmail({ email: action.payload.email }));
             rootNavigate('/auth/verify');
+            yield put(appActions.openSnackBar({ severity: 'success', message: response.message }));
             yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
         } else {
             yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));
@@ -56,6 +93,7 @@ function* register(action: PayloadAction<UserRegister>) {
         }
     } catch (error: any) {
         console.log(error);
+        yield put(appActions.openSnackBar({ severity: 'error', message: error.message }));
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
     }
 }
@@ -102,6 +140,8 @@ function* authSaga() {
     yield fork(watchLoginFlow);
     yield takeLatest(authActions.RegisterUser, register);
     yield takeLatest(authActions.VerifyOTP, verifyOtp);
+    yield takeLatest(authActions.SignOut, signout);
+    yield takeLatest(authActions.ForgotPassword, forgotPassword);
 }
 
 export default authSaga;

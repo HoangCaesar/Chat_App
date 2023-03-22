@@ -48,6 +48,12 @@ const authSlice = createSlice({
         VerifyOTP(state, action: PayloadAction<VerifyOTP>) {
             // Do nothing
         },
+        SignOut(state, action: PayloadAction<VerifyOTP>) {
+            // Do nothing
+        },
+        ForgotPassword(state, action: PayloadAction<VerifyOTP>) {
+            // Do nothing
+        },
 
         // others
         updateIsLoading(state, action: PayloadAction<any>) {
@@ -59,7 +65,7 @@ const authSlice = createSlice({
             state.token = action.payload.token;
             state.user_id = action.payload.user_id;
         },
-        signOut(state, action) {
+        signOut(state) {
             state.isLoggedIn = false;
             state.token = '';
             state.user_id = null;
