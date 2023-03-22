@@ -26,17 +26,13 @@ const verifyUser = async (email, password, location) => {
 
         if (location === '') {
             location = 'Mars';
-            await User.findOneAndUpdate({ email: email }, { location });
-            const token = signToken(user._id);
-
-            return { token, uid: user._id, location };
         }
 
         await User.findOneAndUpdate({ email: email }, { location });
 
         const token = signToken(user._id);
 
-        return { token, uid: user._id, location };
+        return { token, uid: user._id, fullname: `${user.firstName} ${user.lastName}`, location };
     } catch (error) {
         throw new Error('Error verify User');
     }
