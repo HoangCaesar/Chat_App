@@ -69,6 +69,7 @@ function* signout() {
         localStorage.removeItem('token');
         localStorage.removeItem('uid');
         yield put(authActions.signOut());
+        rootNavigate('/auth/signin');
     } catch (error: any) {
         console.log(error);
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
@@ -168,7 +169,7 @@ function* authSaga() {
     yield fork(watchLoginFlow);
     yield takeLatest(authActions.RegisterUser, register);
     yield takeLatest(authActions.VerifyOTP, verifyOtp);
-    yield takeLatest(authActions.SignOut, signout);
+    yield takeLatest(authActions.SignoutUser, signout);
     yield takeLatest(authActions.ForgotPassword, forgotPassword);
     yield takeLatest(authActions.ResetPassword, resetPassword);
 }

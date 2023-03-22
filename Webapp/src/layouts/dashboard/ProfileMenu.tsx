@@ -5,10 +5,14 @@ import { faker } from '@faker-js/faker';
 
 // Project Import
 import { Profile_Menu } from '../../data/chat_data';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
 
 // ==============================|| DASHBOARD LAYOUT: PROFILE MENU ||============================== //
 
 const ProfileMenu = () => {
+    const dispatch = useAppDispatch();
+
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (event: any) => {
@@ -53,6 +57,11 @@ const ProfileMenu = () => {
                         {Profile_Menu.map((el, idx) => (
                             <MenuItem onClick={handleClose}>
                                 <Stack
+                                    onClick={() => {
+                                        if (idx === 2) {
+                                            dispatch(authActions.SignoutUser());
+                                        }
+                                    }}
                                     sx={{ width: 100 }}
                                     direction="row"
                                     alignItems={'center'}

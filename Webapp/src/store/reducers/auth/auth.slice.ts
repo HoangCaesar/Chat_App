@@ -48,7 +48,7 @@ const authSlice = createSlice({
         VerifyOTP(state, action: PayloadAction<VerifyOTP>) {
             // Do nothing
         },
-        SignOut() {
+        SignoutUser() {
             // Do nothing
         },
         ForgotPassword(state, action: PayloadAction<ForgotPassword>) {

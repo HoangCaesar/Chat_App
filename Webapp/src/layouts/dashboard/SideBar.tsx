@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 // MUI
 import { Avatar, Box, Divider, IconButton, styled, Switch, useTheme } from '@mui/material';
@@ -56,7 +57,9 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 // ==============================|| DASHBOARD LAYOUT: SIDE BAR ||============================== //
 const SideBar = () => {
     const theme: any = useTheme();
-    const [activeItem, setActiveItem] = useState<number>(4);
+    const navigate = useNavigate();
+
+    const [activeItem, setActiveItem] = useState<number>(0);
 
     const { onToggleMode } = useSettings();
     return (
