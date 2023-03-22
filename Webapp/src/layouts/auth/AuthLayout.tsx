@@ -1,12 +1,18 @@
 import { Container, Stack } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 // Project Import
 import { Logo } from '../../components';
+import { useAppSelector } from '../../hooks/sagaHooks';
+import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
 
 // ==============================|| LAYOUT: AUTH ||============================== //
 
 const AuthLayout = () => {
+    const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
+    if (isLoggedIn) {
+        return <Navigate to={"/app"} />;
+    }
     return (
         <>
             <Container sx={{ mt: 5 }} maxWidth="sm">

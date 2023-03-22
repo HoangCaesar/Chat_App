@@ -1,16 +1,25 @@
 import { Stack } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 // Project Import
+import { useResponsive } from '../../hooks';
+import { useAppSelector } from '../../hooks/sagaHooks';
+import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
 import SideBar from './SideBar';
 
 // ==============================|| LAYOUT: DASHBOARD ||============================== //
 
 const DashboardLayout = () => {
+    const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
+    if (!isLoggedIn) {
+        return <Navigate to={'/auth/signin'} />;
+    }
+
+    const isDesktop = useResponsive('up', 'md');
     return (
         <>
             <Stack direction="row">
-                <SideBar />
+                {isDesktop && <SideBar />}
                 <Outlet />
             </Stack>
         </>
