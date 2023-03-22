@@ -39,8 +39,6 @@ const signIn = async (req, res, next) => {
                     message: 'Logged in successfully!',
                     token: response.token,
                     user_id: response.uid,
-                    fullname: response.fullname,
-                    location: response.location
                 });
         }
     } catch (error) {

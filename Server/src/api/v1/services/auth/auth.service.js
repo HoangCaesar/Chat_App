@@ -32,7 +32,7 @@ const verifyUser = async (email, password, location) => {
 
         const token = signToken(user._id);
 
-        return { token, uid: user._id, fullname: `${user.firstName} ${user.lastName}`, location };
+        return { token, uid: user._id };
     } catch (error) {
         throw new Error('Error verify User');
     }

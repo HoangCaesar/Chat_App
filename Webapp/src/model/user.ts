@@ -33,8 +33,6 @@ export interface LoginResponse {
     message: string;
     token: string;
     user_id: string;
-    fullname: string;
-    location?: string;
 }
 
 export interface ResgiterResponse {
