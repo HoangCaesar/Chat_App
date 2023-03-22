@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../../index';
+
 // import axios from '../../utils/axios';
 
 // ==============================|| APP SLICE  ||============================== //
@@ -12,8 +14,8 @@ export interface AppState {
     tab: number;
     snackbar: {
         open: boolean | null;
-        severity: boolean | null;
-        message: boolean | null;
+        severity: string | null;
+        message: string | null;
     };
     users: []; // all users of app who are not friends and not requested yet
     friends: []; // all friends
@@ -85,11 +87,10 @@ const appSlice = createSlice({
 const appActions = appSlice.actions;
 
 // Selectors
+const appSelectSnackbar = (state: RootState) => state.app.snackbar;
 
 // Reducer
 const appReducer = appSlice.reducer;
 
-export {
-    appActions,
-};
+export { appActions, appSelectSnackbar };
 export default appReducer;

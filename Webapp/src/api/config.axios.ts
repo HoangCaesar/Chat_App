@@ -37,6 +37,10 @@ axiosClient.interceptors.response.use(
         return response;
     },
     (error) => {
+        if (error && error.response.data) {
+            return error.response.data;
+        }
+
         return error;
     }
 );

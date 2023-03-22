@@ -2,21 +2,15 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, fork, put, take, takeLatest } from 'redux-saga/effects';
 
 // Project Import
-import { authActions } from './auth.slice';
-import {
-    UserLogin,
-    UserRegister,
-    LoginResponse,
-    ResgiterResponse,
-    ForgotPassword,
-    ForgotPasswordResponse,
-    ResetPassword,
-    ResetPasswordResponse,
-    VerifyOTP,
-    VerifyOTPResponse,
-} from '../../../model';
 import authApi from '../../../api/auth.api';
 import { rootNavigate } from '../../../hooks';
+import {
+    LoginResponse, ResgiterResponse, UserLogin,
+    UserRegister, VerifyOTP,
+    VerifyOTPResponse
+} from '../../../model';
+import { appActions } from '../app/app.slice';
+import { authActions } from './auth.slice';
 
 // ==============================|| AUTH SAGA  ||============================== //
 
@@ -38,8 +32,11 @@ function* verifyOtp(action: PayloadAction<VerifyOTP>) {
             yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
             rootNavigate('/app');
             yield delay(1000);
-        } 
-    } catch (error) {
+        } else {
+            yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
+        }
+    } catch (error: any) {
         console.log(error);
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
     }
@@ -52,9 +49,12 @@ function* register(action: PayloadAction<UserRegister>) {
         if (response.status === 'success') {
             yield put(authActions.updateRegisterEmail({ email: action.payload.email }));
             rootNavigate('/auth/verify');
+            yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
+        } else {
+            yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
         }
-        yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
     }
@@ -74,11 +74,16 @@ function* handleLogin(payload: UserLogin) {
             );
             localStorage.setItem('token', response.token);
             localStorage.setItem('uid', response.user_id);
+            yield put(appActions.openSnackBar({ severity: 'success', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
+        } else {
+            console.log(response);
+            yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));
+            yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
         }
-
-        yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
+        yield put(appActions.openSnackBar({ severity: 'error', message: error.message }));
         yield put(authActions.updateIsLoading({ isLoading: false, error: true }));
     }
 }
