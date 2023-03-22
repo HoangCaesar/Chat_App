@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import * as Yup from 'yup';
 // form
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,8 +9,14 @@ import { Button, Stack } from '@mui/material';
 
 // Project Import
 import { FormProvider, RHFTextField } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
 
 const NewPasswordForm = () => {
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(authSelectIsLoading);
+
+    const [queryParameters] = useSearchParams();
     const [showPassword, setShowPassword] = useState(false);
 
     const NewPasswordSchema = Yup.object().shape({
@@ -37,7 +44,12 @@ const NewPasswordForm = () => {
     const onSubmit = async (data: any) => {
         try {
             //   Send API Request
-            console.log(data);
+            dispatch(
+                authActions.ResetPassword({
+                    ...data,
+                    token: queryParameters.get('token'),
+                })
+            );
         } catch (error) {
             console.error(error);
         }
@@ -63,6 +75,7 @@ const NewPasswordForm = () => {
                     size="large"
                     type="submit"
                     variant="contained"
+                    disabled={isLoading}
                     sx={{
                         mt: 3,
                         bgcolor: 'text.primary',
