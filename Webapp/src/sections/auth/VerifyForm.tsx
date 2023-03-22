@@ -7,8 +7,18 @@ import { Button, Stack } from '@mui/material';
 
 // Project Import
 import { FormProvider, RHFCodes } from '../../components';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import {
+    authActions,
+    authSelectEmail,
+    authSelectIsLoading,
+} from '../../store/reducers/auth/auth.slice';
 
 const VerifyForm = () => {
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(authSelectIsLoading);
+    const email = useAppSelector(authSelectEmail);
+
     const VerifyCodeSchema = Yup.object().shape({
         code1: Yup.string().required('Code is required'),
         code2: Yup.string().required('Code is required'),
@@ -41,7 +51,12 @@ const VerifyForm = () => {
     const onSubmit = async (data: any) => {
         try {
             //   Send API Request
-            console.log(data);
+            dispatch(
+                authActions.VerifyOTP({
+                    email,
+                    otp: `${data.code1}${data.code2}${data.code3}${data.code4}${data.code5}${data.code6}`,
+                })
+            );
         } catch (error) {
             console.error(error);
         }
@@ -60,6 +75,7 @@ const VerifyForm = () => {
                     size="large"
                     type="submit"
                     variant="contained"
+                    disabled={isLoading}
                     sx={{
                         mt: 3,
                         bgcolor: 'text.primary',
@@ -77,6 +93,6 @@ const VerifyForm = () => {
             </Stack>
         </FormProvider>
     );
-}
+};
 
-export default VerifyForm
+export default VerifyForm;

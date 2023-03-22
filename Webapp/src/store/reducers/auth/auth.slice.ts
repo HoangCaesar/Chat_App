@@ -19,7 +19,7 @@ export interface AuthState {
     isLoading?: boolean;
     user?: any;
     user_id?: string | null;
-    email?: string;
+    email: string;
     error?: boolean;
 }
 
@@ -43,6 +43,9 @@ const authSlice = createSlice({
             // Do nothing
         },
         RegisterUser(state, action: PayloadAction<UserRegister>) {
+            // Do nothing
+        },
+        VerifyOTP(state, action: PayloadAction<VerifyOTP>) {
             // Do nothing
         },
 
