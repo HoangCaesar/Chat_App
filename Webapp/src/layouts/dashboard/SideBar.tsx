@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // MUI
-import { Box, Divider, IconButton, styled, Switch, useTheme } from '@mui/material';
+import { Box, Divider, IconButton, styled, Switch, Tooltip, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
+import { Cloud } from 'phosphor-react';
 
 // Project Import
 import { Logo } from '../../components';
@@ -11,6 +12,7 @@ import { useSettings } from '../../hooks';
 import ProfileMenu from './ProfileMenu';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { appActions, appSelectServers } from '../../store/reducers/app/app.slice';
+import setSideNavData from '../../utils/setSideNavData';
 
 // Style
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -55,6 +57,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
+// Data
+
 // ==============================|| DASHBOARD LAYOUT: SIDE BAR ||============================== //
 const SideBar = () => {
     const dispatch = useAppDispatch();
@@ -62,6 +66,8 @@ const SideBar = () => {
 
     const theme: any = useTheme();
     const navigate = useNavigate();
+
+    const data = servers ? setSideNavData(servers) : [];
 
     const [activeItem, setActiveItem] = useState<number>(0);
 
@@ -114,36 +120,39 @@ const SideBar = () => {
                         sx={{ width: 'max-content' }}
                     >
                         {/* Icon list */}
-                        {servers?.map((item: any, index: number) => {
+                        {data.map((item: any, index: number) => {
                             return index === activeItem ? (
                                 <Box
-                                    key={item.name}
+                                    key={item.color}
                                     sx={{
                                         backgroundColor: theme.palette.primary.main,
                                         borderRadius: 1.5,
                                     }}
                                 >
-                                    <IconButton
-                                        sx={{ width: 'max-content', color: '#fff' }}
-                                        onClick={() => setActiveItem(index)}
-                                    >
-                                        {Nav_Buttons[index].icon}
-                                    </IconButton>
+                                    <Tooltip placement="right" title={item.title}>
+                                        <IconButton
+                                            sx={{ width: 'max-content', color: '#fff' }}
+                                            onClick={() => setActiveItem(index)}
+                                        >
+                                            {<Cloud color={item.color} />}
+                                        </IconButton>
+                                    </Tooltip>
                                 </Box>
                             ) : (
-                                <IconButton
-                                    key={item.name}
-                                    sx={{
-                                        width: 'max-content',
-                                        color:
-                                            theme.palette.mode === 'light'
-                                                ? '#000'
-                                                : theme.palette.text.primary,
-                                    }}
-                                    onClick={() => setActiveItem(index)}
-                                >
-                                    {Nav_Buttons[index].icon}
-                                </IconButton>
+                                <Tooltip key={item.color} placement="right" title={item.title}>
+                                    <IconButton
+                                        sx={{
+                                            width: 'max-content',
+                                            color:
+                                                theme.palette.mode === 'light'
+                                                    ? '#000'
+                                                    : theme.palette.text.primary,
+                                        }}
+                                        onClick={() => setActiveItem(index)}
+                                    >
+                                        {<Cloud color={item.color} />}
+                                    </IconButton>
+                                </Tooltip>
                             );
                         })}
 
