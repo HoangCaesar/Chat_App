@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 // MUI
 import { Box, Divider, IconButton, styled, Switch, Tooltip, useTheme } from '@mui/material';
@@ -7,16 +7,13 @@ import { Cloud, Door } from 'phosphor-react';
 
 // Project Import
 import { Logo } from '../../components';
-import { Nav_Buttons } from '../../data/chat_data';
 import { useSettings } from '../../hooks';
-import ProfileMenu from './ProfileMenu';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import {
-    appActions,
-    appSelectServers,
-    appSelectActiveItem,
+    appActions, appSelectActiveItem, appSelectServers
 } from '../../store/reducers/app/app.slice';
 import setSideNavData from '../../utils/setSideNavData';
+import ProfileMenu from './ProfileMenu';
 
 // Style
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -67,23 +64,21 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 const SideBar = () => {
     const dispatch = useAppDispatch();
     const servers = useAppSelector(appSelectServers);
-    const activeNum = useAppSelector(appSelectActiveItem);
+    const activeItem = useAppSelector(appSelectActiveItem);
 
     const theme: any = useTheme();
     const navigate = useNavigate();
 
     const data = servers ? setSideNavData(servers) : [];
 
-    const [activeItem, setActiveItem] = useState<number>(activeNum);
-
     // state
     useEffect(() => {
         dispatch(appActions.getServerList());
     }, []);
 
-    useEffect(() => {
-        setActiveItem(activeNum);
-    }, [activeNum]);
+    const setActiveItem = (id: number) => {
+        dispatch(appActions.setActiveItem(id));
+    };
 
     const { onToggleMode } = useSettings();
     return (
