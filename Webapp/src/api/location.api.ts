@@ -1,7 +1,7 @@
 import { Location } from '../model';
 import axiosClient from './config.axios';
 
-// ==============================|| AUTH AXIOS ||============================== //
+// ==============================|| LOCATION AXIOS ||============================== //
 
 const locationApi = {
     getLocation(data: Location): Promise<any> {

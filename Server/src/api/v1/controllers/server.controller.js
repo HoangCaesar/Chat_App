@@ -25,6 +25,27 @@ const createServer = async (req, res, next) => {
     }
 };
 
+// GET: api/v1/server
+const getAllServer = async (req, res, next) => {
+    try {
+        const response = await ServerService.getAll();
+        if (!response) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Can not get server list.',
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            message: response,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createServer,
+    getAllServer
 };

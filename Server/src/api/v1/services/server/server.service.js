@@ -29,4 +29,18 @@ const create = async (name, creator) => {
     }
 };
 
-module.exports = { create };
+const getAll = async () => {
+    try {
+        const serverList = await Server.find({}).sort({ createdAt: -1 }).populate('members');
+        if (!serverList || serverList.length === 0) {
+            return false;
+        }
+
+        return serverList;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error get All Server');
+    }
+};
+
+module.exports = { create, getAll };
