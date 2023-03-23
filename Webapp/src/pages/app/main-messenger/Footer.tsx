@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
-import { Box, Fab, IconButton, InputAdornment, Stack, TextField, Tooltip } from '@mui/material';
+import { Box, Fab, IconButton, Stack, TextField, Tooltip } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import {
     Camera,
@@ -13,6 +12,7 @@ import {
     Sticker,
     User
 } from 'phosphor-react';
+import { useRef, useState } from 'react';
 
 // Project Import
 
@@ -83,7 +83,7 @@ const ChatInput = ({ openPicker, setOpenPicker, setValue, value, inputRef }: any
                             }}
                         >
                             {Actions.map((el) => (
-                                <Tooltip placement="right" title={el.title}>
+                                <Tooltip placement="right" title={el.title}> 
                                     <Fab
                                         onClick={() => {
                                             setOpenActions(!openActions);
@@ -101,28 +101,24 @@ const ChatInput = ({ openPicker, setOpenPicker, setValue, value, inputRef }: any
                             ))}
                         </Stack>
 
-                        <InputAdornment>
-                            <IconButton
-                                onClick={() => {
-                                    setOpenActions(!openActions);
-                                }}
-                            >
-                                <LinkSimple />
-                            </IconButton>
-                        </InputAdornment>
+                        <IconButton
+                            onClick={() => {
+                                setOpenActions(!openActions);
+                            }}
+                        >
+                            <LinkSimple />
+                        </IconButton>
                     </Stack>
                 ),
                 endAdornment: (
                     <Stack sx={{ position: 'relative' }}>
-                        <InputAdornment>
-                            <IconButton
-                                onClick={() => {
-                                    setOpenPicker(!openPicker);
-                                }}
-                            >
-                                <Smiley />
-                            </IconButton>
-                        </InputAdornment>
+                        <IconButton
+                            onClick={() => {
+                                setOpenPicker(!openPicker);
+                            }}
+                        >
+                            <Smiley />
+                        </IconButton>
                     </Stack>
                 ),
             }}

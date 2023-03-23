@@ -20,8 +20,25 @@ const DashboardLayout = () => {
     const user_id: any = localStorage.getItem('uid');
 
     useEffect(() => {
+        if (isLoggedIn) {
+            // window.onload = () => {
+            //     if (!window.location.hash) {
+            //         window.location = (window.location ) as any;
+            //         window.location.reload();
+            //     }
+            // };
+
+            // // To avoid error cause calling onload function without argument
+            // const ev: any = {};
+
+            // window.onload(ev);
+
+            if (!socket) {
+                connectSocket(user_id);
+            }
+        }
         connectSocket(user_id);
-    }, []);
+    }, [isLoggedIn]);
 
     const isDesktop = useResponsive('up', 'md');
     return (
