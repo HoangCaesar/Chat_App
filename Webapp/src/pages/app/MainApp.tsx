@@ -23,6 +23,10 @@ const MainApp = () => {
         dispatch(appActions.getServerList());
     }, []);
 
+    const setActiveItem = (id: number) => {
+        dispatch(appActions.setActiveItem(id));
+    };
+
     return (
         <>
             <Stack direction="row" sx={{ width: '100%' }}>
@@ -54,7 +58,7 @@ const MainApp = () => {
                                             All Servers
                                         </Typography>
                                     </Stack>
-                                    {servers?.map((server: any) => {
+                                    {servers?.map((server: any, index: number) => {
                                         return (
                                             <Box
                                                 sx={{
@@ -74,15 +78,20 @@ const MainApp = () => {
                                                     justifyContent="space-between"
                                                 >
                                                     {/* Left */}
-                                                    <Typography variant="h6">
-                                                        {server.name}
+                                                    <Stack
+                                                        direction="column"
+                                                        justifyContent="center"
+                                                    >
+                                                        <Typography variant="h6">
+                                                            {server.name}
+                                                        </Typography>
                                                         <Typography
-                                                            variant="subtitle2"
-                                                            color={theme.palette.text.secondary}
+                                                            variant="caption"
+                                                            color={theme.palette.primary.dark}
                                                         >
                                                             {server.members.length} member
                                                         </Typography>
-                                                    </Typography>
+                                                    </Stack>
                                                     {/* Right -- Time */}
                                                     <Link
                                                         style={{
@@ -90,6 +99,7 @@ const MainApp = () => {
                                                             textDecoration: 'none',
                                                         }}
                                                         to={`/server/${server.name}`}
+                                                        onClick={() => setActiveItem(index + 1)}
                                                     >
                                                         <IconButton
                                                             sx={{

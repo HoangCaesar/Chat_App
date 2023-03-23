@@ -11,7 +11,11 @@ import { Nav_Buttons } from '../../data/chat_data';
 import { useSettings } from '../../hooks';
 import ProfileMenu from './ProfileMenu';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import { appActions, appSelectServers } from '../../store/reducers/app/app.slice';
+import {
+    appActions,
+    appSelectServers,
+    appSelectActiveItem,
+} from '../../store/reducers/app/app.slice';
 import setSideNavData from '../../utils/setSideNavData';
 
 // Style
@@ -63,18 +67,23 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 const SideBar = () => {
     const dispatch = useAppDispatch();
     const servers = useAppSelector(appSelectServers);
+    const activeNum = useAppSelector(appSelectActiveItem);
 
     const theme: any = useTheme();
     const navigate = useNavigate();
 
     const data = servers ? setSideNavData(servers) : [];
 
-    const [activeItem, setActiveItem] = useState<number>(0);
+    const [activeItem, setActiveItem] = useState<number>(activeNum);
 
     // state
     useEffect(() => {
         dispatch(appActions.getServerList());
     }, []);
+    
+    useEffect(() => {
+        setActiveItem(activeNum)
+    }, [activeNum]);
 
     const { onToggleMode } = useSettings();
     return (
@@ -135,9 +144,9 @@ const SideBar = () => {
                                             onClick={() => setActiveItem(index)}
                                         >
                                             {index === 0 ? (
-                                                <Door color='white' />
+                                                <Door color="white" />
                                             ) : (
-                                                <Cloud color='white' />
+                                                <Cloud color="white" />
                                             )}
                                         </IconButton>
                                     </Tooltip>

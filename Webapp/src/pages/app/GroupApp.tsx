@@ -7,14 +7,13 @@ import Messenger from './main-messenger';
 // ==============================|| PAGE: GROUP APP  ||============================== //
 
 const GroupApp = () => {
-    console.log(1);
     return (
         <>
             <Stack direction="row" sx={{ width: '100%' }}>
                 {/* Chat Bar */}
-                <Chats />
+                {/* <Chats /> */}
                 {/* Body */}
-                <Messenger  />
+                {/* <Messenger  /> */}
             </Stack>
         </>
     );

@@ -10,6 +10,7 @@ export interface AppState {
         open: boolean;
         type: 'CONTACT' | 'STARRED' | 'SHARED';
     };
+    activeItem: number;
     isLoggedIn: boolean;
     tab: number;
     snackbar: {
@@ -28,6 +29,7 @@ const initialState: AppState = {
         open: false,
         type: 'CONTACT',
     },
+    activeItem: 0,
     isLoggedIn: true,
     tab: 0, // [0, 1, 2, 3]
     snackbar: {
@@ -47,7 +49,7 @@ const appSlice = createSlice({
     reducers: {
         // http requests
         getServerList(state) {
-            state.sideBar.open = !state.sideBar.open;
+            // Do Nothing
         },
         setServerList(state, action: PayloadAction<any>) {
             state.servers = action.payload.servers;
@@ -62,6 +64,11 @@ const appSlice = createSlice({
         },
         updateTab(state, action: PayloadAction<any>) {
             state.tab = action.payload.tab;
+        },
+
+        setActiveItem(state, action: PayloadAction<number>) {
+            state.activeItem = action.payload;
+            console.log(state.activeItem);
         },
 
         openSnackBar(state, action: PayloadAction<any>) {
@@ -89,9 +96,10 @@ const appActions = appSlice.actions;
 // Selectors
 const appSelectSnackbar = (state: RootState) => state.app.snackbar;
 const appSelectServers = (state: RootState) => state.app.servers;
+const appSelectActiveItem = (state: RootState) => state.app.activeItem;
 
 // Reducer
 const appReducer = appSlice.reducer;
 
-export { appActions, appSelectSnackbar, appSelectServers };
+export { appActions, appSelectSnackbar, appSelectServers, appSelectActiveItem };
 export default appReducer;
