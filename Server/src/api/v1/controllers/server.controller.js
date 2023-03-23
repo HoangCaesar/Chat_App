@@ -25,7 +25,7 @@ const createServer = async (req, res, next) => {
     }
 };
 
-// GET: api/v1/server
+// GET: api/v1/server/all
 const getAllServer = async (req, res, next) => {
     try {
         const response = await ServerService.getAll();
@@ -45,7 +45,29 @@ const getAllServer = async (req, res, next) => {
     }
 };
 
+// GET: api/v1/server/one
+const getOneServer = async (req, res, next) => {
+    const { serverID } = req.params;
+    try {
+        const response = await ServerService.getOne(serverID);
+        if (!response) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Can not get this server',
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+            server: response,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createServer,
-    getAllServer
+    getAllServer,
+    getOneServer
 };

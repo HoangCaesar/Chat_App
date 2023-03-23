@@ -43,4 +43,18 @@ const getAll = async () => {
     }
 };
 
-module.exports = { create, getAll };
+const getOne = async (id) => {
+    try {
+        const server = await Server.findById(id).populate('members');
+        if (!server) {
+            return false;
+        }
+
+        return server;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error get All Server');
+    }
+};
+
+module.exports = { create, getAll, getOne };
