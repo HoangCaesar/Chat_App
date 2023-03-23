@@ -38,7 +38,7 @@ const getAllServer = async (req, res, next) => {
 
         res.status(200).json({
             status: 'success',
-            message: response,
+            servers: response,
         });
     } catch (error) {
         next(error);

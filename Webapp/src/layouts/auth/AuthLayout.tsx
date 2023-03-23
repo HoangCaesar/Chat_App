@@ -10,9 +10,9 @@ import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
 
 const AuthLayout = () => {
     const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
-    if (isLoggedIn) {
-        return <Navigate to={"/app"} />;
-    }
+    // if (isLoggedIn) {
+    //     return <Navigate to={"/app"} />;
+    // }
     return (
         <>
             <Container sx={{ mt: 5 }} maxWidth="sm">

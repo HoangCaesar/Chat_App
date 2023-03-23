@@ -1,15 +1,16 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 // MUI
-import { Avatar, Box, Divider, IconButton, styled, Switch, useTheme } from '@mui/material';
+import { Box, Divider, IconButton, styled, Switch, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
-import { Gear } from 'phosphor-react';
 
 // Project Import
 import { Logo } from '../../components';
 import { Nav_Buttons } from '../../data/chat_data';
 import { useSettings } from '../../hooks';
 import ProfileMenu from './ProfileMenu';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { appActions, appSelectServers } from '../../store/reducers/app/app.slice';
 
 // Style
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -56,10 +57,18 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 
 // ==============================|| DASHBOARD LAYOUT: SIDE BAR ||============================== //
 const SideBar = () => {
+    const dispatch = useAppDispatch();
+    const servers = useAppSelector(appSelectServers);
+
     const theme: any = useTheme();
     const navigate = useNavigate();
 
     const [activeItem, setActiveItem] = useState<number>(0);
+
+    // state
+    useEffect(() => {
+        dispatch(appActions.getServerList());
+    }, []);
 
     const { onToggleMode } = useSettings();
     return (
@@ -105,24 +114,25 @@ const SideBar = () => {
                         sx={{ width: 'max-content' }}
                     >
                         {/* Icon list */}
-                        {Nav_Buttons.map((item) => {
-                            return item.index === activeItem ? (
+                        {servers?.map((item: any, index: number) => {
+                            return index === activeItem ? (
                                 <Box
+                                    key={item.name}
                                     sx={{
                                         backgroundColor: theme.palette.primary.main,
                                         borderRadius: 1.5,
                                     }}
                                 >
                                     <IconButton
-                                        key={item.index}
                                         sx={{ width: 'max-content', color: '#fff' }}
+                                        onClick={() => setActiveItem(index)}
                                     >
-                                        {item.icon}
+                                        {Nav_Buttons[index].icon}
                                     </IconButton>
                                 </Box>
                             ) : (
                                 <IconButton
-                                    key={item.index}
+                                    key={item.name}
                                     sx={{
                                         width: 'max-content',
                                         color:
@@ -130,9 +140,9 @@ const SideBar = () => {
                                                 ? '#000'
                                                 : theme.palette.text.primary,
                                     }}
-                                    onClick={() => setActiveItem(item.index)}
+                                    onClick={() => setActiveItem(index)}
                                 >
-                                    {item.icon}
+                                    {Nav_Buttons[index].icon}
                                 </IconButton>
                             );
                         })}
@@ -150,7 +160,7 @@ const SideBar = () => {
                             onToggleMode();
                         }}
                     />
-                    <ProfileMenu />
+                    {/* <ProfileMenu /> */}
                 </Stack>
             </Stack>
         </Box>
