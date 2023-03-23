@@ -39,7 +39,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    // console.log(JSON.stringify(socket.handshake.query));
+    
+    socket.on('msg', data => {
+        socket.broadcast.emit('msg', 'Hei hei!')
+    })
 });
 
 app.use('/api/v1', appRoute);
