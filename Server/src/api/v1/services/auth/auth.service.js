@@ -2,7 +2,7 @@ const otpGenerator = require('otp-generator');
 const crypto = require('crypto');
 
 // Project import
-const { User } = require('../../models/user.model');
+const { User } = require('../../models');
 const objectFilter = require('../../helpers/objectFilter');
 const signToken = require('../../helpers/signToken');
 

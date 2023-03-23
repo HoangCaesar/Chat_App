@@ -9,7 +9,7 @@ const modelOptions = require('./modelOptions');
 
 // ========================================== USER MODEL ===============================================
 
-const UserSchema = new Schema(
+const userSchema = new Schema(
     {
         firstName: {
             type: String,
@@ -65,10 +65,10 @@ const UserSchema = new Schema(
         otp_expiry_time: {
             type: Date,
         },
-        friends: [
+        servers: [
             {
-                type: mongoose.Schema.ObjectId,
-                ref: 'User',
+                type: Schema.Types.ObjectId,
+                ref: 'Server',
             },
         ],
         socket_id: {
@@ -86,7 +86,7 @@ const UserSchema = new Schema(
 );
 
 // OTP
-UserSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
     if (!this.isModified('otp') || !this.otp) return next();
 
     this.otp = await bcrypt.hash(this.otp.toString(), 12);
@@ -96,12 +96,12 @@ UserSchema.pre('save', async function (next) {
     next();
 });
 
-UserSchema.methods.correctOTP = async function (candidateOTP, userOTP) {
+userSchema.methods.correctOTP = async function (candidateOTP, userOTP) {
     return await bcrypt.compare(candidateOTP, userOTP);
 };
 
 // PASSWORD
-UserSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
     if (!this.isModified('password') || !this.password) return next();
 
     this.password = await bcrypt.hash(this.password, 12);
@@ -109,12 +109,12 @@ UserSchema.pre('save', async function (next) {
     next();
 });
 
-UserSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
+userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
     return await bcrypt.compare(candidatePassword, userPassword);
 };
 
 // RESET TOKEN
-UserSchema.methods.createPasswordResetToken = function () {
+userSchema.methods.createPasswordResetToken = function () {
     const resetToken = crypto.randomBytes(32).toString('hex');
 
     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
@@ -124,7 +124,7 @@ UserSchema.methods.createPasswordResetToken = function () {
     return resetToken;
 };
 
-UserSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
+userSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     if (this.passwordChangedAt) {
         const changedTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
         return JWTTimeStamp < changedTimeStamp;
@@ -134,7 +134,7 @@ UserSchema.methods.changedPasswordAfter = function (JWTTimeStamp) {
     return false;
 };
 
-const User = appDatabase.model('user', UserSchema);
+const User = appDatabase.model('User', userSchema);
 
 module.exports = {
     User,
