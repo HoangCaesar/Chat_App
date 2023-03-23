@@ -8,7 +8,7 @@ const setSideNavData = (servers: any) => {
         {
             color: 'blue',
             y: 32,
-            title: 'Main',
+            title: 'Dashboard',
         },
         {
             color: 'red',
