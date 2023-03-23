@@ -1,5 +1,6 @@
 const otpGenerator = require('otp-generator');
 const crypto = require('crypto');
+const gravatar = require('gravatar');
 
 // Project import
 const { User } = require('../../models');
@@ -42,6 +43,10 @@ const verifyRegistration = async (data) => {
     const { _firstName, _lastName, email, _password } = data;
     try {
         const filteredBody = objectFilter(data, 'firstName', 'lastName', 'email', 'password');
+
+        const avatar = gravatar.url(email, { s: '100', r: 'x', d: 'retro' }, true);
+
+        filteredBody['avatar'] = avatar;
 
         const existing_user = await User.findOne({ email: email });
 
