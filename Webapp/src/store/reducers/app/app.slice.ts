@@ -68,7 +68,6 @@ const appSlice = createSlice({
 
         setActiveItem(state, action: PayloadAction<number>) {
             state.activeItem = action.payload;
-            console.log(state.activeItem);
         },
 
         openSnackBar(state, action: PayloadAction<any>) {

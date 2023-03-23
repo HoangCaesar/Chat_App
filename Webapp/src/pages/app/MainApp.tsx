@@ -98,7 +98,7 @@ const MainApp = () => {
                                                             color: theme.palette.primary.main,
                                                             textDecoration: 'none',
                                                         }}
-                                                        to={`/server/${server.name}`}
+                                                        to={`/server/${server._id}`}
                                                         onClick={() => setActiveItem(index + 1)}
                                                     >
                                                         <IconButton

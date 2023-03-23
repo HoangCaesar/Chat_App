@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // MUI
 import { Box, Divider, IconButton, styled, Switch, Tooltip, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
@@ -80,9 +80,9 @@ const SideBar = () => {
     useEffect(() => {
         dispatch(appActions.getServerList());
     }, []);
-    
+
     useEffect(() => {
-        setActiveItem(activeNum)
+        setActiveItem(activeNum);
     }, [activeNum]);
 
     const { onToggleMode } = useSettings();
@@ -138,37 +138,53 @@ const SideBar = () => {
                                         borderRadius: 1.5,
                                     }}
                                 >
-                                    <Tooltip placement="right" title={item.title}>
-                                        <IconButton
-                                            sx={{ width: 'max-content', color: '#fff' }}
-                                            onClick={() => setActiveItem(index)}
-                                        >
-                                            {index === 0 ? (
-                                                <Door color="white" />
-                                            ) : (
-                                                <Cloud color="white" />
-                                            )}
-                                        </IconButton>
-                                    </Tooltip>
+                                    <Link
+                                        style={{
+                                            color: theme.palette.primary.main,
+                                            textDecoration: 'none',
+                                        }}
+                                        to={item.path}
+                                    >
+                                        <Tooltip placement="right" title={item.title}>
+                                            <IconButton
+                                                sx={{ width: 'max-content', color: '#fff' }}
+                                                onClick={() => setActiveItem(index)}
+                                            >
+                                                {index === 0 ? (
+                                                    <Door color="white" />
+                                                ) : (
+                                                    <Cloud color="white" />
+                                                )}
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Link>
                                 </Box>
                             ) : (
                                 <Tooltip key={item.color} placement="right" title={item.title}>
-                                    <IconButton
-                                        sx={{
-                                            width: 'max-content',
-                                            color:
-                                                theme.palette.mode === 'light'
-                                                    ? '#000'
-                                                    : theme.palette.text.primary,
+                                    <Link
+                                        style={{
+                                            color: theme.palette.primary.main,
+                                            textDecoration: 'none',
                                         }}
-                                        onClick={() => setActiveItem(index)}
+                                        to={item.path}
                                     >
-                                        {index === 0 ? (
-                                            <Door color={item.color} />
-                                        ) : (
-                                            <Cloud color={item.color} />
-                                        )}
-                                    </IconButton>
+                                        <IconButton
+                                            sx={{
+                                                width: 'max-content',
+                                                color:
+                                                    theme.palette.mode === 'light'
+                                                        ? '#000'
+                                                        : theme.palette.text.primary,
+                                            }}
+                                            onClick={() => setActiveItem(index)}
+                                        >
+                                            {index === 0 ? (
+                                                <Door color={item.color} />
+                                            ) : (
+                                                <Cloud color={item.color} />
+                                            )}
+                                        </IconButton>
+                                    </Link>
                                 </Tooltip>
                             );
                         })}
