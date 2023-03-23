@@ -8,6 +8,7 @@ import DashboardLayout from '../layouts/dashboard/DashboardLayout';
 
 // render
 const Dashboard = Loadable(lazy(() => import('../pages/app/MainApp')));
+const GroupApp = Loadable(lazy(() => import('../pages/app/GroupApp')));
 const Page404 = Loadable(lazy(() => import('../pages/404/Page404')));
 const Settings = Loadable(lazy(() => import('../pages/settings/Settings')));
 
@@ -24,6 +25,10 @@ const DashboardRoutes = {
         {
             path: '/app',
             element: <Dashboard />,
+        },
+        {
+            path: '/server/:serverID',
+            element: <GroupApp />,
         },
         {
             path: '/settings',

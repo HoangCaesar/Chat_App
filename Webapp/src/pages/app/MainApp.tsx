@@ -11,10 +11,8 @@ const MainApp = () => {
     return (
         <>
             <Stack direction="row" sx={{ width: '100%' }}>
-                {/* Chat Bar */}
-                <Chats />
-                {/* Body */}
-                <Messenger  />
+                {/* Server Connection Board */}
+                {/* No Chat/Welcome */}
             </Stack>
         </>
     );

@@ -48,7 +48,7 @@ const DashboardLayout = () => {
         <>
             <Stack direction="row">
                 {isDesktop && <SideBar />}
-                {/* <Outlet /> */}
+                <Outlet />
             </Stack>
         </>
     );
