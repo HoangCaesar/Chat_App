@@ -6,6 +6,11 @@ import { Location } from '../model';
 const setSideNavData = (servers: any) => {
     return [
         {
+            color: 'blue',
+            y: 32,
+            title: 'Main',
+        },
+        {
             color: 'red',
             y: 102,
             title: servers[0]?.name,
@@ -16,7 +21,7 @@ const setSideNavData = (servers: any) => {
             title: servers[1]?.name,
         },
         {
-            color: 'yellow',
+            color: 'purple',
             y: 242,
             title: servers[2]?.name,
         },

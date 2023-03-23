@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // MUI
 import { Box, Divider, IconButton, styled, Switch, Tooltip, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
-import { Cloud } from 'phosphor-react';
+import { Cloud, Door } from 'phosphor-react';
 
 // Project Import
 import { Logo } from '../../components';
@@ -134,7 +134,11 @@ const SideBar = () => {
                                             sx={{ width: 'max-content', color: '#fff' }}
                                             onClick={() => setActiveItem(index)}
                                         >
-                                            {<Cloud color={item.color} />}
+                                            {index === 0 ? (
+                                                <Door color='white' />
+                                            ) : (
+                                                <Cloud color='white' />
+                                            )}
                                         </IconButton>
                                     </Tooltip>
                                 </Box>
@@ -150,7 +154,11 @@ const SideBar = () => {
                                         }}
                                         onClick={() => setActiveItem(index)}
                                     >
-                                        {<Cloud color={item.color} />}
+                                        {index === 0 ? (
+                                            <Door color={item.color} />
+                                        ) : (
+                                            <Cloud color={item.color} />
+                                        )}
                                     </IconButton>
                                 </Tooltip>
                             );
@@ -169,7 +177,7 @@ const SideBar = () => {
                             onToggleMode();
                         }}
                     />
-                    {/* <ProfileMenu /> */}
+                    <ProfileMenu />
                 </Stack>
             </Stack>
         </Box>
