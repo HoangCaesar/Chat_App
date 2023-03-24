@@ -1,5 +1,5 @@
 // Project import
-const { Server, User } = require('../../models');
+const { Server, User, Conversation } = require('../../models');
 
 // ======================================== SERVICE: SERVER =======================================
 const create = async (name, creator) => {
@@ -57,6 +57,26 @@ const getOne = async (id) => {
     }
 };
 
+// First time a user join a server => gonna create conversations with others
+const generateConversations = async (server, user) => {
+    try {
+        server.members
+            .filter((member) => member._id !== user._id)
+            .map(async (member) => {
+                const newConversation = new Conversation({
+                    participants: [member, user],
+                    messages: [],
+                    server: server._id,
+                });
+
+                await newConversation.save();
+            });
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error generate Conversations');
+    }
+};
+
 const addUser = async (serverID, userID) => {
     try {
         const server = await Server.findById(serverID);
@@ -84,10 +104,12 @@ const addUser = async (serverID, userID) => {
             { new: true, upsert: true }
         );
 
+        generateConversations(server, user);
+
         return true;
     } catch (error) {
         console.log(error);
-        throw new Error('Error get All Server');
+        throw new Error('Error add User to Server');
     }
 };
 
