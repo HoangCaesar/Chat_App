@@ -27,7 +27,7 @@ const DashboardLayout = () => {
         if (isLoggedIn) {
             window.onload = () => {
                 if (!window.location.hash) {
-                    window.location = (window.location ) as any;
+                    window.location = window.location as any;
                     window.location.reload();
                 }
             };
@@ -40,6 +40,10 @@ const DashboardLayout = () => {
             if (!socket) {
                 connectSocket(user_id);
             }
+
+            return () => {
+                
+            };
         }
         connectSocket(user_id);
     }, [isLoggedIn]);

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Box, Button, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material';
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
 
@@ -5,6 +6,9 @@ import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
 import { ChatItem, Search, SearchIconWrapper, SearchInputBase } from '../../components';
 import { SimpleBarStyle } from '../../components/ScrollBar';
 import { ChatList } from '../../data/chat_data';
+import { useAppDispatch } from '../../hooks/sagaHooks';
+import { socket } from "../../socket";
+
 // model
 import { Chat } from '../../model';
 
@@ -12,6 +16,19 @@ import { Chat } from '../../model';
 
 const Chats = () => {
     const theme = useTheme();
+
+    const user_id = window.localStorage.getItem('uid');
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        socket.emit('get_direct_conversations', { user_id }, (data) => {
+            console.log(data); // this data is the list of conversations
+            // dispatch action
+
+            dispatch(FetchDirectConversations({ conversations: data }));
+        });
+    }, []);
 
     return (
         <Box

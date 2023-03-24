@@ -83,7 +83,7 @@ function* verifyOtp(action: PayloadAction<VerifyOTP>) {
         if (response.status === 'success') {
             yield put(authActions.updateRegisterEmail({ email: '' }));
             localStorage.setItem('token', response.token);
-            localStorage.setItem('user_id', response.user_id);
+            localStorage.setItem('uid', response.user_id);
             yield put(
                 authActions.logIn({
                     isLoggedIn: true,

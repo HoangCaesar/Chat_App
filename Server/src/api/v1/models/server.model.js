@@ -22,7 +22,7 @@ const ServerSchema = new Schema(
                 ref: 'User',
             },
         ],
-        messages: [
+        conversations: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Message',
