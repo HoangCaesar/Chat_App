@@ -10,10 +10,13 @@ import { Logo } from '../../components';
 import { useSettings } from '../../hooks';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import {
-    appActions, appSelectActiveItem, appSelectServers
+    appActions,
+    appSelectActiveItem,
+    appSelectServers,
 } from '../../store/reducers/app/app.slice';
 import setSideNavData from '../../utils/setSideNavData';
 import ProfileMenu from './ProfileMenu';
+import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 
 // Style
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -69,6 +72,8 @@ const SideBar = () => {
     const theme: any = useTheme();
     const navigate = useNavigate();
 
+    const userID = localStorage.getItem('uid');
+
     const data = servers ? setSideNavData(servers) : [];
 
     // state
@@ -76,8 +81,9 @@ const SideBar = () => {
         dispatch(appActions.getServerList());
     }, []);
 
-    const setActiveItem = (id: number) => {
-        dispatch(appActions.setActiveItem(id));
+    const setActiveItem = (index: number, serverID: string) => {
+        dispatch(appActions.setActiveItem(index));
+        dispatch(conversationActions.addUserToServer({ userID, serverID }));
     };
 
     const { onToggleMode } = useSettings();
@@ -143,7 +149,7 @@ const SideBar = () => {
                                         <Tooltip placement="right" title={item.title}>
                                             <IconButton
                                                 sx={{ width: 'max-content', color: '#fff' }}
-                                                onClick={() => setActiveItem(index)}
+                                                onClick={() => setActiveItem(index, item._id)}
                                             >
                                                 {index === 0 ? (
                                                     <Door color="white" />
@@ -171,7 +177,7 @@ const SideBar = () => {
                                                         ? '#000'
                                                         : theme.palette.text.primary,
                                             }}
-                                            onClick={() => setActiveItem(index)}
+                                            onClick={() => setActiveItem(index, item._id)}
                                         >
                                             {index === 0 ? (
                                                 <Door color={item.color} />

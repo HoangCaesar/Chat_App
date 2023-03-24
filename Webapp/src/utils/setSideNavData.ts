@@ -11,24 +11,15 @@ const setSideNavData = (servers: any) => {
             title: 'Dashboard',
             path: '/app',
         },
-        {
-            color: 'red',
-            y: 102,
-            title: servers[0]?.name,
-            path: `/server/${servers[0]?._id}`,
-        },
-        {
-            color: 'green',
-            y: 172,
-            title: servers[1]?.name,
-            path: `/server/${servers[1]?._id}`,
-        },
-        {
-            color: 'purple',
-            y: 242,
-            title: servers[2]?.name,
-            path: `/server/${servers[2]?._id}`,
-        },
+        ...servers.map((server: any, index: number) => {
+            return {
+                color: 'green',
+                y: 102 + index*70,
+                title: server.name,
+                path: `/server/${server._id}`,
+                id: server._id,
+            };
+        }),
     ];
 };
 

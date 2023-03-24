@@ -35,7 +35,7 @@ const getAll = async () => {
         if (!serverList || serverList.length === 0) {
             return false;
         }
-        
+
         return serverList;
     } catch (error) {
         console.log(error);
@@ -59,10 +59,16 @@ const getOne = async (id) => {
 
 const addUser = async (serverID, userID) => {
     try {
-        const server = await Server.findById(serverID)
-        const user = await User.findById(userID)
+        const server = await Server.findById(serverID);
+        const user = await User.findById(userID);
 
         if (!server || !user) {
+            return false;
+        }
+
+        const isExisted = server.members.includes(user._id);
+
+        if (isExisted) {
             return false;
         }
 
