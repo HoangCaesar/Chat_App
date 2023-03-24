@@ -12,6 +12,7 @@ const { Server } = require('socket.io');
 const appRoute = require('./api/v1/routes');
 require('./api/v1/databases/init.multi.mongodb');
 const errorHandler = require('./api/v1/helpers/errorHandler');
+const appSocket = require('./socket')
 
 // ========================================== APP - setting project ===============================================
 
@@ -38,13 +39,7 @@ app.use(cookieParser());
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
 
-io.on('connection', (socket) => {
-    // console.log(JSON.stringify(socket.handshake.query));
-    
-    socket.on('msg', data => {
-        console.log(data);
-    })
-});
+appSocket(io)
 
 app.use('/api/v1', appRoute);
 

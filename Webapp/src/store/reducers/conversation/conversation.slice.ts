@@ -47,7 +47,8 @@ const conversationSlice = createSlice({
                 };
             });
 
-            state.direct_chat.conversations = list;
+            console.log(list);
+            // state.direct_chat.conversations = list;
         },
     },
 });

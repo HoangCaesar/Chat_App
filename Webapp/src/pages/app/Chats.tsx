@@ -6,8 +6,9 @@ import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
 import { ChatItem, Search, SearchIconWrapper, SearchInputBase } from '../../components';
 import { SimpleBarStyle } from '../../components/ScrollBar';
 import { ChatList } from '../../data/chat_data';
-import { useAppDispatch } from '../../hooks/sagaHooks';
 import { socket } from "../../socket";
+import { useAppDispatch } from '../../hooks/sagaHooks';
+import { conversationActions } from '../../store/reducers/conversation/conversation.slice'
 
 // model
 import { Chat } from '../../model';
@@ -22,11 +23,11 @@ const Chats = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        socket.emit('get_direct_conversations', { user_id }, (data) => {
+        socket.emit('get_direct_conversations', { user_id }, (data: any) => {
             console.log(data); // this data is the list of conversations
             // dispatch action
 
-            dispatch(FetchDirectConversations({ conversations: data }));
+            dispatch(conversationActions.fetchDirectConversations({ conversations: data }));
         });
     }, []);
 

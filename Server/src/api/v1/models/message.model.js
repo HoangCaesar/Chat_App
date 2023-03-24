@@ -3,16 +3,11 @@ const Schema = mongoose.Schema;
 
 // Project import
 const modelOptions = require('./modelOptions');
+const { appDatabase } = require('../databases/init.multi.mongodb');
 
 // ========================================== USER MODEL ===============================================
 const messageSchema = new Schema(
     {
-        participants: [
-            {
-                type: mongoose.Schema.ObjectId,
-                ref: 'User',
-            },
-        ],
         messages: [
             {
                 to: {
@@ -39,11 +34,14 @@ const messageSchema = new Schema(
                 },
             },
         ],
+        server: {
+            type: String,
+        },
     },
     modelOptions
 );
 
-const Message = new mongoose.model('OneToOneMessage', messageSchema);
+const Message = appDatabase.model('OneToOneMessage', messageSchema);
 module.exports = {
     Message,
 };

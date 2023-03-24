@@ -47,6 +47,8 @@ const verifyRegistration = async (data) => {
         const avatar = gravatar.url(email, { s: '100', r: 'x', d: 'retro' }, true);
 
         filteredBody['avatar'] = avatar;
+        filteredBody['socket_id'] = null;
+        filteredBody['status'] = 'Offline';
 
         const existing_user = await User.findOne({ email: email });
 
@@ -69,6 +71,7 @@ const verifyRegistration = async (data) => {
             return new_user;
         }
     } catch (error) {
+        console.log(error);
         throw new Error('Error registering');
     }
 };
