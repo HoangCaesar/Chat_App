@@ -66,8 +66,30 @@ const getOneServer = async (req, res, next) => {
     }
 };
 
+// POST: api/v1/server/access
+const accessServer = async (req, res, next) => {
+    const { serverID, userID } = req.body;
+    try {
+        const response = await ServerService.addUser(serverID, userID);
+
+        if (!response) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'Can not add this user to server',
+            });
+        }
+
+        res.status(200).json({
+            status: 'success',
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     createServer,
     getAllServer,
-    getOneServer
+    getOneServer,
+    accessServer
 };

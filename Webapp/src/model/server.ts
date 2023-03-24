@@ -3,6 +3,12 @@ export interface Server {
     creator: string;
 }
 
+export interface AddUserToServer {
+    serverID: string;
+    userID: string;
+}
+
+// Response
 export interface ServerListResponse {
     status: string;
     servers: any;

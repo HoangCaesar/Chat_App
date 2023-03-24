@@ -31,6 +31,11 @@ const conversationSlice = createSlice({
     name: 'conversation',
     initialState,
     reducers: {
+        addUserToServer(state, action: PayloadAction<any>) {
+            // Do nothing
+        },
+
+
         fetchDirectConversations(state, action: PayloadAction<any>) {
             const list = action.payload.conversations.map((el: any) => {
                 const user = el.participants.find((elm: any) => elm._id.toString() !== user_id);

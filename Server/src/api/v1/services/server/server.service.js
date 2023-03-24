@@ -35,7 +35,7 @@ const getAll = async () => {
         if (!serverList || serverList.length === 0) {
             return false;
         }
-
+        
         return serverList;
     } catch (error) {
         console.log(error);
@@ -57,4 +57,32 @@ const getOne = async (id) => {
     }
 };
 
-module.exports = { create, getAll, getOne };
+const addUser = async (serverID, userID) => {
+    try {
+        const server = await Server.findById(serverID)
+        const user = await User.findById(userID)
+
+        if (!server || !user) {
+            return false;
+        }
+
+        await Server.findOneAndUpdate(
+            { _id: serverID },
+            { $push: { members: user } },
+            { new: true, upsert: true }
+        );
+
+        await User.findOneAndUpdate(
+            { _id: userID },
+            { $push: { servers: server } },
+            { new: true, upsert: true }
+        );
+
+        return true;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error get All Server');
+    }
+};
+
+module.exports = { create, getAll, getOne, addUser };

@@ -86,3 +86,4 @@
 24-03-2023	52:23:14-----POST /api/v1/auth/register ::: Error registering
 24-03-2023	44:24:14-----POST /api/v1/auth/register ::: Error registering
 24-03-2023	57:24:14-----POST /api/v1/auth/register ::: Error registering
+24-03-2023	38:22:15-----POST /api/v1/server/access ::: Unexpected token } in JSON at position 82

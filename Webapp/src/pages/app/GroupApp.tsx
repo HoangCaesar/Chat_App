@@ -10,6 +10,7 @@ import Messenger from './main-messenger';
 const GroupApp = () => {
     const params = useParams()
     const serverID = params.serverID;
+    const userID: any = localStorage.getItem('uid');
     return (
         <>
             <Stack direction="row" sx={{ width: '100%' }}>

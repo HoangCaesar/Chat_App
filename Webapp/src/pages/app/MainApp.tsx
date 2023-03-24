@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { SimpleBarStyle } from '../../components/ScrollBar';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { appActions, appSelectServers } from '../../store/reducers/app/app.slice';
+import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 import NoChat from '../../assets/NoChat';
 
 // ==============================|| PAGE: MAIN APP  ||============================== //
@@ -18,13 +19,16 @@ const MainApp = () => {
 
     const theme = useTheme();
 
+    const userID = localStorage.getItem('uid')
+
     // state
     useEffect(() => {
         dispatch(appActions.getServerList());
     }, []);
 
-    const setActiveItem = (id: number) => {
-        dispatch(appActions.setActiveItem(id));
+    const setActiveItem = (index: number, serverID: string) => {
+        dispatch(appActions.setActiveItem(index));
+        dispatch(conversationActions.addUserToServer({ userID, serverID }));
     };
 
     return (
@@ -99,7 +103,9 @@ const MainApp = () => {
                                                             textDecoration: 'none',
                                                         }}
                                                         to={`/server/${server._id}`}
-                                                        onClick={() => setActiveItem(index + 1)}
+                                                        onClick={() =>
+                                                            setActiveItem(index + 1, server._id)
+                                                        }
                                                     >
                                                         <IconButton
                                                             sx={{
