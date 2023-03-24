@@ -25,17 +25,17 @@ const DashboardLayout = () => {
     // socket
     useEffect(() => {
         if (isLoggedIn) {
-            // window.onload = () => {
-            //     if (!window.location.hash) {
-            //         window.location = (window.location ) as any;
-            //         window.location.reload();
-            //     }
-            // };
+            window.onload = () => {
+                if (!window.location.hash) {
+                    window.location = (window.location ) as any;
+                    window.location.reload();
+                }
+            };
 
-            // // To avoid error cause calling onload function without argument
-            // const ev: any = {};
+            // To avoid error cause calling onload function without argument
+            const ev: any = {};
 
-            // window.onload(ev);
+            window.onload(ev);
 
             if (!socket) {
                 connectSocket(user_id);

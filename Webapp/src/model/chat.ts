@@ -5,7 +5,7 @@ export interface Chat {
     msg: string;
     time: string;
     unread: number;
-    pinned: boolean;
+    isGroup: boolean;
     online: boolean;
 }
 

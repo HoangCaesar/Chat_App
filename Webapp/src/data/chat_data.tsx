@@ -54,7 +54,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "9:36",
     unread: 0,
-    pinned: true,
+    isGroup: true,
     online: true,
   },
   {
@@ -64,7 +64,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "12:02",
     unread: 2,
-    pinned: true,
+    isGroup: false,
     online: false,
   },
   {
@@ -74,7 +74,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "10:35",
     unread: 3,
-    pinned: false,
+    isGroup: false,
     online: true,
   },
   {
@@ -84,7 +84,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "04:00",
     unread: 0,
-    pinned: false,
+    isGroup: false,
     online: true,
   },
   {
@@ -94,7 +94,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "08:42",
     unread: 0,
-    pinned: false,
+    isGroup: false,
     online: false,
   },
   {
@@ -104,7 +104,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "08:42",
     unread: 0,
-    pinned: false,
+    isGroup: false,
     online: false,
   },
   {
@@ -114,7 +114,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "08:42",
     unread: 0,
-    pinned: false,
+    isGroup: false,
     online: false,
   },
   {
@@ -124,7 +124,7 @@ const ChatList: Chat[] = [
     msg: faker.music.songName(),
     time: "08:42",
     unread: 0,
-    pinned: false,
+    isGroup: false,
     online: false,
   },
 ];

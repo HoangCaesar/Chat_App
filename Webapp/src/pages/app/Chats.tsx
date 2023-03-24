@@ -55,9 +55,9 @@ const Chats = () => {
                         {/* Pinned Messages */}
                         <Stack spacing={2}>
                             <Typography variant="subtitle2" sx={{ color: '#676767' }}>
-                                Pinned
+                                Group Chat
                             </Typography>
-                            {ChatList.filter((item: Chat) => item.pinned).map((item, idx) => {
+                            {ChatList.filter((item: Chat) => item.isGroup).map((item, idx) => {
                                 return <ChatItem key={item.id} {...item} />;
                             })}
                             {/* All Messages */}
@@ -66,7 +66,7 @@ const Chats = () => {
                                     All Chats
                                 </Typography>
                             </Stack>
-                            {ChatList.filter((item: Chat) => !item.pinned).map((item, idx) => {
+                            {ChatList.filter((item: Chat) => !item.isGroup).map((item, idx) => {
                                 return <ChatItem key={item.id} {...item} />;
                             })}
                         </Stack>

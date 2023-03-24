@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     // console.log(JSON.stringify(socket.handshake.query));
     
     socket.on('msg', data => {
-        socket.broadcast.emit('msg', 'Hei hei!')
+        console.log(data);
     })
 });
 
