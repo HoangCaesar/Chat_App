@@ -4,13 +4,13 @@ import { fork, takeLatest, call, put } from 'redux-saga/effects';
 // Project Import
 import { appActions } from './app.slice';
 import serverApi from '../../../api/server.api';
-import { ServerResponse } from '../../../model';
+import { ServerListResponse } from '../../../model';
 
 // ==============================|| APP SAGA  ||============================== //
 
 function* getServerList() {
     try {
-        const response: ServerResponse = yield call(serverApi.getAllServer);
+        const response: ServerListResponse = yield call(serverApi.getAllServer);
         if (response.status === 'success') {
             yield put(
                 appActions.setServerList({

@@ -3,7 +3,12 @@ export interface Server {
     creator: string;
 }
 
-export interface ServerResponse {
+export interface ServerListResponse {
     status: string;
     servers: any;
+}
+
+export interface ServerResponse {
+    status: string;
+    server: any;
 }

@@ -1,4 +1,4 @@
-import { Server, ServerResponse } from '../model';
+import { Server, ServerListResponse, ServerResponse } from '../model';
 import axiosClient from './config.axios';
 
 // ==============================|| SERVER AXIOS ||============================== //
@@ -8,7 +8,11 @@ const serverApi = {
         const url = '/server/create';
         return axiosClient.post(url, data);
     },
-    getAllServer(): Promise<ServerResponse> {
+    getAllServer(): Promise<ServerListResponse> {
+        const url = '/server/all';
+        return axiosClient.get(url);
+    },
+    getOneServer(): Promise<ServerResponse> {
         const url = '/server/all';
         return axiosClient.get(url);
     },
