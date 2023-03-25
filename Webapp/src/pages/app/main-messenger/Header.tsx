@@ -1,4 +1,4 @@
-import React from 'react';
+import { faker } from '@faker-js/faker';
 import {
     Avatar,
     Badge,
@@ -14,10 +14,12 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from 'phosphor-react';
-import { faker } from '@faker-js/faker';
-import { useSearchParams } from 'react-router-dom';
-import { useResponsive } from '../../../hooks';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../../hooks/sagaHooks';
+import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
+import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
 
+// style
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         backgroundColor: '#44b700',
@@ -65,7 +67,12 @@ const Conversation_Menu = [
 const Header = () => {
     const theme = useTheme();
 
-    const [conversationMenuAnchorEl, setConversationMenuAnchorEl] = React.useState(null);
+    const room_id = useAppSelector(appSelectRoomId);
+    const { conversations } = useAppSelector(conversationSelectDirectChat);
+
+    const [conversationMenuAnchorEl, setConversationMenuAnchorEl] = useState(null);
+    const [chatter, setChatter] = useState<any>();
+
     const openConversationMenu = Boolean(conversationMenuAnchorEl);
     const handleClickConversationMenu = (event: any) => {
         setConversationMenuAnchorEl(event.currentTarget);
@@ -73,6 +80,13 @@ const Header = () => {
     const handleCloseConversationMenu = () => {
         setConversationMenuAnchorEl(null);
     };
+
+    useEffect(() => {
+        const conversation = conversations.find((conversation) => conversation.id === room_id);
+        setChatter(conversation);
+    }, [room_id]);
+
+    console.log(chatter);
 
     return (
         <Box
@@ -98,14 +112,19 @@ const Header = () => {
                                 vertical: 'bottom',
                                 horizontal: 'right',
                             }}
-                            variant="dot"
+                            variant={chatter?.online ? 'dot' : undefined}
                         >
-                            <Avatar alt={faker.name.fullName()} src={faker.image.avatar()} />
+                            <Avatar alt={chatter?.name} src={chatter?.img} />
                         </StyledBadge>
                     </Box>
                     <Stack spacing={0.2}>
-                        <Typography variant="subtitle2">{faker.name.fullName()}</Typography>
-                        <Typography variant="caption">Online</Typography>
+                        <Typography variant="subtitle2">{chatter?.name}</Typography>
+                        <Typography
+                            variant="caption"
+                            color={chatter?.online ? 'secondary' : 'grey'}
+                        >
+                            {chatter?.online ? 'online' : 'offline'}
+                        </Typography>
                     </Stack>
                 </Stack>
                 <Stack direction={'row'} alignItems="center" spacing={3}>

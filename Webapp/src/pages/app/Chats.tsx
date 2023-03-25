@@ -12,6 +12,7 @@ import {
     conversationActions,
     conversationSelectDirectChat,
 } from '../../store/reducers/conversation/conversation.slice';
+import { useResponsive } from '../../hooks';
 
 // model
 import { Chat } from '../../model';
@@ -20,6 +21,7 @@ import { Chat } from '../../model';
 
 const Chats = () => {
     const theme = useTheme();
+    const isDesktop = useResponsive('up', 'md');
 
     const user_id = window.localStorage.getItem('uid');
 
@@ -38,13 +40,14 @@ const Chats = () => {
             sx={{
                 position: 'relative',
                 height: '100%',
-                width: 320,
+                width: isDesktop ? 320 : '100vw',
                 backgroundColor:
-                    theme.palette.mode === 'light' ? '#F8FAFA' : theme.palette.background.paper,
-                boxShadow: '0 0 2px rgba(0, 0, 0, 0.25)',
+                    theme.palette.mode === 'light' ? '#F8FAFF' : theme.palette.background.default,
+
+                boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
             }}
         >
-            <Stack p={3} spacing={2} sx={{ maxHeight: '100vh' }}>
+            <Stack p={3} spacing={2} sx={{ maxHeight: '100vh', height: '100%' }}>
                 {/* Top 1: text + btn */}
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Typography variant="h5">Chats</Typography>

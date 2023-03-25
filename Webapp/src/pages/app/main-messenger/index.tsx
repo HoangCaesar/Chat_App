@@ -8,6 +8,7 @@ import Header from './Header';
 // hooks
 import { useResponsive } from '../../../hooks';
 import { useAppDispatch, useAppSelector } from '../../../hooks/sagaHooks';
+import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
 
 // ==============================|| MAIN APP: MAIN MESSENGER  ||============================== //
 
@@ -17,7 +18,7 @@ const Messenger = () => {
 
     const messageListRef = useRef<any>(null);
 
-    const { current_messages } = useAppSelector((state) => state.conversation.direct_chat);
+    const { current_messages } = useAppSelector(conversationSelectDirectChat);
 
     useEffect(() => {
         // Scroll to the bottom of the message list when new messages are added
@@ -25,7 +26,7 @@ const Messenger = () => {
     }, [current_messages]);
 
     return (
-        <Stack height={'100%'} maxHeight={'100vh'} width={isMobile ? '100vw' : 'auto'}>
+        <Stack height={'100%'} maxHeight={'100vh'} width={isMobile ? '100vw' : '100%'}>
             {/* Header */}
             <Header />
 
@@ -38,7 +39,9 @@ const Messenger = () => {
                     overflowY: 'scroll',
 
                     backgroundColor:
-                        theme.palette.mode === 'light' ? '#F0F4FA' : theme.palette.background.default,
+                        theme.palette.mode === 'light'
+                            ? '#F0F4FA'
+                            : theme.palette.background.default,
 
                     boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
                 }}

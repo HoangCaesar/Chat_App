@@ -97,9 +97,17 @@ const appSelectSnackbar = (state: RootState) => state.app.snackbar;
 const appSelectServers = (state: RootState) => state.app.servers;
 const appSelectActiveItem = (state: RootState) => state.app.activeItem;
 const appSelectRoomId = (state: RootState) => state.app.room_id;
+const appSelectChatType = (state: RootState) => state.app.chat_type;
 
 // Reducer
 const appReducer = appSlice.reducer;
 
-export { appActions, appSelectSnackbar, appSelectServers, appSelectActiveItem, appSelectRoomId };
+export {
+    appActions,
+    appSelectSnackbar,
+    appSelectServers,
+    appSelectActiveItem,
+    appSelectRoomId,
+    appSelectChatType,
+};
 export default appReducer;
