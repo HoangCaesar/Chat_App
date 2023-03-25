@@ -44,7 +44,7 @@ const socket = async (io) => {
 
             // data: {to, from, text}
 
-            const { message, conversation_id, from, to, type } = data;
+            const { message, conversation_id, from, to, type, subType } = data;
 
             const to_user = await User.findById(to);
             const from_user = await User.findById(from);
@@ -54,6 +54,7 @@ const socket = async (io) => {
                     to: to,
                     from: from,
                     type: type,
+                    subType: subType,
                     created_at: Date.now(),
                     text: message,
                 },

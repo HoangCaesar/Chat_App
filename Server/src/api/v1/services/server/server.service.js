@@ -67,7 +67,8 @@ const generateConversations = async (server, user) => {
                     messages: {
                         to: member,
                         from: user,
-                        type: 'Text',
+                        type: 'divider',
+                        subType: 'text',
                         text: `${user.firstName} ${user.lastName} join ${server.name} for the first time. Say hello to each other :)`,
                         file: null,
                     },

@@ -36,16 +36,16 @@ const DashboardLayout = () => {
 
     // socket
     useEffect(() => {
-        window.onload = function () {
-            if (!window.location.hash) {
-                window.location = (window.location + '#loaded') as any;
-                window.location.reload();
-            }
-        };
+        // window.onload = function () {
+        //     if (!window.location.hash) {
+        //         window.location = (window.location + '#loaded') as any;
+        //         window.location.reload();
+        //     }
+        // };
 
-        const ev: any = {};
+        // const ev: any = {};
 
-        window.onload(ev);
+        // window.onload(ev);
 
         if (!socket) {
             connectSocket(user_id);

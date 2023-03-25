@@ -19,7 +19,11 @@ const messageSchema = new Schema(
             },
             type: {
                 type: String,
-                enum: ['Text', 'Media', 'Document', 'Link'],
+                enum: ['msg', 'divider'],
+            },
+            subType: {
+                type: String,
+                enum: ['img', 'doc', 'reply', 'link', 'text'],
             },
             created_at: {
                 type: Date,

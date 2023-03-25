@@ -261,11 +261,11 @@ const Timeline = ({ el }: any) => {
     const theme = useTheme();
     return (
         <Stack direction="row" alignItems={'center'} justifyContent="space-between">
-            <Divider sx={{ width: '46%' }} />
+            <Divider sx={{ width: '36%' }} />
             <Typography variant="caption" sx={{ color: `${theme.palette.text}` }}>
-                {el.text}
+                {el.message}
             </Typography>
-            <Divider sx={{ width: '46%' }} />
+            <Divider sx={{ width: '36%' }} />
         </Stack>
     );
 };

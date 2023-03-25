@@ -57,8 +57,8 @@ const conversationSlice = createSlice({
             const messages = action.payload.messages;
             const formatted_messages = messages.map((el: any) => ({
                 id: el._id,
-                type: 'msg',
-                subtype: el.messages.type,
+                type: el.messages.type,
+                subtype: el.messages.subType,
                 message: el.messages.text,
                 incoming: el.messages.to === user_id,
                 outgoing: el.messages.from === user_id,

@@ -51,7 +51,7 @@ const Body = ({ isMobile, menu }: any) => {
                                         // Doc Message
                                         <DocMsg key={item.id} el={item} menu={menu} />
                                     );
-                                case 'Link':
+                                case 'link':
                                     return (
                                         //  Link Message
                                         <LinkMsg key={item.id} el={item} menu={menu} />
