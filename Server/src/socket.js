@@ -1,4 +1,4 @@
-const { User, Message, Server } = require('./api/v1/models');
+const { User, Message, Server, Conversation } = require('./api/v1/models');
 
 // ========================================== SOCKET - SETTING SOCKET ===============================================
 
@@ -19,16 +19,14 @@ const socket = async (io) => {
             });
         }
 
-        // get chat list
-        // socket.on('get_direct_conversations', async ({ user_id }, callback) => {
-        //     const existing_conversations = await Message.find({
-        //         participants: { $all: [user_id] },
-        //     }).populate('participants');
+        // get chat list/conversations
+        socket.on('get_direct_conversations', async ({ user_id }, callback) => {
+            const existing_conversations = await Conversation.find({
+                participants: { $all: [user_id] },
+            }).populate('participants').populate('messages');
 
-        //     console.log(existing_conversations);
-
-        //     callback(existing_conversations);
-        // });
+            callback(existing_conversations);
+        });
 
         // socket exit
         // socket.on('end', async (data) => {

@@ -73,7 +73,7 @@ const accessServer = async (req, res, next) => {
         const response = await ServerService.addUser(serverID, userID);
 
         if (!response) {
-            return res.status(400).json({
+            return res.status(201).json({
                 status: 'error',
                 message: 'Can not add this user to server',
             });

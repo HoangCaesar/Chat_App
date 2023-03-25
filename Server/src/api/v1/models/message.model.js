@@ -8,32 +8,30 @@ const { appDatabase } = require('../databases/init.multi.mongodb');
 // ========================================== USER MODEL ===============================================
 const messageSchema = new Schema(
     {
-        messages: [
-            {
-                to: {
-                    type: mongoose.Schema.ObjectId,
-                    ref: 'User',
-                },
-                from: {
-                    type: mongoose.Schema.ObjectId,
-                    ref: 'User',
-                },
-                type: {
-                    type: String,
-                    enum: ['Text', 'Media', 'Document', 'Link'],
-                },
-                created_at: {
-                    type: Date,
-                    default: Date.now(),
-                },
-                text: {
-                    type: String,
-                },
-                file: {
-                    type: String,
-                },
+        messages: {
+            to: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User',
             },
-        ],
+            from: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'User',
+            },
+            type: {
+                type: String,
+                enum: ['Text', 'Media', 'Document', 'Link'],
+            },
+            created_at: {
+                type: Date,
+                default: Date.now(),
+            },
+            text: {
+                type: String,
+            },
+            file: {
+                type: String,
+            },
+        },
         server: {
             type: String,
         },
@@ -41,7 +39,7 @@ const messageSchema = new Schema(
     modelOptions
 );
 
-const Message = appDatabase.model('OneToOneMessage', messageSchema);
+const Message = appDatabase.model('Message', messageSchema);
 module.exports = {
     Message,
 };

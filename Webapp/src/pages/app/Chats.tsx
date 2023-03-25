@@ -6,9 +6,12 @@ import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
 import { ChatItem, Search, SearchIconWrapper, SearchInputBase } from '../../components';
 import { SimpleBarStyle } from '../../components/ScrollBar';
 import { ChatList } from '../../data/chat_data';
-import { socket } from "../../socket";
-import { useAppDispatch } from '../../hooks/sagaHooks';
-import { conversationActions } from '../../store/reducers/conversation/conversation.slice'
+import { socket } from '../../socket';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import {
+    conversationActions,
+    conversationSelectDirectChat,
+} from '../../store/reducers/conversation/conversation.slice';
 
 // model
 import { Chat } from '../../model';
@@ -22,11 +25,10 @@ const Chats = () => {
 
     const dispatch = useAppDispatch();
 
+    const { conversations } = useAppSelector(conversationSelectDirectChat);
+
     useEffect(() => {
         socket.emit('get_direct_conversations', { user_id }, (data: any) => {
-            console.log(data); // this data is the list of conversations
-            // dispatch action
-
             dispatch(conversationActions.fetchDirectConversations({ conversations: data }));
         });
     }, []);
@@ -72,20 +74,14 @@ const Chats = () => {
                     <SimpleBarStyle clickOnTrack={false}>
                         {/* Pinned Messages */}
                         <Stack spacing={2}>
-                            <Typography variant="subtitle2" sx={{ color: '#676767' }}>
-                                Group Chat
-                            </Typography>
-                            {ChatList.filter((item: Chat) => item.isGroup).map((item, idx) => {
-                                return <ChatItem key={item.id} {...item} />;
-                            })}
                             {/* All Messages */}
                             <Stack spacing={2.4}>
                                 <Typography variant="subtitle2" sx={{ color: '#676767' }}>
                                     All Chats
                                 </Typography>
                             </Stack>
-                            {ChatList.filter((item: Chat) => !item.isGroup).map((item, idx) => {
-                                return <ChatItem key={item.id} {...item} />;
+                            {conversations.map((item, idx) => {
+                                return <ChatItem key={idx} {...item} />;
                             })}
                         </Stack>
                     </SimpleBarStyle>

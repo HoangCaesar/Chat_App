@@ -1,8 +1,9 @@
-import { faker } from '@faker-js/faker';
+import React from 'react';
 import { Avatar, Badge, Box, Stack, styled, Typography, useTheme } from '@mui/material';
 
 // Project Import
 import { Chat } from '../../model';
+import { cutTimeString, cutMessageString } from '../../utils/cutString';
 
 // Style
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -37,14 +38,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // ==============================|| COMPONENT: CHAT ITEM ||============================== //
 
 const ChatItem = ({ ...item }: Chat) => {
-    const theme = useTheme()
-
+    const theme = useTheme();
     return (
         <Box
             sx={{
                 width: '100%',
                 borderRadius: 1,
-                backgroundColor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default,
+                backgroundColor:
+                    theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default,
             }}
             p={2}
         >
@@ -58,23 +59,25 @@ const ChatItem = ({ ...item }: Chat) => {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
-                            <Avatar src={faker.image.avatar()} />
+                            <Avatar src={item.img} />
                         </StyledBadge>
                     ) : (
-                        <Avatar src={faker.image.avatar()} />
+                        <Avatar src={item.img} />
                     )}
                     {/* Messages */}
                     <Stack>
                         <Typography variant="subtitle2">{item.name}</Typography>
-                        <Typography variant="caption">{item.msg}</Typography>
+                        <Typography variant="caption">{cutMessageString(item.msg)}</Typography>
                     </Stack>
                 </Stack>
                 {/* Right -- Time */}
                 <Stack alignItems="center" spacing={2}>
                     <Typography sx={{ fontWeight: 600 }} variant="caption">
-                        {item.time}
+                        {cutTimeString(item.time)}
                     </Typography>
-                    <Badge color="primary" badgeContent={item.unread} />
+                    <Badge color="primary" variant="dot" badgeContent={item.unread ? 1 : 0}>
+                        <React.Fragment></React.Fragment>
+                    </Badge>
                 </Stack>
             </Stack>
         </Box>

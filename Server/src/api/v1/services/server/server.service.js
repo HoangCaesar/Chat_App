@@ -1,5 +1,5 @@
 // Project import
-const { Server, User, Conversation } = require('../../models');
+const { Server, User, Conversation, Message } = require('../../models');
 
 // ======================================== SERVICE: SERVER =======================================
 const create = async (name, creator) => {
@@ -61,11 +61,24 @@ const getOne = async (id) => {
 const generateConversations = async (server, user) => {
     try {
         server.members
-            .filter((member) => member._id !== user._id)
+            .filter((member) => member._id.toString() !== user._id.toString())
             .map(async (member) => {
+                const firstMessage = new Message({
+                    messages: {
+                        to: member,
+                        from: user,
+                        type: 'Text',
+                        text: `${user.firstName} ${user.lastName} join ${server.name} for the first time. Say hello to each other :)`,
+                        file: null,
+                    },
+                    server: server._id,
+                });
+
+                const savedMessage = await firstMessage.save();
+
                 const newConversation = new Conversation({
                     participants: [member, user],
-                    messages: [],
+                    messages: [savedMessage],
                     server: server._id,
                 });
 
@@ -79,8 +92,8 @@ const generateConversations = async (server, user) => {
 
 const addUser = async (serverID, userID) => {
     try {
-        const server = await Server.findById(serverID);
-        const user = await User.findById(userID);
+        let server = await Server.findById(serverID);
+        let user = await User.findById(userID);
 
         if (!server || !user) {
             return false;
@@ -104,7 +117,10 @@ const addUser = async (serverID, userID) => {
             { new: true, upsert: true }
         );
 
-        generateConversations(server, user);
+        server = await Server.findById(serverID);
+        user = await User.findById(userID);
+
+        await generateConversations(server, user);
 
         return true;
     } catch (error) {
