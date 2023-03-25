@@ -6,7 +6,7 @@ const resetMail = require('../templates/resetPassword');
 
 // ======================================== AUTH CONTROLLER =======================================
 
-// POST: api/v1/user/signin
+// POST: api/v1/auth/signin
 const signIn = async (req, res, next) => {
     let { email, password, location } = req.body;
     try {
@@ -46,7 +46,7 @@ const signIn = async (req, res, next) => {
     }
 };
 
-// POST: api/v1/user/register
+// POST: api/v1/auth/register
 const register = async (req, res, next) => {
     try {
         const response = await AuthService.verifyRegistration(req.body);
@@ -64,7 +64,7 @@ const register = async (req, res, next) => {
     }
 };
 
-// POST: api/v1/user/send-OTP
+// POST: api/v1/auth/send-OTP
 const sendOTP = async (req, res, next) => {
     const { userId } = req;
     try {
@@ -86,7 +86,7 @@ const sendOTP = async (req, res, next) => {
     }
 };
 
-// POST: api/v1/user/verify-OTP
+// POST: api/v1/auth/verify-OTP
 const verifyOTP = async (req, res, next) => {
     const { email, otp } = req.body;
     try {
@@ -124,7 +124,7 @@ const verifyOTP = async (req, res, next) => {
     }
 };
 
-// POST: api/v1/user/forgot-password
+// POST: api/v1/auth/forgot-password
 const forgotPassword = async (req, res, next) => {
     try {
         const response = await AuthService.forgotPassword(req.body);
@@ -155,7 +155,7 @@ const forgotPassword = async (req, res, next) => {
     }
 };
 
-// POST: api/v1/user/reset-password
+// POST: api/v1/auth/reset-password
 const resetPassword = async (req, res, next) => {
     const { token } = req.body;
     try {

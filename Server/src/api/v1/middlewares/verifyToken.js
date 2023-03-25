@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+
+// Project Import
+const { User } = require('../models')
 // ========================================== VERIFY TOKEN MIDDLEARE ===============================================
 
 const verifyToken = async (req, res, next) => {
@@ -39,6 +42,7 @@ const verifyToken = async (req, res, next) => {
         req.user = this_user;
         next();
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };

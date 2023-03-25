@@ -12,11 +12,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import {
     appActions,
     appSelectActiveItem,
-    appSelectServers,
+    appSelectServers
 } from '../../store/reducers/app/app.slice';
+import {
+    conversationActions
+} from '../../store/reducers/conversation/conversation.slice';
 import setSideNavData from '../../utils/setSideNavData';
 import ProfileMenu from './ProfileMenu';
-import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 
 // Style
 const AntSwitch = styled(Switch)(({ theme }) => ({
