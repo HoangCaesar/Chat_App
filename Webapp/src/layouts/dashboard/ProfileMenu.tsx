@@ -8,6 +8,7 @@ import { Profile_Menu } from '../../data/chat_data';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { authActions } from '../../store/reducers/auth/auth.slice';
 import { userSelectUser, userActions } from '../../store/reducers/user/user.slice';
+import { socket } from '../../socket';
 
 // ==============================|| DASHBOARD LAYOUT: PROFILE MENU ||============================== //
 
@@ -15,6 +16,8 @@ const ProfileMenu = () => {
     const dispatch = useAppDispatch();
 
     const userInfo = useAppSelector(userSelectUser);
+
+    const user_id = window.localStorage.getItem('uid');
 
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -67,6 +70,7 @@ const ProfileMenu = () => {
                                     onClick={() => {
                                         if (idx === 2) {
                                             dispatch(authActions.SignoutUser());
+                                            socket.emit('end', { user_id });
                                         }
                                     }}
                                     sx={{ width: 100 }}

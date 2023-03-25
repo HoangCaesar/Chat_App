@@ -7,7 +7,7 @@ import { RootState } from '../../index';
 // State
 export interface ConversationState {
     direct_chat: {
-        conversations: [any];
+        conversations: any[];
         current_conversation: any;
         current_messages: [any];
     };
@@ -16,7 +16,7 @@ export interface ConversationState {
 
 const initialState: ConversationState = {
     direct_chat: {
-        conversations: [''],
+        conversations: [],
         current_conversation: null,
         current_messages: [''],
     },
@@ -68,6 +68,33 @@ const conversationSlice = createSlice({
 
         setCurrentConversation(state, action) {
             state.direct_chat.current_conversation = action.payload;
+        },
+
+        updateDirectConversation(state, action) {
+            const this_conversation = action.payload.conversation;
+            state.direct_chat.conversations = state.direct_chat.conversations.map((el: any) => {
+                if (el.id !== this_conversation._id) {
+                    return el;
+                } else {
+                    const user = this_conversation.participants.find(
+                        (elm: any) => elm._id.toString() !== user_id
+                    );
+                    return {
+                        id: el._id,
+                        user_id: user._id,
+                        name: `${user.firstName} ${user.lastName}`,
+                        online: user.status === 'Online',
+                        img: user.avatar,
+                        msg: el.messages[el.messages.length - 1].messages.text,
+                        time: el.messages[el.messages.length - 1].messages.created_at,
+                        unread: true,
+                    } as any;
+                }
+            });
+        },
+
+        addDirectMessage(state, action) {
+            state.direct_chat.current_messages.push(action.payload.message);
         },
     },
 });

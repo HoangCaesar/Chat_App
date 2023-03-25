@@ -51,7 +51,7 @@ const Messenger = () => {
             </Box>
 
             {/* Footer */}
-            {/* <Footer /> */}
+            <Footer />
         </Stack>
     );
 };

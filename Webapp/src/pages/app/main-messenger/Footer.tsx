@@ -10,11 +10,16 @@ import {
     PaperPlaneTilt,
     Smiley,
     Sticker,
-    User
+    User,
 } from 'phosphor-react';
 import { useRef, useState } from 'react';
 
 // Project Import
+import { useAppDispatch, useAppSelector } from '../../../hooks/sagaHooks';
+import { useResponsive } from '../../../hooks';
+import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
+import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
+import { socket } from '../../../socket';
 
 // Style
 const StyledInput = styled(TextField)(({ theme }) => ({
@@ -83,7 +88,7 @@ const ChatInput = ({ openPicker, setOpenPicker, setValue, value, inputRef }: any
                             }}
                         >
                             {Actions.map((el) => (
-                                <Tooltip placement="right" title={el.title}> 
+                                <Tooltip placement="right" title={el.title}>
                                     <Fab
                                         onClick={() => {
                                             setOpenActions(!openActions);
@@ -139,10 +144,32 @@ function containsUrl(text: string) {
 const Footer = () => {
     const theme = useTheme();
 
+    const { current_conversation } = useAppSelector(conversationSelectDirectChat);
+
+    const user_id = localStorage.getItem('uid');
+
+    const isMobile = useResponsive('between', 'md', 'xs', 'sm');
+
+    const room_id = useAppSelector(appSelectRoomId);
+
     const [openPicker, setOpenPicker] = useState(false);
 
     const [value, setValue] = useState('');
-    const inputRef = useRef(null);
+    const inputRef = useRef<any>(null);
+
+    function handleEmojiClick(emoji: any) {
+        const input = inputRef.current;
+
+        if (input) {
+            const selectionStart = input.selectionStart;
+            const selectionEnd = input.selectionEnd;
+
+            setValue(value.substring(0, selectionStart) + emoji + value.substring(selectionEnd));
+
+            // Move the cursor to the end of the inserted emoji
+            input.selectionStart = input.selectionEnd = selectionStart + 1;
+        }
+    }
 
     return (
         <Box
@@ -197,7 +224,17 @@ const Footer = () => {
                             alignItems={'center'}
                             justifyContent="center"
                         >
-                            <IconButton>
+                            <IconButton
+                                onClick={() => {
+                                    socket.emit('text_message', {
+                                        message: linkify(value),
+                                        conversation_id: room_id,
+                                        from: user_id,
+                                        to: current_conversation.user_id,
+                                        type: containsUrl(value) ? 'Link' : 'Text',
+                                    });
+                                }}
+                            >
                                 <PaperPlaneTilt color="#ffffff" />
                             </IconButton>
                         </Stack>

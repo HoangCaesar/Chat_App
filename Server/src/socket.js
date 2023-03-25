@@ -38,19 +38,63 @@ const socket = async (io) => {
             callback(messages);
         });
 
+        // Handle incoming text/link messages
+        socket.on('text_message', async (data) => {
+            // console.log('Received message:', data);
+
+            // data: {to, from, text}
+
+            const { message, conversation_id, from, to, type } = data;
+
+            const to_user = await User.findById(to);
+            const from_user = await User.findById(from);
+
+            const new_message = new Message( {
+                messages: {
+                    to: to,
+                    from: from,
+                    type: type,
+                    created_at: Date.now(),
+                    text: message,
+                },
+                server: null
+            });
+
+            const savedNewMessages = await new_message.save()
+
+            await Conversation.findOneAndUpdate(
+                { _id: conversation_id },
+                { $push: { messages: savedNewMessages } },
+                { new: true, upsert: true }
+            );
+            
+            // // emit incoming_message -> to user
+
+            // io.to(to_user.socket_id).emit('new_message', {
+            //     conversation_id,
+            //     message: new_message,
+            // });
+
+            // // emit outgoing_message -> from user
+            // io.to(from_user.socket_id).emit('new_message', {
+            //     conversation_id,
+            //     message: new_message,
+            // });
+        });
+
         // socket exit
-        // socket.on('end', async (data) => {
-        //     // Find user by ID and set status as offline
+        socket.on('end', async (data) => {
+            // Find user by ID and set status as offline
+            console.log(data);
+            if (data.user_id) {
+                await User.findByIdAndUpdate(data.user_id, { status: 'Offline' });
+            }
 
-        //     if (data.user_id) {
-        //         await User.findByIdAndUpdate(data.user_id, { status: 'Offline' });
-        //     }
+            // broadcast to all conversation rooms of this user that this user is offline (disconnected)
 
-        //     // broadcast to all conversation rooms of this user that this user is offline (disconnected)
-
-        //     console.log('closing connection');
-        //     socket.disconnect(0);
-        // });
+            console.log('closing connection');
+            socket.disconnect(0);
+        });
     });
 };
 
