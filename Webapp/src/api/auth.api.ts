@@ -35,6 +35,10 @@ const authApi = {
         const url = `/auth/reset-password`;
         return axiosClient.post(url, data);
     },
+    checkToken(): Promise<any> {
+        const url = `/auth/check-token`;
+        return axiosClient.post(url);
+    },
 };
 
 export default authApi;

@@ -132,7 +132,7 @@ const SideBar = () => {
                         sx={{ width: 'max-content' }}
                     >
                         {/* Icon list */}
-                        {data.map((item: any, index: number) => {
+                        {/* {data.map((item: any, index: number) => {
                             return index === activeItem ? (
                                 <Box
                                     key={item.color}
@@ -190,7 +190,7 @@ const SideBar = () => {
                                     </Link>
                                 </Tooltip>
                             );
-                        })}
+                        })} */}
 
                         <Divider sx={{ width: '100%' }} />
                     </Stack>

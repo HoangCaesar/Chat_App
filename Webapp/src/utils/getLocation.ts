@@ -6,14 +6,14 @@ import locationApi from '../api/location.api';
 
 const getLocationName = async ({ lat, lng }: Location) => {
     return locationApi.getLocation({ lat, lng }).then((response) => {
-        const address = response.address;
+        const address = response?.address;
         const city =
-            address.city ||
-            address.county ||
-            address.village ||
-            address.hamlet ||
-            address.suburb ||
-            address.neighbourhood;
+            address?.city ||
+            address?.county ||
+            address?.village ||
+            address?.hamlet ||
+            address?.suburb ||
+            address?.neighbourhood;
 
         return city;
     });

@@ -17,8 +17,8 @@ function* getUser() {
     }
 }
 
-function* conversationSaga() {
+function* userSaga() {
     yield takeLatest(userActions.getUser, getUser);
 }
 
-export default conversationSaga;
+export default userSaga;

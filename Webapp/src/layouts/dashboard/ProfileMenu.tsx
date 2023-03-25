@@ -1,17 +1,21 @@
 import { Avatar, Box, Fade, Menu, MenuItem, Stack } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { faker } from '@faker-js/faker';
 
 // Project Import
 import { Profile_Menu } from '../../data/chat_data';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import { authActions, authSelectIsLoading } from '../../store/reducers/auth/auth.slice';
+import { authActions } from '../../store/reducers/auth/auth.slice';
+import { userSelectUser, userActions } from '../../store/reducers/user/user.slice';
 
 // ==============================|| DASHBOARD LAYOUT: PROFILE MENU ||============================== //
 
 const ProfileMenu = () => {
     const dispatch = useAppDispatch();
+
+    const userInfo = useAppSelector(userSelectUser);
+    // console.log(userInfo);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -21,6 +25,10 @@ const ProfileMenu = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+        dispatch(userActions.getUser());
+    }, []);
 
     return (
         <>

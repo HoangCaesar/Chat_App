@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 
 // Project Import
-const { User } = require('../models')
+const { User } = require('../models');
 // ========================================== VERIFY TOKEN MIDDLEARE ===============================================
 
 const verifyToken = async (req, res, next) => {
@@ -13,7 +13,11 @@ const verifyToken = async (req, res, next) => {
             token = req.headers.authorization.split(' ')[1];
         } else if (req.cookies.jwt) {
             token = req.cookies.jwt;
+        } else if (req.body.token) {
+            token = req.body.token;
         }
+
+        console.log(token);
 
         if (!token) {
             return res.status(401).json({

@@ -5,7 +5,7 @@ import { BASE_URL } from './constants.axios';
 
 // helpers
 const getToken = () => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('token');
     return accessToken;
 };
 
@@ -37,7 +37,7 @@ axiosClient.interceptors.response.use(
         return response;
     },
     (error) => {
-        if (error && error.response.data) {
+        if (error && error?.response?.data) {
             return error.response.data;
         }
 

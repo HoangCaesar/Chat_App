@@ -24,10 +24,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         loadUserInfo(state, action: PayloadAction<GetUserResponse>) {
-            state.user = action.payload.user;
+            state.user = action.payload;
         },
 
-        getUser(state, action: PayloadAction<any>) {
+        getUser(state) {
             // Do Nothing
         },
     },

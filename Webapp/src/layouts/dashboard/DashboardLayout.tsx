@@ -1,52 +1,38 @@
 import { Stack } from '@mui/material';
 import { useEffect } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // Project Import
 import { useResponsive } from '../../hooks';
-import { useAppSelector, useAppDispatch } from '../../hooks/sagaHooks';
 import { connectSocket, socket } from '../../socket';
-import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
+import { isAuthenticated } from '../../utils/authHandler';
 import SideBar from './SideBar';
 
 // ==============================|| LAYOUT: DASHBOARD ||============================== //
 
 const DashboardLayout = () => {
-    const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
+    const navigate = useNavigate();
 
     const isDesktop = useResponsive('up', 'md');
 
-    // if (!isLoggedIn) {
-    //     return <Navigate to={'/auth/signin'} />;
-    // }
-
     const user_id: any = localStorage.getItem('uid');
+
+    useEffect(() => {
+        const checkToken = (async () => {
+            const res = await isAuthenticated();
+            if (!res) return navigate('/auth/signin');
+        })();
+    }, []);
 
     // socket
     useEffect(() => {
-        if (isLoggedIn) {
-            window.onload = () => {
-                if (!window.location.hash) {
-                    window.location = window.location as any;
-                    window.location.reload();
-                }
-            };
-
-            // To avoid error cause calling onload function without argument
-            const ev: any = {};
-
-            window.onload(ev);
-
-            if (!socket) {
-                connectSocket(user_id);
-            }
-
-            return () => {
-                
-            };
+        if (!socket) {
+            connectSocket(user_id);
         }
+
+        return () => {};
         connectSocket(user_id);
-    }, [isLoggedIn]);
+    }, []);
 
     return (
         <>

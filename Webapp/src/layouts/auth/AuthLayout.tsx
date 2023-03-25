@@ -1,18 +1,23 @@
 import { Container, Stack } from '@mui/material';
-import { Navigate, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 // Project Import
 import { Logo } from '../../components';
-import { useAppSelector } from '../../hooks/sagaHooks';
-import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
+import isAuthenticated from '../../utils/authHandler';
 
 // ==============================|| LAYOUT: AUTH ||============================== //
 
 const AuthLayout = () => {
-    const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
-    // if (isLoggedIn) {
-    //     return <Navigate to={"/app"} />;
-    // }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkToken = (async () => {
+            const res = await isAuthenticated();
+            if (res) return navigate('/app');
+        })();
+    }, []);
+
     return (
         <>
             <Container sx={{ mt: 5 }} maxWidth="sm">

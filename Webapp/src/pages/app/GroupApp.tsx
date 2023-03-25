@@ -15,7 +15,7 @@ const GroupApp = () => {
         <>
             <Stack direction="row" sx={{ width: '100%' }}>
                 {/* Chat Bar */}
-                <Chats />
+                {/* <Chats /> */}
                 {/* Body */}
                 {/* <Messenger  /> */}
             </Stack>
