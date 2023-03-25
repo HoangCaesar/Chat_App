@@ -22,8 +22,8 @@ const Body = ({ isMobile, menu }: any) => {
         const current = conversations.find((el) => el.id === room_id);
 
         socket.emit('get_messages', { conversation_id: current.id }, (data: any) => {
-            // data => list of messages
-            console.log(data, 'List of messages');
+            // data => array/list of messages
+            // console.log(data);
             dispatch(conversationActions.fetchCurrentMessages({ messages: data }));
         });
 
@@ -32,12 +32,12 @@ const Body = ({ isMobile, menu }: any) => {
     return (
         <Box p={isMobile ? 1 : 3}>
             <Stack spacing={1}>
-                {Chat_History.map((item) => {
+                {current_messages.map((item) => {
                     switch (item.type) {
                         case 'divider':
                             return (
                                 // Timeline
-                                <Timeline key={item.message} el={item} />
+                                <Timeline key={item.id} el={item} />
                             );
 
                         case 'msg':
@@ -45,35 +45,32 @@ const Body = ({ isMobile, menu }: any) => {
                                 case 'img':
                                     return (
                                         // Media Message
-                                        <MediaMsg key={item.message} el={item} menu={menu} />
+                                        <MediaMsg key={item.id} el={item} menu={menu} />
                                     );
 
                                 case 'doc':
                                     return (
                                         // Doc Message
-                                        <DocMsg key={item.message} el={item} menu={menu} />
+                                        <DocMsg key={item.id} el={item} menu={menu} />
                                     );
                                 case 'Link':
                                     return (
                                         //  Link Message
-                                        <LinkMsg key={item.message} el={item} menu={menu} />
+                                        <LinkMsg key={item.id} el={item} menu={menu} />
                                     );
 
                                 case 'reply':
                                     return (
                                         //  ReplyMessage
-                                        <ReplyMsg key={item.message} el={item} menu={menu} />
+                                        <ReplyMsg key={item.id} el={item} menu={menu} />
                                     );
 
                                 default:
                                     return (
                                         // Text Message
-                                        <TextMsg key={item.message} el={item} menu={menu} />
+                                        <TextMsg key={item.id} el={item} menu={menu} />
                                     );
                             }
-
-                        default:
-                            return <></>;
                     }
                 })}
             </Stack>

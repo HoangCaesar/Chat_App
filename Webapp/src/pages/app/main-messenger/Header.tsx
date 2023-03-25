@@ -86,8 +86,6 @@ const Header = () => {
         setChatter(conversation);
     }, [room_id]);
 
-    console.log(chatter);
-
     return (
         <Box
             p={2}
@@ -172,8 +170,8 @@ const Header = () => {
                     >
                         <Box p={1}>
                             <Stack spacing={1}>
-                                {Conversation_Menu.map((item) => (
-                                    <MenuItem onClick={handleCloseConversationMenu}>
+                                {Conversation_Menu.map((item, index) => (
+                                    <MenuItem key={index} onClick={handleCloseConversationMenu}>
                                         <Stack
                                             sx={{ minWidth: 100 }}
                                             direction="row"

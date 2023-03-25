@@ -23,9 +23,19 @@ const socket = async (io) => {
         socket.on('get_direct_conversations', async ({ user_id }, callback) => {
             const existing_conversations = await Conversation.find({
                 participants: { $all: [user_id] },
-            }).populate('participants').populate('messages');
+            })
+                .populate('participants')
+                .populate('messages');
 
             callback(existing_conversations);
+        });
+
+        // Messages for messenger
+        socket.on('get_messages', async (data, callback) => {
+            const { messages } = await Conversation.findById(data.conversation_id)
+                .populate('messages')
+                .select('messages');
+            callback(messages);
         });
 
         // socket exit

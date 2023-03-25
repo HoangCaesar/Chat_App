@@ -47,7 +47,7 @@ const Messenger = () => {
                 }}
             >
                 {/* Body */}
-                {/* <Body isMobile={isMobile} menu={true} /> */}
+                <Body isMobile={isMobile} menu={true} />
             </Box>
 
             {/* Footer */}

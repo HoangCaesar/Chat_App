@@ -58,10 +58,10 @@ const conversationSlice = createSlice({
             const formatted_messages = messages.map((el: any) => ({
                 id: el._id,
                 type: 'msg',
-                subtype: el.type,
-                message: el.text,
-                incoming: el.to === user_id,
-                outgoing: el.from === user_id,
+                subtype: el.messages.type,
+                message: el.messages.text,
+                incoming: el.messages.to === user_id,
+                outgoing: el.messages.from === user_id,
             }));
             state.direct_chat.current_messages = formatted_messages;
         },
