@@ -57,3 +57,8 @@ export interface ResetPasswordResponse {
     message: string;
     token: String;
 }
+
+export interface GetUserResponse {
+    status: string;
+    user: any;
+}
