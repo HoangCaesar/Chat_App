@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
 import { Box, Stack, useTheme } from '@mui/material';
+import { useEffect, useRef } from 'react';
 
 // Project Import
 import Body from './Body';
@@ -7,7 +7,7 @@ import Footer from './Footer';
 import Header from './Header';
 // hooks
 import { useResponsive } from '../../../hooks';
-import { useAppDispatch, useAppSelector } from '../../../hooks/sagaHooks';
+import { useAppSelector } from '../../../hooks/sagaHooks';
 import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
 
 // ==============================|| MAIN APP: MAIN MESSENGER  ||============================== //
@@ -39,9 +39,7 @@ const Messenger = () => {
                     overflowY: 'scroll',
 
                     backgroundColor:
-                        theme.palette.mode === 'light'
-                            ? '#F0F4FA'
-                            : theme.palette.background.default,
+                        theme.palette.mode === 'light' ? '#F0F4FA' : theme.palette.background.default,
 
                     boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
                 }}

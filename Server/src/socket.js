@@ -70,16 +70,16 @@ const socket = async (io) => {
             
             // // emit incoming_message -> to user
 
-            // io.to(to_user.socket_id).emit('new_message', {
-            //     conversation_id,
-            //     message: new_message,
-            // });
+            io.to(to_user.socket_id).emit('new_message', {
+                conversation_id,
+                message: new_message,
+            });
 
             // // emit outgoing_message -> from user
-            // io.to(from_user.socket_id).emit('new_message', {
-            //     conversation_id,
-            //     message: new_message,
-            // });
+            io.to(from_user.socket_id).emit('new_message', {
+                conversation_id,
+                message: new_message,
+            });
         });
 
         // socket exit

@@ -88,7 +88,7 @@ const ChatInput = ({ openPicker, setOpenPicker, setValue, value, inputRef }: any
                             }}
                         >
                             {Actions.map((el) => (
-                                <Tooltip placement="right" title={el.title}>
+                                <Tooltip key={el.title} placement="right" title={el.title}>
                                     <Fab
                                         onClick={() => {
                                             setOpenActions(!openActions);
@@ -233,6 +233,7 @@ const Footer = () => {
                                         to: current_conversation.user_id,
                                         type: containsUrl(value) ? 'Link' : 'Text',
                                     });
+                                    setValue('')
                                 }}
                             >
                                 <PaperPlaneTilt color="#ffffff" />

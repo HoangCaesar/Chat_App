@@ -40,7 +40,7 @@ const Chats = () => {
             sx={{
                 position: 'relative',
                 height: '100%',
-                width: isDesktop ? 320 : '100vw',
+                width: isDesktop ? 420 : '100vw',
                 backgroundColor:
                     theme.palette.mode === 'light' ? '#F8FAFF' : theme.palette.background.default,
 
@@ -73,7 +73,7 @@ const Chats = () => {
                     <Divider />
                 </Stack>
                 {/* Chat */}
-                <Stack direction="column" sx={{ flexGrow: 1, overflowY: 'scroll', height: '100%' }}>
+                <Stack direction="column" sx={{ flexGrow: 1,  height: '100%' }}>
                     <SimpleBarStyle clickOnTrack={false}>
                         {/* Pinned Messages */}
                         <Stack spacing={2}>

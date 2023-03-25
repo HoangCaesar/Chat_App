@@ -15,7 +15,7 @@ import { socket } from '../../../socket';
 const Body = ({ isMobile, menu }: any) => {
     const dispatch = useAppDispatch();
 
-    const { conversations, current_messages } = useAppSelector(conversationSelectDirectChat);
+    const { conversations, current_messages, current_conversation } = useAppSelector(conversationSelectDirectChat);
     const room_id = useAppSelector(appSelectRoomId);
 
     useEffect(() => {
@@ -23,10 +23,8 @@ const Body = ({ isMobile, menu }: any) => {
 
         socket.emit('get_messages', { conversation_id: current.id }, (data: any) => {
             // data => array/list of messages
-            // console.log(data);
             dispatch(conversationActions.fetchCurrentMessages({ messages: data }));
         });
-
         dispatch(conversationActions.setCurrentConversation(current));
     }, []);
     return (

@@ -429,3 +429,11 @@
 25-03-2023	18:26:13-----GET /api/v1/user/get-user ::: This route does not exist.
 25-03-2023	53:00:18-----GET /api/v1/user/get-user ::: jwt malformed
 25-03-2023	53:00:18-----GET /api/v1/user/get-user ::: jwt malformed
+25-03-2023	22:25:18-----GET /api/v1/user/get-user ::: invalid signature
+25-03-2023	22:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	22:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	22:25:18-----GET /api/v1/user/get-user ::: invalid signature
+25-03-2023	22:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	22:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	43:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	43:25:18-----POST /api/v1/auth/check-token ::: invalid signature
