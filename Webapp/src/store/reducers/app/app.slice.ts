@@ -96,9 +96,10 @@ const appActions = appSlice.actions;
 const appSelectSnackbar = (state: RootState) => state.app.snackbar;
 const appSelectServers = (state: RootState) => state.app.servers;
 const appSelectActiveItem = (state: RootState) => state.app.activeItem;
+const appSelectRoomId = (state: RootState) => state.app.room_id;
 
 // Reducer
 const appReducer = appSlice.reducer;
 
-export { appActions, appSelectSnackbar, appSelectServers, appSelectActiveItem };
+export { appActions, appSelectSnackbar, appSelectServers, appSelectActiveItem, appSelectRoomId };
 export default appReducer;

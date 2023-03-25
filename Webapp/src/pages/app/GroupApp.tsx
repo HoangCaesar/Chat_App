@@ -17,7 +17,7 @@ const GroupApp = () => {
                 {/* Chat Bar */}
                 <Chats />
                 {/* Body */}
-                {/* <Messenger  /> */}
+                <Messenger  />
             </Stack>
         </>
     );

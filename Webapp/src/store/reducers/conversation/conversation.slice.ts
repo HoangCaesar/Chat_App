@@ -37,7 +37,6 @@ const conversationSlice = createSlice({
 
         fetchDirectConversations(state, action: PayloadAction<any>) {
             const list = action.payload.conversations.map((el: any) => {
-
                 const user = el.participants.find((elm: any) => elm._id.toString() !== user_id);
                 return {
                     id: el._id,
@@ -52,6 +51,23 @@ const conversationSlice = createSlice({
             });
 
             state.direct_chat.conversations = list;
+        },
+
+        fetchCurrentMessages(state, action) {
+            const messages = action.payload.messages;
+            const formatted_messages = messages.map((el: any) => ({
+                id: el._id,
+                type: 'msg',
+                subtype: el.type,
+                message: el.text,
+                incoming: el.to === user_id,
+                outgoing: el.from === user_id,
+            }));
+            state.direct_chat.current_messages = formatted_messages;
+        },
+
+        setCurrentConversation(state, action) {
+            state.direct_chat.current_conversation = action.payload;
         },
     },
 });

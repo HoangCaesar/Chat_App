@@ -1,9 +1,11 @@
 import React from 'react';
-import { Avatar, Badge, Box, Stack, styled, Typography, useTheme } from '@mui/material';
+import { Avatar, Badge, Box, Stack, styled, Typography, useTheme, alpha } from '@mui/material';
 
 // Project Import
 import { Chat } from '../../model';
 import { cutTimeString, cutMessageString } from '../../utils/cutString';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { appSelectRoomId, appActions } from '../../store/reducers/app/app.slice';
 
 // Style
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -38,14 +40,35 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 // ==============================|| COMPONENT: CHAT ITEM ||============================== //
 
 const ChatItem = ({ ...item }: Chat) => {
+    const dispatch = useAppDispatch();
+    const room_id = useAppSelector(appSelectRoomId);
+    const selectedChatId: any = room_id?.toString();
+
+    let isSelected = selectedChatId === item.id;
+
+    if (!selectedChatId) {
+        isSelected = false;
+    }
+
     const theme = useTheme();
     return (
         <Box
+            onClick={() => {
+                dispatch(appActions.selectConversation({ room_id: item.id }));
+            }}
             sx={{
                 width: '100%',
                 borderRadius: 1,
-                backgroundColor:
-                    theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default,
+                backgroundColor: isSelected
+                    ? theme.palette.mode === 'light'
+                        ? alpha(theme.palette.primary.main, 0.5)
+                        : theme.palette.primary.main
+                    : theme.palette.mode === 'light'
+                    ? '#fff'
+                    : theme.palette.background.paper,
+                '&:hover': {
+                    cursor: 'pointer',
+                },
             }}
             p={2}
         >
