@@ -15,7 +15,6 @@ const ProfileMenu = () => {
     const dispatch = useAppDispatch();
 
     const userInfo = useAppSelector(userSelectUser);
-    // console.log(userInfo);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -37,8 +36,8 @@ const ProfileMenu = () => {
                 aria-controls={openMenu ? 'profile-positioned-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={openMenu ? 'true' : undefined}
-                alt={faker.name.fullName()}
-                src={faker.image.avatar()}
+                alt={`${userInfo?.firstName} ${userInfo?.lastName}`}
+                src={userInfo?.avatar}
                 onClick={handleClick}
             />
             <Menu

@@ -12,11 +12,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import {
     appActions,
     appSelectActiveItem,
-    appSelectServers
+    appSelectServers,
 } from '../../store/reducers/app/app.slice';
-import {
-    conversationActions
-} from '../../store/reducers/conversation/conversation.slice';
+import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 import setSideNavData from '../../utils/setSideNavData';
 import ProfileMenu from './ProfileMenu';
 
@@ -132,7 +130,7 @@ const SideBar = () => {
                         sx={{ width: 'max-content' }}
                     >
                         {/* Icon list */}
-                        {/* {data.map((item: any, index: number) => {
+                        {data.map((item: any, index: number) => {
                             return index === activeItem ? (
                                 <Box
                                     key={item.color}
@@ -190,7 +188,7 @@ const SideBar = () => {
                                     </Link>
                                 </Tooltip>
                             );
-                        })} */}
+                        })}
 
                         <Divider sx={{ width: '100%' }} />
                     </Stack>
