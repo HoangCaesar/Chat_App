@@ -1,14 +1,13 @@
 import { Avatar, Box, Fade, Menu, MenuItem, Stack } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { faker } from '@faker-js/faker';
 
 // Project Import
 import { Profile_Menu } from '../../data/chat_data';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import { authActions } from '../../store/reducers/auth/auth.slice';
-import { userSelectUser, userActions } from '../../store/reducers/user/user.slice';
 import { socket } from '../../socket';
+import { authActions } from '../../store/reducers/auth/auth.slice';
+import { userActions, userSelectUser } from '../../store/reducers/user/user.slice';
 
 // ==============================|| DASHBOARD LAYOUT: PROFILE MENU ||============================== //
 

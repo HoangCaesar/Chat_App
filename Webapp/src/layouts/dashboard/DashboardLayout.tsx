@@ -4,16 +4,14 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 // Project Import
 import { useResponsive } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { connectSocket, socket } from '../../socket';
+import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
+import {
+    conversationActions
+} from '../../store/reducers/conversation/conversation.slice';
 import { isAuthenticated } from '../../utils/authHandler';
 import SideBar from './SideBar';
-import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import {
-    conversationSelectDirectChat,
-    conversationActions,
-} from '../../store/reducers/conversation/conversation.slice';
-import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
-import { appActions } from '../../store/reducers/app/app.slice';
 
 // ==============================|| LAYOUT: DASHBOARD ||============================== //
 

@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
 // Project Import
-import useSettings from './useSettings';
 import { allLangs, defaultLang } from '../config/config';
+import useSettings from './useSettings';
 
 // ==============================|| HOOKS: useLocales ||============================== //
 

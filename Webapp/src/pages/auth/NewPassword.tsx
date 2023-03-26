@@ -1,45 +1,44 @@
-import { Stack, Typography, Link } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
-import React from "react";
-import { CaretLeft } from "phosphor-react";
-import { NewPasswordForm } from "../../sections";
+import { Link, Stack, Typography } from '@mui/material';
+import { CaretLeft } from 'phosphor-react';
+import { Link as RouterLink } from 'react-router-dom';
+import { NewPasswordForm } from '../../sections';
 
 // ==============================|| PAGE: NEW PASSWORD  ||============================== //
 
 const NewPassword = () => {
-  return (
-    <>
-      <Stack spacing={2} sx={{ mb: 5, position: "relative" }}>
-        <Typography variant="h3" paragraph>
-          Reset Password
-        </Typography>
+    return (
+        <>
+            <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+                <Typography variant="h3" paragraph>
+                    Reset Password
+                </Typography>
 
-        <Typography sx={{ color: "text.secondary", mb: 5 }}>
-          Please set your new password.
-        </Typography>
-      </Stack>
+                <Typography sx={{ color: 'text.secondary', mb: 5 }}>
+                    Please set your new password.
+                </Typography>
+            </Stack>
 
-      {/* NewPasswordForm */}
+            {/* NewPasswordForm */}
 
-      <NewPasswordForm />
+            <NewPasswordForm />
 
-      <Link
-        component={RouterLink}
-        to={"/auth/signin"}
-        color="inherit"
-        variant="subtitle2"
-        sx={{
-          mt: 3,
-          mx: "auto",
-          alignItems: "center",
-          display: "inline-flex",
-        }}
-      >
-        <CaretLeft size={24} />
-        Return to sign in
-      </Link>
-    </>
-  );
+            <Link
+                component={RouterLink}
+                to={'/auth/signin'}
+                color="inherit"
+                variant="subtitle2"
+                sx={{
+                    mt: 3,
+                    mx: 'auto',
+                    alignItems: 'center',
+                    display: 'inline-flex',
+                }}
+            >
+                <CaretLeft size={24} />
+                Return to sign in
+            </Link>
+        </>
+    );
 };
 
 export default NewPassword;

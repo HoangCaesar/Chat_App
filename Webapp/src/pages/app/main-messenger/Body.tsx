@@ -1,21 +1,21 @@
-import { Box, Stack, useTheme } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useEffect } from 'react';
 
 // Project Import
-import { Chat_History } from '../../../data/chat_data';
-import { Timeline, DocMsg, LinkMsg, MediaMsg, ReplyMsg, TextMsg } from '../../../sections';
 import { useAppDispatch, useAppSelector } from '../../../hooks/sagaHooks';
-import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
-import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
-import { conversationActions } from '../../../store/reducers/conversation/conversation.slice';
+import { DocMsg, LinkMsg, MediaMsg, ReplyMsg, TextMsg, Timeline } from '../../../sections';
 import { socket } from '../../../socket';
+import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
+import { conversationActions, conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
 
 // ==============================|| MESSENGER: BODY ||============================== //
 
 const Body = ({ isMobile, menu }: any) => {
     const dispatch = useAppDispatch();
 
-    const { conversations, current_messages, current_conversation } = useAppSelector(conversationSelectDirectChat);
+    const { conversations, current_messages } = useAppSelector(
+        conversationSelectDirectChat
+    );
     const room_id = useAppSelector(appSelectRoomId);
 
     useEffect(() => {

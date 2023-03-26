@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
-import { Stack, Typography, Link } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 
 // Project Import
 import { AuthRegisterForm, AuthSocial } from '../../sections';

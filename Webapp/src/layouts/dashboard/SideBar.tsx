@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import {
     appActions,
     appSelectActiveItem,
-    appSelectServers,
+    appSelectServers
 } from '../../store/reducers/app/app.slice';
 import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 import setSideNavData from '../../utils/setSideNavData';

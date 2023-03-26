@@ -10,16 +10,16 @@ import {
     PaperPlaneTilt,
     Smiley,
     Sticker,
-    User,
+    User
 } from 'phosphor-react';
 import { useRef, useState } from 'react';
 
 // Project Import
-import { useAppDispatch, useAppSelector } from '../../../hooks/sagaHooks';
 import { useResponsive } from '../../../hooks';
-import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
-import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
+import { useAppSelector } from '../../../hooks/sagaHooks';
 import { socket } from '../../../socket';
+import { appSelectRoomId } from '../../../store/reducers/app/app.slice';
+import { conversationSelectDirectChat } from '../../../store/reducers/conversation/conversation.slice';
 
 // Style
 const StyledInput = styled(TextField)(({ theme }) => ({

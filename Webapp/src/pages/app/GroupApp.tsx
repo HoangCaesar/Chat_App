@@ -1,14 +1,13 @@
-import { Stack } from '@mui/system';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { Box, Typography, useTheme } from '@mui/material';
+import { Stack } from '@mui/system';
+import { useSearchParams } from 'react-router-dom';
 
 // Project Import
+import NoChat from '../../assets/NoChat';
+import { useAppSelector } from '../../hooks/sagaHooks';
+import { appSelectChatType, appSelectRoomId } from '../../store/reducers/app/app.slice';
 import Chats from './Chats';
 import Messenger from './main-messenger';
-import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import { appSelectRoomId, appSelectChatType } from '../../store/reducers/app/app.slice';
-import NoChat from '../../assets/NoChat';
-import { useEffect } from 'react';
 
 // ==============================|| PAGE: GROUP APP  ||============================== //
 

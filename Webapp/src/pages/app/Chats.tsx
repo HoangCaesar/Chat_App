@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { socket } from '../../socket';
 import {
     conversationActions,
-    conversationSelectDirectChat,
+    conversationSelectDirectChat
 } from '../../store/reducers/conversation/conversation.slice';
 
 // model

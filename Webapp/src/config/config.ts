@@ -1,5 +1,5 @@
 // @mui
-import { enUS, frFR, zhCN, viVN, arSD } from '@mui/material/locale';
+import { arSD, enUS, frFR, viVN, zhCN } from '@mui/material/locale';
 
 // routes
 import { PATH_DASHBOARD } from '../routes/paths';
@@ -60,4 +60,3 @@ export const defaultLang = allLangs[0]; // English
 
 // DEFAULT ROOT PATH
 export const DEFAULT_PATH = PATH_DASHBOARD.general.app; // as '/app'
-

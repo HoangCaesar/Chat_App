@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // ==============================|| HOOKS: useLocalStorage ||============================== //
 
@@ -33,6 +33,6 @@ const useLocalStorage = (key: string, defaultValue: any) => {
     };
 
     return [value, setValueInLocalStorage];
-}
+};
 
 export default useLocalStorage;

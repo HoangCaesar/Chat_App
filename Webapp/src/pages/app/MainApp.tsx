@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
 import { Box, CircularProgress, IconButton, Typography, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Compass } from 'phosphor-react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Project Import
+import NoChat from '../../assets/NoChat';
 import { SimpleBarStyle } from '../../components/ScrollBar';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { appActions, appSelectServers } from '../../store/reducers/app/app.slice';
 import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
-import NoChat from '../../assets/NoChat';
 
 // ==============================|| PAGE: MAIN APP  ||============================== //
 
@@ -134,12 +134,14 @@ const MainApp = () => {
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
-                                                scroll: 'hidden'
+                                                scroll: 'hidden',
                                             }}
                                         >
-                                            <CircularProgress sx={{
-                                                scroll: 'hidden'
-                                            }} />
+                                            <CircularProgress
+                                                sx={{
+                                                    scroll: 'hidden',
+                                                }}
+                                            />
                                         </Box>
                                     )}
                                 </Stack>
