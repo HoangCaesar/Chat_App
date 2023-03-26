@@ -6,6 +6,7 @@ import { Chat } from '../../model';
 import { cutTimeString, cutMessageString } from '../../utils/cutString';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { appSelectRoomId, appActions } from '../../store/reducers/app/app.slice';
+import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
 
 // Style
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -49,12 +50,13 @@ const ChatItem = ({ ...item }: Chat) => {
     if (!selectedChatId) {
         isSelected = false;
     }
-
+    console.log(item);
     const theme = useTheme();
     return (
         <Box
             onClick={() => {
                 dispatch(appActions.selectConversation({ room_id: item.id }));
+                dispatch(conversationActions.updateDirectConversation({ conversation: item }));
             }}
             sx={{
                 width: '100%',
@@ -89,8 +91,12 @@ const ChatItem = ({ ...item }: Chat) => {
                     )}
                     {/* Messages */}
                     <Stack>
-                        <Typography variant="subtitle2">{item.name}</Typography>
-                        <Typography variant="caption">{cutMessageString(item.msg)}</Typography>
+                        <Typography variant="subtitle2" color={item.unread ? 'blue' : 'black'}>
+                            {item.name}
+                        </Typography>
+                        <Typography variant="caption" color={item.unread ? 'blue' : 'gray'}>
+                            {cutMessageString(item.msg)}
+                        </Typography>
                     </Stack>
                 </Stack>
                 {/* Right -- Time */}

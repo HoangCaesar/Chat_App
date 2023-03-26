@@ -76,21 +76,19 @@ const conversationSlice = createSlice({
             const user_id = localStorage.getItem('uid');
             const this_conversation = action.payload.conversation;
             state.direct_chat.conversations = state.direct_chat.conversations.map((el: any) => {
-                if (el.id !== this_conversation._id) {
+                if (el.id !== this_conversation.id) {
                     return el;
                 } else {
-                    const user = this_conversation.participants.find(
-                        (elm: any) => elm._id.toString() !== user_id
-                    );
+                    console.log(this_conversation);
                     return {
-                        id: el._id,
-                        user_id: user._id,
-                        name: `${user.firstName} ${user.lastName}`,
-                        online: user.status === 'Online',
-                        img: user.avatar,
-                        msg: el.messages[el.messages.length - 1].messages.text,
-                        time: el.messages[el.messages.length - 1].messages.created_at,
-                        unread: true,
+                        id: this_conversation.id,
+                        user_id: user_id,
+                        name: this_conversation.name,
+                        online: this_conversation.online,
+                        img: this_conversation.img,
+                        msg: this_conversation.msg,
+                        time: this_conversation.time,
+                        unread: false,
                     } as any;
                 }
             });

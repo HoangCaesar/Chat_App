@@ -29,7 +29,6 @@ const Chats = () => {
 
     useEffect(() => {
         socket.emit('get_direct_conversations', { user_id }, (data: any) => {
-            console.log(data);
             dispatch(conversationActions.fetchDirectConversations({ conversations: data }));
         });
     }, []);

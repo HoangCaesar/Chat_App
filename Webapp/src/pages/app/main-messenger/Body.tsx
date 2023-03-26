@@ -26,7 +26,7 @@ const Body = ({ isMobile, menu }: any) => {
             dispatch(conversationActions.fetchCurrentMessages({ messages: data }));
         });
         dispatch(conversationActions.setCurrentConversation(current));
-    }, []);
+    }, [room_id]);
     return (
         <Box p={isMobile ? 1 : 3}>
             <Stack spacing={1}>
