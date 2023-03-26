@@ -53,7 +53,7 @@ const TextMsg = ({ el, menu }: any) => {
                 py={1.5}
                 sx={{
                     backgroundColor: el.incoming
-                        ? alpha(theme.palette.background.default, 1)
+                        ? alpha(theme.palette.secondary.light, 1)
                         : theme.palette.primary.main,
                     borderRadius: 1.5,
                     width: 'max-content',
@@ -62,7 +62,7 @@ const TextMsg = ({ el, menu }: any) => {
                 <Typography
                     variant="body2"
                     sx={{
-                        color: `${el.incoming ? theme.palette.text : '#fff'}`,
+                        color: `${el.incoming ? theme.palette.text.primary : '#fff'}`,
                     }}
                 >
                     {el.message}

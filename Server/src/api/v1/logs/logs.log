@@ -98,3 +98,5 @@
 25-03-2023	28:37:10-----GET /api/v1/user/get-user ::: Cannot access 'this_user' before initialization
 25-03-2023	39:37:10-----GET /api/v1/user/get-user ::: User is not defined
 25-03-2023	44:16:11-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	24:19:15-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	24:19:15-----GET /api/v1/user/get-user ::: jwt malformed

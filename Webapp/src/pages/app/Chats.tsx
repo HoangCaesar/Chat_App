@@ -13,8 +13,6 @@ import {
     conversationSelectDirectChat
 } from '../../store/reducers/conversation/conversation.slice';
 
-// model
-
 // ==============================|| APP: CHATS  ||============================== //
 
 const Chats = () => {
