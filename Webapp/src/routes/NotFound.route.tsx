@@ -1,5 +1,3 @@
-import { lazy } from 'react';
-import { Loadable } from '../components';
 import { Navigate } from 'react-router-dom';
 
 // Project import

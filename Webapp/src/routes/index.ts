@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 // project import
+import AuthRoutes from './Auth.route';
 import DashboardRoutes from './Dashboard.route';
 import NotFoundRoutes from './NotFound.route';
-import AuthRoutes from './Auth.route';
 
 // ==============================|| ROUTES-APP  ||============================== //
 

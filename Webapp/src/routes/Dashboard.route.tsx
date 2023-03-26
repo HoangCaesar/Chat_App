@@ -1,6 +1,6 @@
 import { lazy } from 'react';
-import { Loadable } from '../components';
 import { Navigate } from 'react-router-dom';
+import { Loadable } from '../components';
 
 // Project import
 import { DEFAULT_PATH } from '../config/config';
