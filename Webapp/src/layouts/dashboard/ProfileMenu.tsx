@@ -1,5 +1,6 @@
 import { Avatar, Box, Fade, Menu, MenuItem, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 // Project Import
@@ -15,6 +16,8 @@ const ProfileMenu = () => {
     const dispatch = useAppDispatch();
 
     const userInfo = useAppSelector(userSelectUser);
+
+    const navigate = useNavigate()
 
     const user_id = window.localStorage.getItem('uid');
 
@@ -70,6 +73,8 @@ const ProfileMenu = () => {
                                         if (idx === 2) {
                                             dispatch(authActions.SignoutUser());
                                             socket.emit('end', { user_id });
+                                        } else if (idx === 1) {
+                                            navigate('/settings')
                                         }
                                     }}
                                     sx={{ width: 100 }}
