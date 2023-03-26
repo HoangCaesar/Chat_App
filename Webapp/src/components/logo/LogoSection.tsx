@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { ButtonBase } from '@mui/material';
 
 // project import
-import Logo from './Logo';
 import { DEFAULT_PATH } from '../../config/config';
+import Logo from './Logo';
 
 // ==============================|| COMPONENT LOGO ||============================== //
 

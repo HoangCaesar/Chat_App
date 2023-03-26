@@ -10,32 +10,32 @@ import { InputHTMLAttributes } from 'react';
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
     label?: string;
-  };
+}
 
 const RHFTextField = ({ name, label, ...InputProps }: InputFieldProps) => {
     const {
         field: { value, onChange, onBlur, ref },
-        fieldState: { invalid, error }
-      } = useController({
+        fieldState: { invalid, error },
+    } = useController({
         name,
-      })
-    
-      return (
+    });
+
+    return (
         <TextField
-          fullWidth
-          size="small"
-          margin="normal"
-          value={value}
-          onChange={onChange}
-          onBlur={onBlur}
-          label={label}
-          variant="outlined"
-          inputRef={ref}
-          error={invalid}
-          helperText={error?.message}
-          InputProps={InputProps as any}
+            fullWidth
+            size="small"
+            margin="normal"
+            value={value}
+            onChange={onChange}
+            onBlur={onBlur}
+            label={label}
+            variant="outlined"
+            inputRef={ref}
+            error={invalid}
+            helperText={error?.message}
+            InputProps={InputProps as any}
         />
-      )
+    );
 };
 
 RHFTextField.propTypes = {

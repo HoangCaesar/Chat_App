@@ -1,12 +1,12 @@
+import { alpha, Avatar, Badge, Box, Stack, styled, Typography, useTheme } from '@mui/material';
 import React from 'react';
-import { Avatar, Badge, Box, Stack, styled, Typography, useTheme, alpha } from '@mui/material';
 
 // Project Import
-import { Chat } from '../../model';
-import { cutTimeString, cutMessageString } from '../../utils/cutString';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
-import { appSelectRoomId, appActions } from '../../store/reducers/app/app.slice';
+import { Chat } from '../../model';
+import { appActions, appSelectRoomId } from '../../store/reducers/app/app.slice';
 import { conversationActions } from '../../store/reducers/conversation/conversation.slice';
+import { cutMessageString, cutTimeString } from '../../utils/cutString';
 
 // Style
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -100,7 +100,11 @@ const ChatItem = ({ ...item }: Chat) => {
                 </Stack>
                 {/* Right -- Time */}
                 <Stack alignItems="center" spacing={2}>
-                    <Typography sx={{ fontWeight: 600 }} variant="caption" color={item.unread ? 'black' : 'gray'}>
+                    <Typography
+                        sx={{ fontWeight: 600 }}
+                        variant="caption"
+                        color={item.unread ? 'black' : 'gray'}
+                    >
                         {cutTimeString(item.time)}
                     </Typography>
                     <Badge color="primary" variant="dot" badgeContent={item.unread ? 1 : 0}>

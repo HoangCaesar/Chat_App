@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 
 const Iconify = ({ icon, sx, ...other }: any) => {
     return <Box component={Icon} icon={icon} sx={{ ...sx }} {...other} />;
-}
+};
 
 Iconify.propTypes = {
     icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),

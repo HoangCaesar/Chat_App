@@ -10,7 +10,7 @@ const FormProvider = ({ children, onSubmit, methods }: any) => {
             <form onSubmit={onSubmit}>{children}</form>
         </Form>
     );
-}
+};
 
 FormProvider.propTypes = {
     children: PropTypes.node,
@@ -18,4 +18,4 @@ FormProvider.propTypes = {
     onSubmit: PropTypes.func,
 };
 
-export default FormProvider
+export default FormProvider;

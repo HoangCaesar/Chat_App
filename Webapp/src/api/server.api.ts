@@ -1,9 +1,7 @@
 import {
-    Server,
+    AccessServerResponse, AddUserToServer, Server,
     ServerListResponse,
-    ServerResponse,
-    AddUserToServer,
-    AccessServerResponse,
+    ServerResponse
 } from '../model';
 import axiosClient from './config.axios';
 

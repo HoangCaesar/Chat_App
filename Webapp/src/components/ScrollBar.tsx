@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import SimpleBarReact from 'simplebar-react';
 // @mui
-import { alpha, styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
 
 // Style
 const RootStyle = styled('div')(() => ({
@@ -12,7 +12,6 @@ const RootStyle = styled('div')(() => ({
 }));
 
 const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
-    // maxHeight: '100%',
     '& .simplebar-scrollbar': {
         '&:before': {
             backgroundColor: alpha(theme.palette.grey[600], 0.48),

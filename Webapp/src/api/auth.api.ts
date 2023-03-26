@@ -1,14 +1,9 @@
 import {
-    UserLogin,
-    UserRegister,
-    LoginResponse,
-    ResgiterResponse,
     ForgotPassword,
-    ForgotPasswordResponse,
-    ResetPassword,
-    ResetPasswordResponse,
-    VerifyOTP,
-    VerifyOTPResponse,
+    ForgotPasswordResponse, LoginResponse, ResetPassword,
+    ResetPasswordResponse, ResgiterResponse, UserLogin,
+    UserRegister, VerifyOTP,
+    VerifyOTPResponse
 } from '../model';
 import axiosClient from './config.axios';
 
