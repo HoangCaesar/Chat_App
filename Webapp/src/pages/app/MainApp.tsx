@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, CircularProgress, IconButton, Typography, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
 import { Compass } from 'phosphor-react';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ const MainApp = () => {
 
     const theme = useTheme();
 
-    const userID = localStorage.getItem('uid')
+    const userID = localStorage.getItem('uid');
 
     // state
     useEffect(() => {
@@ -62,70 +62,88 @@ const MainApp = () => {
                                             All Servers
                                         </Typography>
                                     </Stack>
-                                    {servers?.map((server: any, index: number) => {
-                                        return (
-                                            <Box
-                                                sx={{
-                                                    width: '100%',
-                                                    borderRadius: 1,
-                                                    backgroundColor:
-                                                        theme.palette.mode === 'light'
-                                                            ? '#fff'
-                                                            : theme.palette.background.default,
-                                                }}
-                                                key={server.name}
-                                                p={2}
-                                            >
-                                                <Stack
-                                                    direction="row"
-                                                    alignItems="center"
-                                                    justifyContent="space-between"
+                                    {servers.length !== 0 ? (
+                                        servers.map((server: any, index: number) => {
+                                            return (
+                                                <Box
+                                                    sx={{
+                                                        width: '100%',
+                                                        borderRadius: 1,
+                                                        backgroundColor:
+                                                            theme.palette.mode === 'light'
+                                                                ? '#fff'
+                                                                : theme.palette.background.default,
+                                                    }}
+                                                    key={server.name}
+                                                    p={2}
                                                 >
-                                                    {/* Left */}
                                                     <Stack
-                                                        direction="column"
-                                                        justifyContent="center"
+                                                        direction="row"
+                                                        alignItems="center"
+                                                        justifyContent="space-between"
                                                     >
-                                                        <Typography variant="h6">
-                                                            {server.name}
-                                                        </Typography>
-                                                        <Typography
-                                                            variant="caption"
-                                                            color={theme.palette.primary.dark}
+                                                        {/* Left */}
+                                                        <Stack
+                                                            direction="column"
+                                                            justifyContent="center"
                                                         >
-                                                            {server.members.length} member
-                                                        </Typography>
-                                                    </Stack>
-                                                    {/* Right -- Time */}
-                                                    <Link
-                                                        style={{
-                                                            color: theme.palette.primary.main,
-                                                            textDecoration: 'none',
-                                                        }}
-                                                        to={`/server/${server._id}`}
-                                                        onClick={() =>
-                                                            setActiveItem(index + 1, server._id)
-                                                        }
-                                                    >
-                                                        <IconButton
-                                                            sx={{
-                                                                width: 'max-content',
-                                                                color:
-                                                                    theme.palette.mode === 'light'
-                                                                        ? '#000'
-                                                                        : '#fff',
-                                                            }}
-                                                        >
-                                                            <Typography variant="caption">
-                                                                Connect
+                                                            <Typography variant="h6">
+                                                                {server.name}
                                                             </Typography>
-                                                            <Compass />
-                                                        </IconButton>
-                                                    </Link>
-                                                </Stack>
-                                            </Box>
-                                        );
-                                    })}
+                                                            <Typography
+                                                                variant="caption"
+                                                                color={theme.palette.primary.dark}
+                                                            >
+                                                                {server.members.length} member
+                                                            </Typography>
+                                                        </Stack>
+                                                        {/* Right -- Time */}
+                                                        <Link
+                                                            style={{
+                                                                color: theme.palette.primary.main,
+                                                                textDecoration: 'none',
+                                                            }}
+                                                            to={`/server/${server._id}`}
+                                                            onClick={() =>
+                                                                setActiveItem(index + 1, server._id)
+                                                            }
+                                                        >
+                                                            <IconButton
+                                                                sx={{
+                                                                    width: 'max-content',
+                                                                    color:
+                                                                        theme.palette.mode ===
+                                                                        'light'
+                                                                            ? '#000'
+                                                                            : '#fff',
+                                                                }}
+                                                            >
+                                                                <Typography variant="caption">
+                                                                    Connect
+                                                                </Typography>
+                                                                <Compass />
+                                                            </IconButton>
+                                                        </Link>
+                                                    </Stack>
+                                                </Box>
+                                            );
+                                        })
+                                    ) : (
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                scroll: 'hidden',
+                                            }}
+                                        >
+                                            <CircularProgress
+                                                sx={{
+                                                    scroll: 'hidden',
+                                                }}
+                                            />
+                                        </Box>
+                                    )}
                                 </Stack>
                             </SimpleBarStyle>
                         </Stack>
