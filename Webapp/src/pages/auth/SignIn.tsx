@@ -18,6 +18,8 @@ const SignIn = () => {
                     <Link to={'/auth/register'} component={RouterLink} variant="subtitle2">
                         Create an account
                     </Link>
+
+                    <Typography variant="body2">Or just click Login button with a given account</Typography>
                 </Stack>
             </Stack>
             {/* Form */}

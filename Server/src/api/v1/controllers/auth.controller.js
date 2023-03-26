@@ -137,7 +137,7 @@ const forgotPassword = async (req, res, next) => {
             return;
         }
 
-        const resetURL = `${process.env.WEBAPP_BASE_URL}/new-password/?token=${response.resetToken}`;
+        const resetURL = `${process.env.WEBAPP_BASE_URL}/auth/new-password/?token=${response.resetToken}`;
 
         await MailService.sendMail({
             to: response.user.email,

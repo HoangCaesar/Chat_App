@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const createError = require('http-errors');
 const http = require('http');
 const { Server } = require('socket.io');
+require('dotenv').config();
 
 // Project import
 const appRoute = require('./api/v1/routes');
@@ -25,7 +26,7 @@ const server = http.createServer(app);
 // the top of http server
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5000',
+        origin: process.env.WEBAPP_BASE_URL,
         methods: ['GET', 'POST'],
     },
 });

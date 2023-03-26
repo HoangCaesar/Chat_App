@@ -79,7 +79,6 @@ const conversationSlice = createSlice({
                 if (el.id !== this_conversation.id) {
                     return el;
                 } else {
-                    console.log(this_conversation);
                     return {
                         id: this_conversation.id,
                         user_id: user_id,

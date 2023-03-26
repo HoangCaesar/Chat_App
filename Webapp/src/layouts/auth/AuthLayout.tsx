@@ -16,17 +16,6 @@ const AuthLayout = () => {
             const res = await isAuthenticated();
             if (res) return navigate('/app');
         })();
-
-        window.onload = function () {
-            if (!window.location.hash) {
-                window.location = (window.location + '#') as any;
-                window.location.reload();
-            }
-        };
-
-        const ev: any = {};
-
-        window.onload(ev);
     }, []);
 
     return (

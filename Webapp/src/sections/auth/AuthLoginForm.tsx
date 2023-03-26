@@ -47,8 +47,8 @@ const AuthLoginForm = () => {
     });
 
     const defaultValues = {
-        email: 'caesar@nets.com',
-        password: 'caesar5899',
+        email: 'caesar.from.vamk@gmail.com',
+        password: 'Hoangoccho58',
     };
 
     const methods = useForm({
