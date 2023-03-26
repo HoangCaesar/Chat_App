@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { socket } from '../../socket';
 import {
     conversationActions,
-    conversationSelectDirectChat
+    conversationSelectDirectChat,
 } from '../../store/reducers/conversation/conversation.slice';
 
 // model
@@ -29,6 +29,7 @@ const Chats = () => {
 
     useEffect(() => {
         socket.emit('get_direct_conversations', { user_id }, (data: any) => {
+            console.log(data);
             dispatch(conversationActions.fetchDirectConversations({ conversations: data }));
         });
     }, []);
@@ -81,9 +82,15 @@ const Chats = () => {
                                     All Chats
                                 </Typography>
                             </Stack>
-                            {conversations.map((item, idx) => {
-                                return <ChatItem key={idx} {...item} />;
-                            })}
+                            {conversations.length ? (
+                                conversations.map((item, idx) => {
+                                    return <ChatItem key={idx} {...item} />;
+                                })
+                            ) : (
+                                <Typography variant="caption">
+                                    Please, reload the server if you don't see any chat.
+                                </Typography>
+                            )}
                         </Stack>
                     </SimpleBarStyle>
                 </Stack>

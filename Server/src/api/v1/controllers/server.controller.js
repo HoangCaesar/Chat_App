@@ -74,7 +74,7 @@ const accessServer = async (req, res, next) => {
 
         if (!response) {
             return res.status(201).json({
-                status: 'error',
+                status: 'warning',
                 message: 'Can not add this user to server',
             });
         }

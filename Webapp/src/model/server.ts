@@ -18,3 +18,8 @@ export interface ServerResponse {
     status: string;
     server: any;
 }
+
+export interface AccessServerResponse {
+    status: string;
+    message?: string;
+}

@@ -1,4 +1,10 @@
-import { Server, ServerListResponse, ServerResponse,AddUserToServer } from '../model';
+import {
+    Server,
+    ServerListResponse,
+    ServerResponse,
+    AddUserToServer,
+    AccessServerResponse,
+} from '../model';
 import axiosClient from './config.axios';
 
 // ==============================|| SERVER AXIOS ||============================== //
@@ -16,7 +22,7 @@ const serverApi = {
         const url = '/server/all';
         return axiosClient.get(url);
     },
-    addUserToServer(data: AddUserToServer): Promise<any> {
+    addUserToServer(data: AddUserToServer): Promise<AccessServerResponse> {
         const url = '/server/access';
         return axiosClient.post(url, data);
     },

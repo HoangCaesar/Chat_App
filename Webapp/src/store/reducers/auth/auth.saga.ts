@@ -83,18 +83,9 @@ function* verifyOtp(action: PayloadAction<VerifyOTP>) {
         const response: VerifyOTPResponse = yield call(authApi.verifyOTP, action.payload);
         if (response.status === 'success') {
             yield put(authActions.updateRegisterEmail({ email: '' }));
-            localStorage.setItem('token', response.token);
-            localStorage.setItem('uid', response.user_id);
-            yield put(
-                authActions.logIn({
-                    isLoggedIn: true,
-                    token: response.token,
-                    user_id: response.user_id,
-                })
-            );
             yield put(appActions.openSnackBar({ severity: 'success', message: response.message }));
             yield put(authActions.updateIsLoading({ isLoading: false, error: false }));
-            rootNavigate('/app');
+            rootNavigate('/auth/signin');
             yield delay(1000);
         } else {
             yield put(appActions.openSnackBar({ severity: 'error', message: response.message }));

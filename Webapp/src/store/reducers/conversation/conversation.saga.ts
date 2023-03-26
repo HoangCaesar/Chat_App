@@ -1,16 +1,20 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 // Project Import
 import serverApi from '../../../api/server.api';
-import { AddUserToServer } from '../../../model';
+import { rootNavigate } from '../../../hooks';
+import { AddUserToServer, AccessServerResponse } from '../../../model';
 import { conversationActions } from './conversation.slice';
 
 // ==============================|| CONVERSATION SAGA  ||============================== //
 
 function* addUserToServer(action: PayloadAction<AddUserToServer>) {
     try {
-        const response: Promise<any> = yield serverApi.addUserToServer(action.payload);
+        const response: AccessServerResponse = yield serverApi.addUserToServer(action.payload);
+        if (response.status === 'success') {
+            window.location.reload();
+        }
     } catch (error) {
         console.log(error);
     }

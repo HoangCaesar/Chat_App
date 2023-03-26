@@ -134,14 +134,12 @@ const MainApp = () => {
                                                 display: 'flex',
                                                 justifyContent: 'center',
                                                 alignItems: 'center',
-                                                scroll: 'hidden',
+                                                scroll: 'hidden'
                                             }}
                                         >
-                                            <CircularProgress
-                                                sx={{
-                                                    scroll: 'hidden',
-                                                }}
-                                            />
+                                            <CircularProgress sx={{
+                                                scroll: 'hidden'
+                                            }} />
                                         </Box>
                                     )}
                                 </Stack>
