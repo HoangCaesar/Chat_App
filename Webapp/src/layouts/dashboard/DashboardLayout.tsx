@@ -25,7 +25,7 @@ const DashboardLayout = () => {
     const isDesktop = useResponsive('up', 'md');
 
     const user_id: any = localStorage.getItem('uid');
-    const current_conversation_id: any = localStorage.getItem('current_conversation_id');
+    const location: any = localStorage.getItem('location');
 
     useEffect(() => {
         const checkToken = (async () => {
@@ -36,22 +36,28 @@ const DashboardLayout = () => {
 
     // socket
     useEffect(() => {
-        // window.onload = function () {
-        //     if (!window.location.hash) {
-        //         window.location = (window.location + '#loaded') as any;
-        //         window.location.reload();
-        //     }
-        // };
-
-        // const ev: any = {};
-
-        // window.onload(ev);
-
         if (!socket) {
             connectSocket(user_id);
         }
 
+        window.onload = function () {
+            if (!window.location.hash) {
+                window.location = (window.location + '#loaded') as any;
+                window.location.reload();
+            }
+        };
+
+        const ev: any = {};
+
+        window.onload(ev);
+
+        socket.emit('greeting_message', {
+            user_id,
+            location
+        })
+
         socket.on('new_message', (data: any) => {
+            console.log(1);
             const message = data.message;
             dispatch(
                 conversationActions.addDirectMessage({
@@ -67,6 +73,7 @@ const DashboardLayout = () => {
 
         return () => {
             socket?.off('new_message');
+            socket?.off('greeting_message');
         };
     }, [socket]);
 

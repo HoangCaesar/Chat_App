@@ -437,3 +437,8 @@
 25-03-2023	22:25:18-----POST /api/v1/auth/check-token ::: invalid signature
 25-03-2023	43:25:18-----POST /api/v1/auth/check-token ::: invalid signature
 25-03-2023	43:25:18-----POST /api/v1/auth/check-token ::: invalid signature
+25-03-2023	38:23:21-----GET /api/v1/user/get-user ::: jwt malformed
+25-03-2023	38:23:21-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	54:14:11-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	11:20:11-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	11:20:11-----GET /api/v1/user/get-user ::: jwt malformed

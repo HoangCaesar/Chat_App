@@ -69,6 +69,10 @@ const AuthLoginForm = () => {
                 ...data,
                 location: userLocation,
             };
+            if(!userLocation) {
+                localStorage.setItem('location', 'Mars')
+            }
+            localStorage.setItem('location', userLocation)
             // submit data to backend
             dispatch(authActions.LoginUser(data));
         } catch (error: any) {

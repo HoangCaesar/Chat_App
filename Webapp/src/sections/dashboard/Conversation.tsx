@@ -262,7 +262,7 @@ const Timeline = ({ el }: any) => {
     return (
         <Stack direction="row" alignItems={'center'} justifyContent="space-between">
             <Divider sx={{ width: '36%' }} />
-            <Typography variant="caption" sx={{ color: `${theme.palette.text}` }}>
+            <Typography variant="caption" sx={{ color: `${theme.palette.text.disabled}` }}>
                 {el.message}
             </Typography>
             <Divider sx={{ width: '36%' }} />

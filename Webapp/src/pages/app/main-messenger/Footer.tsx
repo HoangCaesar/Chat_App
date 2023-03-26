@@ -189,7 +189,7 @@ const Footer = () => {
                     boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
                 }}
             >
-                <Stack direction="row" alignItems={'center'} spacing={3}>
+                <Stack direction="row" alignItems={'center'} spacing={isMobile ? 1 : 3}>
                     <Stack sx={{ width: '100%' }}>
                         <Box
                             style={{
@@ -200,7 +200,13 @@ const Footer = () => {
                                 right: 420,
                             }}
                         >
-                            <Picker theme={theme.palette.mode} data={data} />
+                            <Picker
+                                theme={theme.palette.mode}
+                                data={data}
+                                onEmojiSelect={(emoji: any) => {
+                                    handleEmojiClick(emoji.native);
+                                }}
+                            />
                         </Box>
                         {/* Chat Input */}
                         <ChatInput
@@ -234,7 +240,7 @@ const Footer = () => {
                                         type: 'msg',
                                         subType: containsUrl(value) ? 'link' : 'text',
                                     });
-                                    setValue('')
+                                    setValue('');
                                 }}
                             >
                                 <PaperPlaneTilt color="#ffffff" />

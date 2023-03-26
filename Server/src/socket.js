@@ -19,6 +19,10 @@ const socket = async (io) => {
             });
         }
 
+        socket.on('greeting_message', (data) => {
+            console.log(`::::::::::::::${data.location} ${data.user_id}::::::::::::::::::::`);
+        });
+
         // get chat list/conversations
         socket.on('get_direct_conversations', async ({ user_id }, callback) => {
             const existing_conversations = await Conversation.find({
@@ -49,7 +53,7 @@ const socket = async (io) => {
             const to_user = await User.findById(to);
             const from_user = await User.findById(from);
 
-            const new_message = new Message( {
+            const new_message = new Message({
                 messages: {
                     to: to,
                     from: from,
@@ -58,17 +62,17 @@ const socket = async (io) => {
                     created_at: Date.now(),
                     text: message,
                 },
-                server: null
+                server: null,
             });
 
-            const savedNewMessages = await new_message.save()
+            const savedNewMessages = await new_message.save();
 
             await Conversation.findOneAndUpdate(
                 { _id: conversation_id },
                 { $push: { messages: savedNewMessages } },
                 { new: true, upsert: true }
             );
-            
+
             // // emit incoming_message -> to user
 
             io.to(to_user.socket_id).emit('new_message', {

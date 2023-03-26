@@ -14,7 +14,7 @@ const getLocationName = async ({ lat, lng }: Location) => {
             address?.hamlet ||
             address?.suburb ||
             address?.neighbourhood;
-
+        
         return city;
     });
 };

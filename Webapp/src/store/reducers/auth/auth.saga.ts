@@ -68,6 +68,7 @@ function* signout() {
     try {
         localStorage.removeItem('token');
         localStorage.removeItem('uid');
+        localStorage.removeItem('location');
         yield put(authActions.signOut());
         rootNavigate('/auth/signin');
     } catch (error: any) {
