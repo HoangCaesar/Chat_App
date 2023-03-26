@@ -8,6 +8,7 @@ import Messenger from './main-messenger';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
 import { appSelectRoomId, appSelectChatType } from '../../store/reducers/app/app.slice';
 import NoChat from '../../assets/NoChat';
+import { useEffect } from 'react';
 
 // ==============================|| PAGE: GROUP APP  ||============================== //
 

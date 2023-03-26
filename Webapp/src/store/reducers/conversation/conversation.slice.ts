@@ -23,8 +23,6 @@ const initialState: ConversationState = {
     group_chat: {},
 };
 
-const user_id = window.localStorage.getItem('uid');
-
 // ==============================|| CONVERSATION SLICE  ||============================== //
 
 const conversationSlice = createSlice({
@@ -36,8 +34,11 @@ const conversationSlice = createSlice({
         },
 
         fetchDirectConversations(state, action: PayloadAction<any>) {
+            const user_id = localStorage.getItem('uid');
             const list = action.payload.conversations.map((el: any) => {
-                const user = el.participants.find((elm: any) => elm._id.toString() !== user_id);
+                const user = el.participants.find((elm: any) => {
+                    return elm._id.toString() !== user_id;
+                });
                 return {
                     id: el._id,
                     user_id: user._id,
@@ -54,6 +55,7 @@ const conversationSlice = createSlice({
         },
 
         fetchCurrentMessages(state, action: PayloadAction<any>) {
+            const user_id = localStorage.getItem('uid');
             const messages = action.payload.messages;
             const formatted_messages = messages.map((el: any) => ({
                 id: el._id,
@@ -71,6 +73,7 @@ const conversationSlice = createSlice({
         },
 
         updateDirectConversation(state, action) {
+            const user_id = localStorage.getItem('uid');
             const this_conversation = action.payload.conversation;
             state.direct_chat.conversations = state.direct_chat.conversations.map((el: any) => {
                 if (el.id !== this_conversation._id) {

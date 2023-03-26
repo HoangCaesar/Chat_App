@@ -19,8 +19,39 @@ const socket = async (io) => {
             });
         }
 
-        socket.on('greeting_message', (data) => {
-            console.log(`::::::::::::::${data.location} ${data.user_id}::::::::::::::::::::`);
+        socket.on('greeting_message', async (data) => {
+            const conversations = await Conversation.find({
+                participants: { $all: [data.user_id] },
+            })
+                .populate('participants')
+                .populate('messages');
+
+            const from = await User.findById(data.user_id);
+
+            conversations.map(async (conversation) => {
+                const to = conversation.participants.filter(
+                    (participant) => participant._id.toString() !== data.user_id
+                )[0];
+                const new_message = new Message({
+                    messages: {
+                        to: to,
+                        from: from,
+                        type: 'divider',
+                        subType: 'text',
+                        created_at: Date.now(),
+                        text: `Welcome ${from.firstName} ${from.lastName} logged in from ${data.location}`,
+                    },
+                    server: null,
+                });
+
+                const savedNewMessages = await new_message.save();
+
+                await Conversation.findOneAndUpdate(
+                    { _id: conversation._id },
+                    { $push: { messages: savedNewMessages } },
+                    { new: true, upsert: true }
+                );
+            });
         });
 
         // get chat list/conversations

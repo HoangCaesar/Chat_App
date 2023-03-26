@@ -1,31 +1,29 @@
-import { useEffect } from 'react';
 import { Box, Button, Divider, IconButton, Stack, Typography, useTheme } from '@mui/material';
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
+import { useEffect } from 'react';
 
 // Project Import
 import { ChatItem, Search, SearchIconWrapper, SearchInputBase } from '../../components';
 import { SimpleBarStyle } from '../../components/ScrollBar';
-import { ChatList } from '../../data/chat_data';
-import { socket } from '../../socket';
+import { useResponsive } from '../../hooks';
 import { useAppDispatch, useAppSelector } from '../../hooks/sagaHooks';
+import { socket } from '../../socket';
 import {
     conversationActions,
-    conversationSelectDirectChat,
+    conversationSelectDirectChat
 } from '../../store/reducers/conversation/conversation.slice';
-import { useResponsive } from '../../hooks';
 
 // model
-import { Chat } from '../../model';
 
 // ==============================|| APP: CHATS  ||============================== //
 
 const Chats = () => {
+    const dispatch = useAppDispatch();
+
     const theme = useTheme();
     const isDesktop = useResponsive('up', 'md');
 
     const user_id = window.localStorage.getItem('uid');
-
-    const dispatch = useAppDispatch();
 
     const { conversations } = useAppSelector(conversationSelectDirectChat);
 
@@ -73,7 +71,7 @@ const Chats = () => {
                     <Divider />
                 </Stack>
                 {/* Chat */}
-                <Stack direction="column" sx={{ flexGrow: 1,  height: '100%' }}>
+                <Stack direction="column" sx={{ flexGrow: 1, height: '100%' }}>
                     <SimpleBarStyle clickOnTrack={false}>
                         {/* Pinned Messages */}
                         <Stack spacing={2}>

@@ -12,13 +12,14 @@ import {
     conversationSelectDirectChat,
     conversationActions,
 } from '../../store/reducers/conversation/conversation.slice';
+import { authSelectIsLoggedIn } from '../../store/reducers/auth/auth.slice';
 import { appActions } from '../../store/reducers/app/app.slice';
 
 // ==============================|| LAYOUT: DASHBOARD ||============================== //
 
 const DashboardLayout = () => {
     const dispatch = useAppDispatch();
-    const { conversations, current_conversation } = useAppSelector(conversationSelectDirectChat);
+    const isLoggedIn = useAppSelector(authSelectIsLoggedIn);
 
     const navigate = useNavigate();
 
@@ -40,21 +41,12 @@ const DashboardLayout = () => {
             connectSocket(user_id);
         }
 
-        window.onload = function () {
-            if (!window.location.hash) {
-                window.location = (window.location + '#loaded') as any;
-                window.location.reload();
-            }
-        };
-
-        const ev: any = {};
-
-        window.onload(ev);
-
-        socket.emit('greeting_message', {
-            user_id,
-            location
-        })
+        if (isLoggedIn) {
+            socket.emit('greeting_message', {
+                user_id,
+                location,
+            });
+        }
 
         socket.on('new_message', (data: any) => {
             console.log(1);

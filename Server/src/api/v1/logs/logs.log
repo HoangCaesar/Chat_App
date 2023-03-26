@@ -442,3 +442,9 @@
 26-03-2023	54:14:11-----GET /api/v1/user/get-user ::: jwt malformed
 26-03-2023	11:20:11-----GET /api/v1/user/get-user ::: jwt malformed
 26-03-2023	11:20:11-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	31:00:12-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	31:00:12-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	49:09:12-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	49:09:12-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	26:23:12-----GET /api/v1/user/get-user ::: jwt malformed
+26-03-2023	26:23:12-----GET /api/v1/user/get-user ::: jwt malformed
