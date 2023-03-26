@@ -35,7 +35,7 @@
     "jest": testing our app.
     "@faker-js/faker": fake avatars and texts.
 
-Overall
+###Overall
 
 ![alt text](./public/images//layouts.jpg "Overall of webapp")
 
@@ -60,7 +60,7 @@ Overall
 
 ##### socket.ts: initialize socket-client
 
-2. Concepts of this webapp:
+2. Concepts of this chatapp:
 
 ![alt text](./public/images//UI_overall.jpg "Overall of webapp")
 
