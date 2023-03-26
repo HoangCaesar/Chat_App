@@ -17,8 +17,6 @@ const verifyToken = async (req, res, next) => {
             token = req.body.token;
         }
 
-        console.log(token);
-
         if (!token) {
             return res.status(401).json({
                 message: 'You are not logged in! Please log in to get access.',

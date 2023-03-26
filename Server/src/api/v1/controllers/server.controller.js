@@ -91,5 +91,5 @@ module.exports = {
     createServer,
     getAllServer,
     getOneServer,
-    accessServer
+    accessServer,
 };

@@ -12,9 +12,9 @@ const { Server } = require('socket.io');
 const appRoute = require('./api/v1/routes');
 require('./api/v1/databases/init.multi.mongodb');
 const errorHandler = require('./api/v1/helpers/errorHandler');
-const appSocket = require('./socket')
+const appSocket = require('./socket');
 
-// ========================================== APP - setting project ===============================================
+// ========================================== APP - INITIALIZE PROJECT ===============================================
 
 const app = express();
 
@@ -39,7 +39,7 @@ app.use(cookieParser());
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, 'public')));
 
-appSocket(io)
+appSocket(io);
 
 app.use('/api/v1', appRoute);
 

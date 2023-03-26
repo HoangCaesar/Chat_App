@@ -1,10 +1,10 @@
-const { User, Message, Server, Conversation } = require('./api/v1/models');
+// Project Import
+const { User, Message, Conversation } = require('./api/v1/models');
 
 // ========================================== SOCKET - SETTING SOCKET ===============================================
 
 const socket = async (io) => {
     io.on('connection', async (socket) => {
-        // console.log(JSON.stringify(socket.handshake.query));
         let user_id = socket.handshake.query['user_id'];
         if (user_id === 'null') {
             user_id = null;
@@ -75,10 +75,6 @@ const socket = async (io) => {
 
         // Handle incoming text/link messages
         socket.on('text_message', async (data) => {
-            // console.log('Received message:', data);
-
-            // data: {to, from, text}
-
             const { message, conversation_id, from, to, type, subType } = data;
 
             const to_user = await User.findById(to);
@@ -127,7 +123,6 @@ const socket = async (io) => {
             }
 
             // broadcast to all conversation rooms of this user that this user is offline (disconnected)
-
             console.log('closing connection');
             socket.disconnect(0);
         });

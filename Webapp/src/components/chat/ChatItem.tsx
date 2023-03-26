@@ -50,7 +50,6 @@ const ChatItem = ({ ...item }: Chat) => {
     if (!selectedChatId) {
         isSelected = false;
     }
-    console.log(item);
     const theme = useTheme();
     return (
         <Box
@@ -101,7 +100,7 @@ const ChatItem = ({ ...item }: Chat) => {
                 </Stack>
                 {/* Right -- Time */}
                 <Stack alignItems="center" spacing={2}>
-                    <Typography sx={{ fontWeight: 600 }} variant="caption">
+                    <Typography sx={{ fontWeight: 600 }} variant="caption" color={item.unread ? 'black' : 'gray'}>
                         {cutTimeString(item.time)}
                     </Typography>
                     <Badge color="primary" variant="dot" badgeContent={item.unread ? 1 : 0}>
