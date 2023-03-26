@@ -35,7 +35,7 @@
     "jest": testing our app.
     "@faker-js/faker": fake avatars and texts.
 
-###Overall
+###Overall:
 
 ![alt text](./public/images//layouts.jpg "Overall of webapp")
 
